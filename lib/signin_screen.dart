@@ -11,12 +11,21 @@ class _SignInFormState extends State<SignInForm> {
   @override
   Widget build(BuildContext context) {
     return ListView(padding: const EdgeInsets.all(16), children: [
+      const SizedBox(
+        height: 48,
+      ),
+      const Center(
+        child: Image(image: AssetImage("assets/logo.png")),
+      ),
+      const SizedBox(
+        height: 32,
+      ),
       signInEmail(),
       const SizedBox(height: 16),
       singInPasswrod(),
       const SizedBox(height: 16),
       MaterialButton(
-        disabledColor: const Color.fromARGB(255, 15, 95, 160),
+        disabledColor: const Color.fromRGBO(50, 106, 140, 1),
         onPressed: signIn(),
         child: const Text(
           "SIGN IN",
@@ -38,7 +47,7 @@ class _SignInFormState extends State<SignInForm> {
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,
-              color: Color.fromARGB(255, 15, 95, 160),
+              color: Color.fromRGBO(50, 106, 140, 1),
             ),
           )
         ])),
@@ -52,7 +61,7 @@ class _SignInFormState extends State<SignInForm> {
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 16,
-            color: Color.fromARGB(255, 15, 95, 160),
+            color: Color.fromRGBO(50, 106, 140, 1),
           ),
         ),
       )
