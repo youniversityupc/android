@@ -17,6 +17,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController telephoneController = TextEditingController();
   TextEditingController centerOfStudiesController = TextEditingController();
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +57,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 23),
               child: Form(
+                key: formKey,
                 child: Column(
                   children: [
                     TextFieldWidget('Name', Icons.person_sharp, nameController,
@@ -99,9 +101,13 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                       return null;
                     }),
                     const SizedBox(
-                      height: 40,
+                      height: 20,
                     ),
-                    darkBlueButton('Submit', () {})
+                    darkBlueButton('Submit', () {
+                      if(!formKey.currentState!.validate()) {
+                        return;
+                      }
+                    })
                   ],
                 ),
               ),
