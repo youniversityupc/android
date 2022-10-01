@@ -8,31 +8,36 @@ class SignUpHeader extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: const <Widget>[
-        /*Image(
-          image: AssetImage("assets/img/logo.svg"),
-          width: 42,
-          height: 42,
-        ),*/
-        Text.rich(
-          TextSpan(children: <TextSpan>[
-            TextSpan(
-              text: "Create a YOUniversity Account\n",
-              style: TextStyle(
-                fontWeight: FontWeight.normal,
-                fontSize: 24,
-                color: Color.fromARGB(255, 15, 95, 160),
-              ),
-            ),
-            TextSpan(
-              text: "Organize the best way",
-              style: TextStyle(
-                fontWeight: FontWeight.w200,
-                fontSize: 16,
-                color: Color(0xFF5E6D79),
-              ),
-            )
-          ]),
+        SizedBox(
+          height: 48,
         ),
+        Center(
+          child: Image(image: AssetImage("assets/logo.png")),
+        ),
+        SizedBox(
+          height: 16,
+        ),
+        Center(
+          child: Text.rich(
+            TextSpan(children: <TextSpan>[
+              TextSpan(
+                text: "Create a YOUniversity Account\n",
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 24,
+                  color: Color.fromARGB(255, 15, 95, 160),
+                ),
+              ),
+              TextSpan(
+                text: "Organize the best way",
+                style: TextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 16,
+                    color: Color.fromRGBO(67, 77, 89, 1)),
+              )
+            ]),
+          ),
+        )
       ],
     );
   }
@@ -65,7 +70,7 @@ class _SignUpFormState extends State<SignUpForm> {
         buildPhone(),
         const SizedBox(height: 16),
         MaterialButton(
-          disabledColor: const Color.fromARGB(255, 15, 95, 160),
+          disabledColor: const Color.fromRGBO(50, 106, 140, 1),
           onPressed: sendData(),
           child: const Text(
             "CREATE ACCOUNT",
@@ -79,7 +84,7 @@ class _SignUpFormState extends State<SignUpForm> {
               style: TextStyle(
                 fontWeight: FontWeight.normal,
                 fontSize: 16,
-                color: Colors.black,
+                color: Color.fromRGBO(67, 77, 89, 1),
               ),
             ),
             TextSpan(
@@ -87,7 +92,7 @@ class _SignUpFormState extends State<SignUpForm> {
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 16,
-                color: Color.fromARGB(255, 15, 95, 160),
+                color: Color.fromRGBO(50, 106, 140, 1),
               ),
             )
           ])),
