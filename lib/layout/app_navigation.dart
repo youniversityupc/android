@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:youniversity_app/layout/app_layout_navigation_item.dart';
+import 'package:youniversity_app/pages/home_courses_page.dart';
 
 var navigation = <AppLayoutNavigationItem>[
   AppLayoutNavigationItem(
@@ -15,7 +16,7 @@ var navigation = <AppLayoutNavigationItem>[
         const Tab(text: 'DIST. HORARIA'),
       ],
       children: [
-        const Text('Clases'),
+        const HomeCoursesPage(),
         const Text('Hoy'),
         const Text('Dist. Horaria'),
       ],
