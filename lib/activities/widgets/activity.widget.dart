@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 
 class ActivityWidget extends StatelessWidget {
+
   const ActivityWidget({super.key});
+
+  final List<ActivityDataClass> _activities = const [
+    ActivityDataClass("Test Online","Fisica 2", "Dentro de 30 minutos", "Reglas de Kirchoff",Colors.lightBlue),
+    ActivityDataClass("Reunion Grupal","IHC y Tecnologías Móviles", "Dentro de 2 horas", "Trabajo Parcial", Colors.orange),
+    ActivityDataClass("Entrega de Trabajo Parcial","Diseño de Base De Datos", "Dentro de 11 horas y 29 minutos", "Sprint 4", Colors.green),
+    ActivityDataClass("Control Virtual 2","Cálculo 2", "Dentro de 3 días", "Integrales triples", Colors.redAccent)
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -10,25 +18,55 @@ class ActivityWidget extends StatelessWidget {
         title: const Text("Activities", style: TextStyle(fontFamily: "Roboto", fontSize: 20.5, color: Colors.white))
       ),
       body: Center(
-        child: Column(
-          children: <Widget>[
-            Container(
-              margin: const EdgeInsetsDirectional.all(10.0),
-              child: Column(
-                children: const <Widget> [
-                  Text("Esta semana", style: TextStyle(fontFamily: "Arial", fontSize: 30.5, color: Colors.black54), textAlign: TextAlign.start,),
-                  Text("Tienes 2 actividades para esta semana", style: TextStyle(fontFamily: "Arial", fontSize: 20.5, color: Colors.black54), textAlign: TextAlign.justify,),
-                ]
+          child: Column(
+            children: <Widget>[
+              Container(
+                margin: const EdgeInsetsDirectional.all(10.0),
+                child: Column(
+                  children: const <Widget> [
+                    Text("Esta semana", style: TextStyle(fontFamily: "Arial", fontSize: 30.5, color: Colors.black54), textAlign: TextAlign.start,),
+                    Text("Tienes 2 actividades para esta semana", style: TextStyle(fontFamily: "Arial", fontSize: 20.5, color: Colors.black54), textAlign: TextAlign.justify,),
+                  ]
+                ),
               ),
-            ),
-            const Activity(taskName: "Test Online", courseName: "Fisica 2", remainingTime: "Dentro de 30 minutos", topicTheme: "Reglas de Kirchoff", backgroundColor: Colors.lightBlue),
-            const Activity(taskName: "Reunion Grupal", courseName: "IHC y Tecnologías Móviles", remainingTime: "Dentro de 2 horas", topicTheme: "Trabajo Parcial", backgroundColor: Colors.green)
-          ]
-        )
-      )
+              Expanded(
+              child: ListView.builder(
+                      itemCount: _activities.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        ActivityDataClass act = _activities[index];
+                        return Activity(taskName: act.taskName, courseName: act.courseName, remainingTime: act.remainingTime,topicTheme: act.topicTheme,backgroundColor: act.backgroundColor);
+                      }
+                    )
+              )
+            ]
+          )
+        ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: const Color.fromARGB(255, 95, 55, 238),
+        foregroundColor: Colors.white,
+        onPressed: () {
+
+        },
+        child: const Icon(Icons.add)
+      ),
     );
   }
 
+}
+
+class ActivityDataClass {
+  final String taskName;
+  final String courseName;
+  final String remainingTime;
+  final String topicTheme;
+  final Color backgroundColor;
+  const ActivityDataClass(
+    this.taskName,
+    this.courseName,
+    this.remainingTime,
+    this.topicTheme,
+    this.backgroundColor
+  );
 }
 
 class Activity extends StatelessWidget {
