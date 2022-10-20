@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'activity-form.widget.dart';
+import '../view_models/activity-data-class.model.dart';
 
 class ActivityWidget extends StatelessWidget {
 
-  const ActivityWidget({super.key});
+  ActivityWidget({super.key});
 
-  final List<ActivityDataClass> _activities = const [
+  final List<ActivityDataClass> _activities = [
     ActivityDataClass("Test Online","Fisica 2", "Dentro de 30 minutos", "Reglas de Kirchoff",Colors.lightBlue),
     ActivityDataClass("Reunion Grupal","IHC y Tecnologías Móviles", "Dentro de 2 horas", "Trabajo Parcial", Colors.orange),
     ActivityDataClass("Entrega de Trabajo Parcial","Diseño de Base De Datos", "Dentro de 11 horas y 29 minutos", "Sprint 4", Colors.green),
@@ -45,7 +47,12 @@ class ActivityWidget extends StatelessWidget {
         backgroundColor: const Color.fromARGB(255, 95, 55, 238),
         foregroundColor: Colors.white,
         onPressed: () {
-
+          Navigator.push(
+            context, 
+            MaterialPageRoute(
+              builder: (context) => ActivityForm(onAddActivity: (ActivityDataClass data) {})
+            )
+          );
         },
         child: const Icon(Icons.add)
       ),
@@ -54,27 +61,12 @@ class ActivityWidget extends StatelessWidget {
 
 }
 
-class ActivityDataClass {
-  final String taskName;
-  final String courseName;
-  final String remainingTime;
-  final String topicTheme;
-  final Color backgroundColor;
-  const ActivityDataClass(
-    this.taskName,
-    this.courseName,
-    this.remainingTime,
-    this.topicTheme,
-    this.backgroundColor
-  );
-}
-
 class Activity extends StatelessWidget {
-  final String taskName;
-  final String courseName;
-  final String remainingTime;
-  final String topicTheme;
-  final Color backgroundColor;
+  final String? taskName;
+  final String? courseName;
+  final String? remainingTime;
+  final String? topicTheme;
+  final Color? backgroundColor;
   const Activity(
   {
     Key? key,
@@ -93,7 +85,7 @@ class Activity extends StatelessWidget {
         children: <Widget>[
           Container(
             margin: const EdgeInsets.only(top: 10.0),
-            child: Text(taskName, style: const TextStyle(fontFamily: "Roboto", fontSize: 25.5, color: Colors.white)),
+            child: Text(taskName.toString(), style: const TextStyle(fontFamily: "Roboto", fontSize: 25.5, color: Colors.white)),
           ),
           Container(
             margin: const EdgeInsets.all(15.0),
@@ -102,7 +94,7 @@ class Activity extends StatelessWidget {
                         const Icon(Icons.task),
                         Container(
                           margin: const EdgeInsets.only(left: 20.5),
-                          child: Text(courseName, style: const TextStyle(fontFamily: "Roboto", fontSize: 14.5, color: Colors.white))
+                          child: Text(courseName.toString(), style: const TextStyle(fontFamily: "Roboto", fontSize: 14.5, color: Colors.white))
                         )
                       ]
                     )
@@ -114,7 +106,7 @@ class Activity extends StatelessWidget {
                         const Icon(Icons.timelapse),
                         Container(
                           margin: const EdgeInsets.only(left: 20.5),
-                          child: Text(remainingTime, style: const TextStyle(fontFamily: "Roboto", fontSize: 14.5, color: Colors.white))
+                          child: Text(remainingTime.toString(), style: const TextStyle(fontFamily: "Roboto", fontSize: 14.5, color: Colors.white))
                         )
                       ]
                     )
@@ -126,7 +118,7 @@ class Activity extends StatelessWidget {
                         const Icon(Icons.list_alt),
                         Container(
                           margin: const EdgeInsets.only(left: 20.5),
-                          child: Text(topicTheme, style: const TextStyle(fontFamily: "Roboto", fontSize: 14.5, color: Colors.white))
+                          child: Text(topicTheme.toString(), style: const TextStyle(fontFamily: "Roboto", fontSize: 14.5, color: Colors.white))
                         )
                       ]
                     )
