@@ -1,49 +1,65 @@
+import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:youniversity_app/layout/app_layout_navigation_item.dart';
-import 'package:youniversity_app/pages/home_courses_page.dart';
+
+class _TempLocation extends BeamLocation {
+  @override
+  List<BeamPage> buildPages(
+      BuildContext context, RouteInformationSerializable state) {
+    throw UnimplementedError();
+  }
+
+  @override
+  List<Pattern> get pathPatterns => throw UnimplementedError();
+}
 
 var navigation = <AppLayoutNavigationItem>[
-  AppLayoutNavigationItem(
-    title: 'INICIO',
+  AppLayoutNavigationItem.upper(
+    title: 'Inicio',
     navigation: const BottomNavigationBarItem(
       icon: Icon(Icons.home),
       label: 'Inicio',
     ),
+    beamLocation: _TempLocation(),
     tabBar: AppLayoutTabBar(
-      items: <Tab>[
-        const Tab(text: 'CLASES'),
-        const Tab(text: 'HOY'),
-        const Tab(text: 'DIST. HORARIA'),
-      ],
-      children: [
-        const HomeCoursesPage(),
-        const Text('Hoy'),
-        const Text('Dist. Horaria'),
+      items: <AppLayoutTabBarItem>[
+        AppLayoutTabBarItem.fromText(
+          tab: 'Clases',
+          path: '/home/dashboard',
+        ),
+        AppLayoutTabBarItem.fromText(
+          tab: 'Hoy',
+          path: '/home/today',
+        ),
+        AppLayoutTabBarItem.fromText(
+          tab: 'Dist. Horaria',
+          path: '/home/graphs',
+        ),
       ],
     ),
   ),
-  const AppLayoutNavigationItem(
-    title: 'HORARIO',
-    navigation: BottomNavigationBarItem(
+  AppLayoutNavigationItem(
+    title: 'Horario',
+    navigation: const BottomNavigationBarItem(
       icon: Icon(Icons.date_range),
       label: 'Horario',
     ),
-    children: Text('Horario'),
+    beamLocation: _TempLocation(),
   ),
-  const AppLayoutNavigationItem(
-    title: 'CURSOS',
-    navigation: BottomNavigationBarItem(
+  AppLayoutNavigationItem(
+    title: 'Cursos',
+    navigation: const BottomNavigationBarItem(
       icon: Icon(Icons.book),
       label: 'Cursos',
     ),
-    children: Text('Cursos'),
+    beamLocation: _TempLocation(),
   ),
-  const AppLayoutNavigationItem(
-    title: 'ACTIVIDADES',
-    navigation: BottomNavigationBarItem(
+  AppLayoutNavigationItem(
+    title: 'Actividades',
+    navigation: const BottomNavigationBarItem(
       icon: Icon(Icons.list_alt),
       label: 'Actividades',
     ),
-    children: Text('Actividades'),
+    beamLocation: _TempLocation(),
   ),
 ];
