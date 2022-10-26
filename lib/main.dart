@@ -1,6 +1,7 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:youniversity_app/layout/app_layout.dart';
+import 'package:youniversity_app/layout/app_navigation.dart';
 
 void main() => runApp(YOUniversityApp());
 
@@ -8,10 +9,10 @@ class YOUniversityApp extends StatelessWidget {
   YOUniversityApp({super.key});
 
   final routerDelegate = BeamerDelegate(
-    initialPath: '/home',
+    initialPath: '/home/dashboard',
     locationBuilder: RoutesLocationBuilder(
       routes: {
-        '*': (_, __, ___) => AppLayout(),
+        '*': (_, __, ___) => AppLayout(navigation: navigation),
       },
     ),
   );
@@ -22,7 +23,6 @@ class YOUniversityApp extends StatelessWidget {
     return MaterialApp.router(
       title: 'YOUniversity',
       debugShowCheckedModeBanner: false,
-      color: const Color.fromRGBO(50, 106, 140, 1),
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

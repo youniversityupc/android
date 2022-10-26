@@ -1,13 +1,16 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
+import 'package:youniversity_app/layout/app_location_item.dart';
 
 class BottomNavBarWidget extends StatefulWidget {
-  const BottomNavBarWidget({
+  BottomNavBarWidget({
     required this.beamerKey,
+    required List<AppLocationItem> navigation,
     super.key,
-  });
+  }) : navigation = navigation.where((e) => e.navigation != null).toList();
 
   final GlobalKey<BeamerState> beamerKey;
+  final List<AppLocationItem> navigation;
 
   @override
   State<BottomNavBarWidget> createState() => _BottomNavBarWidgetState();
@@ -15,7 +18,17 @@ class BottomNavBarWidget extends StatefulWidget {
 
 class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
   late BeamerDelegate _beamerDelegate;
-  int _currentIndex = 0;
+
+  int get _currentIndex {
+    return widget.navigation.indexWhere((element) {
+      final location = element.beamLocation;
+      return location.isCurrent;
+    });
+  }
+
+  void _onItemTapped(int index) {
+    _beamerDelegate.beamToNamed(widget.navigation[index].initialPath);
+  }
 
   void _setStateListener() => setState(() {});
 
@@ -30,8 +43,10 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       currentIndex: _currentIndex,
-      items: const [],
-      onTap: (index) => _beamerDelegate.beamToNamed('/home'),
+      items: widget.navigation.map((e) => e.navigation!).toList(),
+      onTap: _onItemTapped,
+      showSelectedLabels: true,
+      type: BottomNavigationBarType.fixed,
     );
   }
 

@@ -1,65 +1,68 @@
-import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
-import 'package:youniversity_app/layout/app_layout_navigation_item.dart';
+import 'package:youniversity_app/layout/app_location_item.dart';
+import 'package:youniversity_app/pages/home/home_location.dart';
+import 'package:youniversity_app/utils/not_found_location.dart';
 
-class _TempLocation extends BeamLocation {
-  @override
-  List<BeamPage> buildPages(
-      BuildContext context, RouteInformationSerializable state) {
-    throw UnimplementedError();
-  }
-
-  @override
-  List<Pattern> get pathPatterns => throw UnimplementedError();
-}
-
-var navigation = <AppLayoutNavigationItem>[
-  AppLayoutNavigationItem.upper(
+List<AppLocationItem> navigation = [
+  AppLocationItem(
     title: 'Inicio',
+    initialPath: '/home/dashboard',
+    beamLocation: HomeLocation(),
     navigation: const BottomNavigationBarItem(
       icon: Icon(Icons.home),
       label: 'Inicio',
     ),
-    beamLocation: _TempLocation(),
-    tabBar: AppLayoutTabBar(
-      items: <AppLayoutTabBarItem>[
-        AppLayoutTabBarItem.fromText(
+    tabBar: AppLocationTabBar(
+      items: [
+        AppLocationTabBarItem.fromText(
           tab: 'Clases',
           path: '/home/dashboard',
         ),
-        AppLayoutTabBarItem.fromText(
+        AppLocationTabBarItem.fromText(
           tab: 'Hoy',
           path: '/home/today',
         ),
-        AppLayoutTabBarItem.fromText(
+        AppLocationTabBarItem.fromText(
           tab: 'Dist. Horaria',
           path: '/home/graphs',
         ),
       ],
     ),
   ),
-  AppLayoutNavigationItem(
+  AppLocationItem(
     title: 'Horario',
+    initialPath: '/timetable',
+    beamLocation: NotFoundLocation(
+      path: '/timetable',
+      child: const Text('Horario'),
+    ),
     navigation: const BottomNavigationBarItem(
       icon: Icon(Icons.date_range),
       label: 'Horario',
     ),
-    beamLocation: _TempLocation(),
   ),
-  AppLayoutNavigationItem(
+  AppLocationItem(
     title: 'Cursos',
+    initialPath: '/courses',
+    beamLocation: NotFoundLocation(
+      path: '/courses',
+      child: const Text('Cursos'),
+    ),
     navigation: const BottomNavigationBarItem(
       icon: Icon(Icons.book),
       label: 'Cursos',
     ),
-    beamLocation: _TempLocation(),
   ),
-  AppLayoutNavigationItem(
+  AppLocationItem(
     title: 'Actividades',
+    initialPath: '/activities',
+    beamLocation: NotFoundLocation(
+      path: '/activities',
+      child: const Text('Actividades'),
+    ),
     navigation: const BottomNavigationBarItem(
       icon: Icon(Icons.list_alt),
       label: 'Actividades',
     ),
-    beamLocation: _TempLocation(),
   ),
 ];
