@@ -18,7 +18,7 @@ class AppLocationItem {
 }
 
 class AppLocationTabBar {
-  late TabController? controller;
+  TabController? controller;
   final List<AppLocationTabBarItem> items;
 
   AppLocationTabBar({required this.items});

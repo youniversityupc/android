@@ -19,12 +19,8 @@ class BottomNavBarWidget extends StatefulWidget {
 class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
   late BeamerDelegate _beamerDelegate;
 
-  int get _currentIndex {
-    return widget.navigation.indexWhere((element) {
-      final location = element.beamLocation;
-      return location.isCurrent;
-    });
-  }
+  int get _currentIndex =>
+      widget.navigation.indexWhere((element) => element.beamLocation.isCurrent);
 
   void _onItemTapped(int index) {
     _beamerDelegate.beamToNamed(widget.navigation[index].initialPath);

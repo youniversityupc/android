@@ -27,6 +27,7 @@ class AppLayout extends StatelessWidget {
     return Scaffold(
       appBar: AppBarWidget(
         beamerKey: _beamerKey,
+        navigation: _navigation,
       ),
       body: Beamer(
         key: _beamerKey,
