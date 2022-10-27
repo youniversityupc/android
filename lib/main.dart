@@ -1,25 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:youniversity_app/views/profile_setting_screen.dart';
+import 'package:youniversity_app/layout/app_layout.dart';
+import 'package:youniversity_app/layout/app_navigation.dart';
+import 'package:youniversity_app/layout/route_constants.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(YOUniversityApp());
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class YOUniversityApp extends StatelessWidget {
+  YOUniversityApp({super.key});
+
+  final routerDelegate = BeamerDelegate(
+    initialPath: RouteConstants.homeDashboard,
+    transitionDelegate: const NoAnimationTransitionDelegate(),
+    locationBuilder: RoutesLocationBuilder(
+      routes: {
+        '*': (_, __, ___) => AppLayout(navigation: navigation),
+      },
+    ),
+  );
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        textTheme:  GoogleFonts.poppinsTextTheme(textTheme),
+    return BeamerProvider(
+      routerDelegate: routerDelegate,
+      child: MaterialApp.router(
+        title: 'YOUniversity',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        routerDelegate: routerDelegate,
+        routeInformationParser: BeamerParser(),
+        backButtonDispatcher: BeamerBackButtonDispatcher(
+          delegate: routerDelegate,
+        ),
       ),
-      home: const ProfileSettingScreen(),
     );
   }
 }
-
