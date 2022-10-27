@@ -36,5 +36,6 @@ class AppLocationTabBarItem {
   AppLocationTabBarItem.fromText({
     required String tab,
     required String path,
-  }) : this(tab: Tab(text: tab), path: path);
+    bool upper = true,
+  }) : this(tab: Tab(text: upper ? tab.toUpperCase() : tab), path: path);
 }
