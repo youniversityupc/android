@@ -27,7 +27,8 @@ jobs:
             path: build/app/outputs/flutter-apk
           - os: ubuntu-latest
             target: appbundle
-            path: build/app/outputs/flutter-apk
+            version: release
+            path: build/app/outputs/bundle/release
           - os: windows-latest
             target: windows
             version: release
