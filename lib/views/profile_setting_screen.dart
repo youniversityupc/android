@@ -27,7 +27,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
+            SizedBox(
               height: Get.height * 0.4,
               child: Stack(
                 children: [
@@ -37,10 +37,10 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                       child: Container(
                         width: 120,
                         height: 120,
-                        margin: EdgeInsets.only(bottom: 20),
-                        decoration: BoxDecoration(
+                        margin: const EdgeInsets.only(bottom: 20),
+                        decoration: const BoxDecoration(
                             shape: BoxShape.circle, color: Color(0xffD6D6D6)),
-                        child: Center(
+                        child: const Center(
                           child: Icon(
                             Icons.camera_alt_outlined,
                             size: 40,
@@ -55,7 +55,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
               height: 20,
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 23),
+              padding: const EdgeInsets.symmetric(horizontal: 23),
               child: Form(
                 key: formKey,
                 child: Column(
@@ -118,6 +118,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
     );
   }
 
+  // ignore: non_constant_identifier_names
   TextFieldWidget(String title, IconData iconData,
       TextEditingController controller, Function validator) {
     return Column(
