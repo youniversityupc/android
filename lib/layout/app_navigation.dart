@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:youniversity_app/layout/app_location_item.dart';
+import 'package:youniversity_app/pages/activities/activities_location.dart';
+import 'package:youniversity_app/pages/courses/courses_location.dart';
 import 'package:youniversity_app/pages/home/home_location.dart';
-import 'package:youniversity_app/utils/not_found_location.dart';
+import 'package:youniversity_app/pages/timetable/timetable_location.dart';
 
 List<AppLocationItem> navigation = [
   AppLocationItem(
@@ -32,11 +34,7 @@ List<AppLocationItem> navigation = [
   AppLocationItem(
     title: 'Horario',
     initialPath: '/timetable',
-    location: NotFoundLocation(
-      title: 'Horario',
-      path: '/timetable',
-      child: const Text('Horario'),
-    ),
+    location: TimetableLocation(),
     navigation: const BottomNavigationBarItem(
       icon: Icon(Icons.date_range),
       label: 'Horario',
@@ -45,11 +43,7 @@ List<AppLocationItem> navigation = [
   AppLocationItem(
     title: 'Cursos',
     initialPath: '/courses',
-    location: NotFoundLocation(
-      title: 'Cursos',
-      path: '/courses',
-      child: const Text('Cursos'),
-    ),
+    location: CoursesLocation(),
     navigation: const BottomNavigationBarItem(
       icon: Icon(Icons.book),
       label: 'Cursos',
@@ -58,11 +52,7 @@ List<AppLocationItem> navigation = [
   AppLocationItem(
     title: 'Actividades',
     initialPath: '/activities',
-    location: NotFoundLocation(
-      title: 'Actividades',
-      path: '/activities',
-      child: const Text('Actividades'),
-    ),
+    location: ActivitiesLocation(),
     navigation: const BottomNavigationBarItem(
       icon: Icon(Icons.list_alt),
       label: 'Actividades',
