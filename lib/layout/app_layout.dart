@@ -1,125 +1,102 @@
+import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
-import 'package:youniversity_app/layout/app_layout_navigation_item.dart';
+import 'package:youniversity_app/layout/app_location_item.dart';
 
 class AppLayout extends StatefulWidget {
-  final List<AppLayoutNavigationItem> navigation;
-  final List<Widget> drawer;
-
-  const AppLayout({
-    super.key,
+  AppLayout({
     required this.navigation,
-    required this.drawer,
-  });
+    super.key,
+  }) : router = _createRouter(navigation);
+
+  final List<AppLocationItem> navigation;
+  final BeamerDelegate router;
+  final beamerKey = GlobalKey<BeamerState>();
+  final initialIndex = 0;
+
+  static BeamerDelegate _createRouter(List<AppLocationItem> navigation) {
+    final locations = navigation.map(((e) => e.location));
+
+    return BeamerDelegate(
+      locationBuilder: BeamerLocationBuilder(
+        beamLocations: [
+          ...locations,
+        ],
+      ),
+    );
+  }
 
   @override
-  State<StatefulWidget> createState() => _AppLayoutState();
+  State<AppLayout> createState() => _AppLayoutState();
 }
 
-class _AppLayoutState extends State<AppLayout>
-    with SingleTickerProviderStateMixin {
-  int _selectedIndex = 0;
-
-  AppLayoutNavigationItem get _config {
-    return widget.navigation[_selectedIndex];
+class _AppLayoutState extends State<AppLayout> {
+  int _getCurrentIndex() {
+    int index = widget.navigation.indexWhere((e) => e.location.isCurrent);
+    return index == -1 ? widget.initialIndex : index;
   }
+
+  Widget _createTitle(int index) {
+    final title = widget.navigation[index].title.toUpperCase();
+    return Text(title);
+  }
+
+  TabBar? _createTabBar(int index) {
+    final config = widget.navigation[index].tabBar;
+    if (config == null) return null;
+
+    final items = config.items.map((e) => e.tab).toList();
+    return TabBar(tabs: items);
+  }
+
+  List<BottomNavigationBarItem> _createBottomNavItemList() {
+    final valid = widget.navigation.where((e) => e.navigation != null);
+    return valid.map((e) => e.navigation!).toList();
+  }
+
+  void _onNavBarItemTapped(int index) {
+    final path = widget.navigation[index].initialPath;
+    widget.router.beamToNamed(path);
+  }
+
+  void _setStateListener() => setState(() {});
 
   @override
   void initState() {
     super.initState();
-
-    var tabBar = _config.tabBar;
-    if (tabBar != null) {
-      tabBar.controller = TabController(
-        length: tabBar.items.length,
-        vsync: this,
-      );
-    }
-  }
-
-  @override
-  void dispose() {
-    var tabBar = _config.tabBar;
-    if (tabBar != null) {
-      var controller = tabBar.controller;
-      if (controller != null) {
-        controller.dispose();
-        controller = null;
-      }
-    }
-
-    super.dispose();
-  }
-
-  void _onItemTapped(int index) {
-    if (index >= widget.navigation.length) {
-      return;
-    }
-
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-  List<BottomNavigationBarItem> _createNavigation() {
-    return widget.navigation.map((item) => item.navigation).toList();
-  }
-
-  TabBar? _createViewTabBar() {
-    var tabBar = _config.tabBar;
-    if (tabBar == null) {
-      return null;
-    }
-
-    return TabBar(
-      controller: tabBar.controller,
-      tabs: tabBar.items,
-      labelColor: const Color.fromRGBO(50, 106, 140, 1),
-      unselectedLabelColor: const Color.fromRGBO(50, 106, 140, 1),
-      indicatorColor: const Color.fromRGBO(50, 106, 140, 1),
-    );
-  }
-
-  Widget? _createBody() {
-    var tabBar = _config.tabBar;
-    if (tabBar != null) {
-      var controller = tabBar.controller;
-      if (controller != null) {
-        return TabBarView(
-          controller: controller,
-          children: tabBar.children,
-        );
-      }
-    }
-    return _config.children;
+    widget.router.addListener(_setStateListener);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color.fromRGBO(242, 242, 242, 1),
-      appBar: AppBar(
-        title: Text(_config.title),
-        bottom: _createViewTabBar(),
-        backgroundColor: const Color.fromRGBO(242, 242, 242, 1),
-        foregroundColor: const Color.fromRGBO(50, 106, 140, 1),
-        elevation: 0,
-      ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: widget.drawer,
+    final index = _getCurrentIndex();
+    final title = _createTitle(index);
+    final tabBar = _createTabBar(index);
+
+    return DefaultTabController(
+      length: tabBar?.tabs.length ?? 0,
+      child: Scaffold(
+        appBar: AppBar(
+          title: title,
+          bottom: tabBar,
+        ),
+        body: Beamer(
+          key: widget.beamerKey,
+          routerDelegate: widget.router,
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          showSelectedLabels: true,
+          currentIndex: index,
+          items: _createBottomNavItemList(),
+          onTap: _onNavBarItemTapped,
         ),
       ),
-      body: _createBody(),
-      bottomNavigationBar: BottomNavigationBar(
-        items: _createNavigation(),
-        type: BottomNavigationBarType.fixed,
-        showSelectedLabels: true,
-        currentIndex: _selectedIndex,
-        backgroundColor: const Color.fromRGBO(242, 242, 242, 1),
-        selectedItemColor: const Color.fromRGBO(50, 106, 140, 1),
-        onTap: _onItemTapped,
-      ),
     );
+  }
+
+  @override
+  void dispose() {
+    widget.router.removeListener(_setStateListener);
+    super.dispose();
   }
 }
