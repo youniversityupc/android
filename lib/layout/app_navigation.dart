@@ -6,7 +6,7 @@ import 'package:youniversity_app/utils/not_found_location.dart';
 List<AppLocationItem> navigation = [
   AppLocationItem(
     title: 'Inicio',
-    initialPath: '/home/dashboard',
+    initialPath: '/home',
     location: HomeLocation(),
     navigation: const BottomNavigationBarItem(
       icon: Icon(Icons.home),

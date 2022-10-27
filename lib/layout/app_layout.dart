@@ -72,29 +72,25 @@ class _AppLayoutState extends State<AppLayout> {
     final title = _createTitle(index);
     final tabBar = _createTabBar(index);
 
-    final scaffold = Scaffold(
-      appBar: AppBar(
-        title: title,
-        bottom: tabBar,
-      ),
-      body: Beamer(
-        key: widget.beamerKey,
-        routerDelegate: widget.router,
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        showSelectedLabels: true,
-        currentIndex: index,
-        items: _createBottomNavItemList(),
-        onTap: _onNavBarItemTapped,
-      ),
-    );
-
-    if (tabBar == null) return scaffold;
-
     return DefaultTabController(
-      length: tabBar.tabs.length,
-      child: scaffold,
+      length: tabBar?.tabs.length ?? 0,
+      child: Scaffold(
+        appBar: AppBar(
+          title: title,
+          bottom: tabBar,
+        ),
+        body: Beamer(
+          key: widget.beamerKey,
+          routerDelegate: widget.router,
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          showSelectedLabels: true,
+          currentIndex: index,
+          items: _createBottomNavItemList(),
+          onTap: _onNavBarItemTapped,
+        ),
+      ),
     );
   }
 
