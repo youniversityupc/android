@@ -7,14 +7,21 @@ class HomeLocation extends BeamLocation<BeamState> {
   @override
   List<BeamPage> buildPages(BuildContext context, BeamState state) {
     return [
-      const BeamPage(
-        key: ValueKey('/home'),
+      BeamPage(
+        key: const ValueKey('/home'),
         title: 'Inicio',
-        child: TabBarViewPage(pages: [
-          HomeCoursesPage(),
-          Text('Hoy'),
-          Text('Dist. Horaria'),
-        ]),
+        child: TabBarViewPage(
+          pages: const [
+            HomeCoursesPage(),
+            Text('Hoy'),
+            Text('Dist. Horaria'),
+          ],
+          paths: const [
+            '/home/dashboard',
+            '/home/today',
+            '/home/graphs',
+          ],
+        ),
         type: BeamPageType.noTransition,
       ),
     ];
