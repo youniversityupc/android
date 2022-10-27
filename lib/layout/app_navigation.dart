@@ -33,6 +33,7 @@ List<AppLocationItem> navigation = [
     title: 'Horario',
     initialPath: '/timetable',
     location: NotFoundLocation(
+      title: 'Horario',
       path: '/timetable',
       child: const Text('Horario'),
     ),
@@ -45,6 +46,7 @@ List<AppLocationItem> navigation = [
     title: 'Cursos',
     initialPath: '/courses',
     location: NotFoundLocation(
+      title: 'Cursos',
       path: '/courses',
       child: const Text('Cursos'),
     ),
@@ -57,6 +59,7 @@ List<AppLocationItem> navigation = [
     title: 'Actividades',
     initialPath: '/activities',
     location: NotFoundLocation(
+      title: 'Actividades',
       path: '/activities',
       child: const Text('Actividades'),
     ),
