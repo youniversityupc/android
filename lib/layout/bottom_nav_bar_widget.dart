@@ -7,7 +7,11 @@ class BottomNavBarWidget extends StatefulWidget {
     required this.beamerKey,
     required List<AppLocationItem> navigation,
     super.key,
-  }) : navigation = navigation.where((e) => e.navigation != null).toList();
+  }) : navigation = _filterNavigation(navigation);
+
+  static List<AppLocationItem> _filterNavigation(List<AppLocationItem> items) {
+    return items.where((e) => e.navigation != null).toList();
+  }
 
   final GlobalKey<BeamerState> beamerKey;
   final List<AppLocationItem> navigation;
