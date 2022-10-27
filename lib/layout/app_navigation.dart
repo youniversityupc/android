@@ -7,7 +7,7 @@ List<AppLocationItem> navigation = [
   AppLocationItem(
     title: 'Inicio',
     initialPath: '/home/dashboard',
-    beamLocation: HomeLocation(),
+    location: HomeLocation(),
     navigation: const BottomNavigationBarItem(
       icon: Icon(Icons.home),
       label: 'Inicio',
@@ -32,7 +32,7 @@ List<AppLocationItem> navigation = [
   AppLocationItem(
     title: 'Horario',
     initialPath: '/timetable',
-    beamLocation: NotFoundLocation(
+    location: NotFoundLocation(
       path: '/timetable',
       child: const Text('Horario'),
     ),
@@ -44,7 +44,7 @@ List<AppLocationItem> navigation = [
   AppLocationItem(
     title: 'Cursos',
     initialPath: '/courses',
-    beamLocation: NotFoundLocation(
+    location: NotFoundLocation(
       path: '/courses',
       child: const Text('Cursos'),
     ),
@@ -56,7 +56,7 @@ List<AppLocationItem> navigation = [
   AppLocationItem(
     title: 'Actividades',
     initialPath: '/activities',
-    beamLocation: NotFoundLocation(
+    location: NotFoundLocation(
       path: '/activities',
       child: const Text('Actividades'),
     ),

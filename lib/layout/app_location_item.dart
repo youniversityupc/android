@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 class AppLocationItem {
   final String title;
   final String initialPath;
-  final BeamLocation beamLocation;
+  final BeamLocation location;
   final BottomNavigationBarItem? navigation;
   final AppLocationTabBar? tabBar;
 
   AppLocationItem({
     required String title,
     required this.initialPath,
-    required this.beamLocation,
+    required this.location,
     this.navigation,
     this.tabBar,
   }) : title = title.toUpperCase();
