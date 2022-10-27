@@ -10,6 +10,7 @@ class YOUniversityApp extends StatelessWidget {
 
   final routerDelegate = BeamerDelegate(
     initialPath: '/home',
+    transitionDelegate: const NoAnimationTransitionDelegate(),
     locationBuilder: RoutesLocationBuilder(
       routes: {
         '*': (_, __, ___) => AppLayout(navigation: navigation),
