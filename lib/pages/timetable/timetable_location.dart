@@ -1,5 +1,6 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
+import 'package:youniversity_app/layout/route_constants.dart';
 import 'package:youniversity_app/utils/no_transition_page.dart';
 
 class TimetableLocation extends BeamLocation<BeamState> {
@@ -7,7 +8,7 @@ class TimetableLocation extends BeamLocation<BeamState> {
   List<BeamPage> buildPages(BuildContext context, BeamState state) {
     return [
       const NoTransitionPage(
-        key: ValueKey('/timetable'),
+        key: ValueKey(RouteConstants.timetable),
         title: 'Horario',
         child: Text('Horario'),
       ),
@@ -15,5 +16,8 @@ class TimetableLocation extends BeamLocation<BeamState> {
   }
 
   @override
-  List<Pattern> get pathPatterns => ['/timetable', '/timetable/*'];
+  List<Pattern> get pathPatterns => [
+        RouteConstants.timetableRoot,
+        RouteConstants.timetableWildcard,
+      ];
 }

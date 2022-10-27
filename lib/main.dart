@@ -2,6 +2,7 @@ import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:youniversity_app/layout/app_layout.dart';
 import 'package:youniversity_app/layout/app_navigation.dart';
+import 'package:youniversity_app/layout/route_constants.dart';
 
 void main() => runApp(YOUniversityApp());
 
@@ -9,7 +10,7 @@ class YOUniversityApp extends StatelessWidget {
   YOUniversityApp({super.key});
 
   final routerDelegate = BeamerDelegate(
-    initialPath: '/home',
+    initialPath: RouteConstants.homeDashboard,
     transitionDelegate: const NoAnimationTransitionDelegate(),
     locationBuilder: RoutesLocationBuilder(
       routes: {

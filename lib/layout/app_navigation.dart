@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:youniversity_app/layout/app_location_item.dart';
+import 'package:youniversity_app/layout/route_constants.dart';
 import 'package:youniversity_app/pages/activities/activities_location.dart';
 import 'package:youniversity_app/pages/courses/courses_location.dart';
 import 'package:youniversity_app/pages/home/home_location.dart';
@@ -8,7 +9,7 @@ import 'package:youniversity_app/pages/timetable/timetable_location.dart';
 List<AppLocationItem> navigation = [
   AppLocationItem(
     title: 'Inicio',
-    initialPath: '/home',
+    initialPath: RouteConstants.homeDashboard,
     location: HomeLocation(),
     navigation: const BottomNavigationBarItem(
       icon: Icon(Icons.home),
@@ -18,22 +19,22 @@ List<AppLocationItem> navigation = [
       items: [
         AppLocationTabBarItem.fromText(
           tab: 'Clases',
-          path: '/home/dashboard',
+          path: RouteConstants.homeDashboard,
         ),
         AppLocationTabBarItem.fromText(
           tab: 'Hoy',
-          path: '/home/today',
+          path: RouteConstants.homeToday,
         ),
         AppLocationTabBarItem.fromText(
           tab: 'Dist. Horaria',
-          path: '/home/graphs',
+          path: RouteConstants.homeGraphs,
         ),
       ],
     ),
   ),
   AppLocationItem(
     title: 'Horario',
-    initialPath: '/timetable',
+    initialPath: RouteConstants.timetable,
     location: TimetableLocation(),
     navigation: const BottomNavigationBarItem(
       icon: Icon(Icons.date_range),
@@ -42,7 +43,7 @@ List<AppLocationItem> navigation = [
   ),
   AppLocationItem(
     title: 'Cursos',
-    initialPath: '/courses',
+    initialPath: RouteConstants.courses,
     location: CoursesLocation(),
     navigation: const BottomNavigationBarItem(
       icon: Icon(Icons.book),
@@ -51,7 +52,7 @@ List<AppLocationItem> navigation = [
   ),
   AppLocationItem(
     title: 'Actividades',
-    initialPath: '/activities',
+    initialPath: RouteConstants.activities,
     location: ActivitiesLocation(),
     navigation: const BottomNavigationBarItem(
       icon: Icon(Icons.list_alt),
