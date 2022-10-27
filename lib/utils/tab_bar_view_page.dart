@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:youniversity_app/pages/home/home_courses_page.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class TabBarViewPage extends StatelessWidget {
+  const TabBarViewPage({required this.pages, super.key});
 
-  static const pages = [
-    HomeCoursesPage(),
-    Text('Hoy'),
-    Text('Dist. Horaria'),
-  ];
+  final List<Widget> pages;
 
   @override
   Widget build(BuildContext context) {
