@@ -6,7 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 Widget coverWidgetWithoutLogo({String title = "Profile Settings"}){
   return Container(
     width: Get.width,
-    decoration: BoxDecoration(
+    decoration: const BoxDecoration(
         image: DecorationImage(
             image: AssetImage('assets/mask.png'),
             fit: BoxFit.fill
