@@ -1,17 +1,21 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:youniversity_app/layout/app_location_item.dart';
+import 'package:youniversity_app/pages/auth/auth_location.dart';
 
 class AppLayout extends StatefulWidget {
   AppLayout({
     required this.navigation,
+    this.onlyBeamer = false,
+    this.initialIndex = 0,
     super.key,
   }) : router = _createRouter(navigation);
 
   final List<AppLocationItem> navigation;
   final BeamerDelegate router;
+  final bool onlyBeamer;
+  final int initialIndex;
   final beamerKey = GlobalKey<BeamerState>();
-  final initialIndex = 0;
 
   static BeamerDelegate _createRouter(List<AppLocationItem> navigation) {
     final locations = navigation.map(((e) => e.location));
@@ -20,6 +24,7 @@ class AppLayout extends StatefulWidget {
       locationBuilder: BeamerLocationBuilder(
         beamLocations: [
           ...locations,
+          AuthLocation(),
         ],
       ),
     );
@@ -30,10 +35,7 @@ class AppLayout extends StatefulWidget {
 }
 
 class _AppLayoutState extends State<AppLayout> {
-  int _getCurrentIndex() {
-    int index = widget.navigation.indexWhere((e) => e.location.isCurrent);
-    return index == -1 ? widget.initialIndex : index;
-  }
+  late int _index;
 
   Widget _createTitle(int index) {
     final title = widget.navigation[index].title.toUpperCase();
@@ -58,38 +60,53 @@ class _AppLayoutState extends State<AppLayout> {
     widget.router.beamToNamed(path);
   }
 
-  void _setStateListener() => setState(() {});
+  void _setStateListener() {
+    int index = widget.navigation.indexWhere((e) => e.location.isCurrent);
+    setState(() {
+      _index = index != -1 ? index : widget.initialIndex;
+    });
+  }
 
   @override
   void initState() {
     super.initState();
+    _setStateListener();
     widget.router.addListener(_setStateListener);
   }
 
   @override
   Widget build(BuildContext context) {
-    final index = _getCurrentIndex();
-    final title = _createTitle(index);
-    final tabBar = _createTabBar(index);
+    final title = _createTitle(_index);
+    final tabBar = _createTabBar(_index);
+    final length = tabBar?.tabs.length ?? 0;
+    final onlyBeamer = widget.navigation[_index].onlyBeamer;
 
     return DefaultTabController(
-      length: tabBar?.tabs.length ?? 0,
+      length: length,
       child: Scaffold(
-        appBar: AppBar(
-          title: title,
-          bottom: tabBar,
+        appBar: onlyBeamer
+            ? null
+            : AppBar(
+                title: title,
+                bottom: tabBar,
+              ),
+        body: Container(
+          margin:
+              onlyBeamer ? const EdgeInsets.only(top: kToolbarHeight) : null,
+          child: Beamer(
+            key: widget.beamerKey,
+            routerDelegate: widget.router,
+          ),
         ),
-        body: Beamer(
-          key: widget.beamerKey,
-          routerDelegate: widget.router,
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          showSelectedLabels: true,
-          currentIndex: index,
-          items: _createBottomNavItemList(),
-          onTap: _onNavBarItemTapped,
-        ),
+        bottomNavigationBar: onlyBeamer
+            ? null
+            : BottomNavigationBar(
+                type: BottomNavigationBarType.fixed,
+                showSelectedLabels: true,
+                currentIndex: _index,
+                items: _createBottomNavItemList(),
+                onTap: _onNavBarItemTapped,
+              ),
       ),
     );
   }

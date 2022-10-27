@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:youniversity_app/layout/app_location_item.dart';
 import 'package:youniversity_app/layout/route_constants.dart';
 import 'package:youniversity_app/pages/activities/activities_location.dart';
+import 'package:youniversity_app/pages/auth/auth_location.dart';
 import 'package:youniversity_app/pages/courses/courses_location.dart';
 import 'package:youniversity_app/pages/home/home_location.dart';
 import 'package:youniversity_app/pages/timetable/timetable_location.dart';
@@ -58,5 +59,11 @@ List<AppLocationItem> navigation = [
       icon: Icon(Icons.list_alt),
       label: 'Actividades',
     ),
+  ),
+  AppLocationItem(
+    title: 'Autenticación',
+    initialPath: '/auth/signin',
+    location: AuthLocation(),
+    onlyBeamer: true,
   ),
 ];

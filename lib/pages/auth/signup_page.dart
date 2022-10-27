@@ -5,40 +5,43 @@ class SignUpHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: const <Widget>[
-        SizedBox(
-          height: 48,
-        ),
-        Center(
-          child: Image(image: AssetImage("assets/logo.png")),
-        ),
-        SizedBox(
-          height: 16,
-        ),
-        Center(
-          child: Text.rich(
-            TextSpan(children: <TextSpan>[
-              TextSpan(
-                text: "Create a YOUniversity Account\n",
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 24,
-                  color: Color.fromARGB(255, 15, 95, 160),
-                ),
-              ),
-              TextSpan(
-                text: "Organize the best way",
-                style: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 16,
-                    color: Color.fromRGBO(67, 77, 89, 1)),
-              )
-            ]),
+    return Container(
+      color: Colors.white,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: const <Widget>[
+          SizedBox(
+            height: 48,
           ),
-        )
-      ],
+          Center(
+            child: Image(image: AssetImage("assets/logo.png")),
+          ),
+          SizedBox(
+            height: 16,
+          ),
+          Center(
+            child: Text.rich(
+              TextSpan(children: <TextSpan>[
+                TextSpan(
+                  text: "Create a YOUniversity Account\n",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 24,
+                    color: Color.fromARGB(255, 15, 95, 160),
+                  ),
+                ),
+                TextSpan(
+                  text: "Organize the best way",
+                  style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 16,
+                      color: Color.fromRGBO(67, 77, 89, 1)),
+                )
+              ]),
+            ),
+          )
+        ],
+      ),
     );
   }
 }
