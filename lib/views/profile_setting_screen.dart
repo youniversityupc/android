@@ -104,7 +104,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                       height: 20,
                     ),
                     darkBlueButton('Submit', () {
-                      if(!formKey.currentState!.validate()) {
+                      if (!formKey.currentState!.validate()) {
                         return;
                       }
                     })
