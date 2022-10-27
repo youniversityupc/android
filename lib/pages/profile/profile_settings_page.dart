@@ -5,14 +5,14 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../utils/app_colors.dart';
 import '../../components/cover_widget.dart';
 
-class ProfileSettingScreen extends StatefulWidget {
-  const ProfileSettingScreen({Key? key}) : super(key: key);
+class ProfileSettingsPage extends StatefulWidget {
+  const ProfileSettingsPage({Key? key}) : super(key: key);
 
   @override
-  State<ProfileSettingScreen> createState() => _ProfileSettingScreenState();
+  State<ProfileSettingsPage> createState() => _ProfileSettingsPageState();
 }
 
-class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
+class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController telephoneController = TextEditingController();
