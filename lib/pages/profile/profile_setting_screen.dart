@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../utils/app_colors.dart';
-import '../widgets/cover_widget.dart';
+import '../../utils/app_colors.dart';
+import '../../components/cover_widget.dart';
 
 class ProfileSettingScreen extends StatefulWidget {
   const ProfileSettingScreen({Key? key}) : super(key: key);
