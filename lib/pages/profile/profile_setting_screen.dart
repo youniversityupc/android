@@ -60,7 +60,8 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                 key: formKey,
                 child: Column(
                   children: [
-                    TextFieldWidget('Name', Icons.person_sharp, nameController,
+                    _createTextFieldWidget(
+                        'Name', Icons.person_sharp, nameController,
                         (String? input) {
                       if (input!.isEmpty) {
                         return 'Name is required!';
@@ -73,7 +74,8 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                     const SizedBox(
                       height: 10,
                     ),
-                    TextFieldWidget('Email', Icons.email_sharp, emailController,
+                    _createTextFieldWidget(
+                        'Email', Icons.email_sharp, emailController,
                         (String? input) {
                       if (input!.isEmpty) {
                         return 'Email Address is required!';
@@ -83,7 +85,9 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                     const SizedBox(
                       height: 10,
                     ),
-                    TextFieldWidget('Telephone number', Icons.phone_sharp,
+                    _createTextFieldWidget(
+                        'Telephone number',
+                        Icons.phone_sharp,
                         telephoneController, (String? input) {
                       if (input!.isEmpty) {
                         return 'Phone number is required!';
@@ -93,7 +97,9 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                     const SizedBox(
                       height: 10,
                     ),
-                    TextFieldWidget('Center of studies', Icons.school_sharp,
+                    _createTextFieldWidget(
+                        'Center of studies',
+                        Icons.school_sharp,
                         centerOfStudiesController, (String? input) {
                       if (input!.isEmpty) {
                         return 'Center of studies is required!';
@@ -103,7 +109,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                     const SizedBox(
                       height: 20,
                     ),
-                    darkBlueButton('Submit', () {
+                    _createDarkBlueButton('Submit', () {
                       if (!formKey.currentState!.validate()) {
                         return;
                       }
@@ -118,8 +124,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
     );
   }
 
-  // ignore: non_constant_identifier_names
-  TextFieldWidget(String title, IconData iconData,
+  Widget _createTextFieldWidget(String title, IconData iconData,
       TextEditingController controller, Function validator) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -168,7 +173,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
     );
   }
 
-  Widget darkBlueButton(String title, Function onPressed) {
+  Widget _createDarkBlueButton(String title, Function onPressed) {
     return MaterialButton(
       minWidth: Get.width,
       height: 50,
