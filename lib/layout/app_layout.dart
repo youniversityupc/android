@@ -1,7 +1,9 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:youniversity_app/layout/app_location_item.dart';
+import 'package:youniversity_app/layout/route_constants.dart';
 import 'package:youniversity_app/pages/auth/auth_location.dart';
+import 'package:youniversity_app/pages/profile/profile_location.dart';
 
 class AppLayout extends StatefulWidget {
   AppLayout({
@@ -25,6 +27,7 @@ class AppLayout extends StatefulWidget {
         beamLocations: [
           ...locations,
           AuthLocation(),
+          ProfileLocation(),
         ],
       ),
     );
@@ -60,6 +63,10 @@ class _AppLayoutState extends State<AppLayout> {
     widget.router.beamToNamed(path);
   }
 
+  void _onAvatarTapped() {
+    widget.router.beamToNamed(RouteConstants.profile);
+  }
+
   void _setStateListener() {
     int index = widget.navigation.indexWhere((e) => e.location.isCurrent);
     setState(() {
@@ -88,6 +95,14 @@ class _AppLayoutState extends State<AppLayout> {
             ? null
             : AppBar(
                 title: title,
+                actions: [
+                  GestureDetector(
+                    onTap: _onAvatarTapped,
+                    child: const CircleAvatar(
+                      child: Text('D'),
+                    ),
+                  )
+                ],
                 bottom: tabBar,
               ),
         body: Container(
