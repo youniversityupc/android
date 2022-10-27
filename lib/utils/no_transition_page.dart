@@ -14,6 +14,7 @@ class NoTransitionPage extends BeamPage {
   @override
   Route createRoute(BuildContext context) {
     return PageRouteBuilder(
+      transitionDuration: Duration.zero,
       fullscreenDialog: fullScreenDialog,
       opaque: opaque,
       settings: this,
