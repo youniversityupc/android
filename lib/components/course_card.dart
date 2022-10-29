@@ -79,3 +79,42 @@ class CourseCard extends StatelessWidget {
     );
   }
 }
+
+class TeacherCard extends StatelessWidget {
+  final Color? color;
+  final String name;
+  final String email;
+  const TeacherCard(
+      {super.key, this.color, required this.name, required this.email});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: color,
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              margin: const EdgeInsets.only(top: 8),
+              child: Column(
+                children: [
+                  _CourseIcon(
+                    icon: const Icon(Icons.badge, color: Colors.white),
+                    label: name,
+                  ),
+                  const SizedBox(height: 4),
+                  _CourseIcon(
+                    icon: const Icon(Icons.mail, color: Colors.white),
+                    label: email,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
