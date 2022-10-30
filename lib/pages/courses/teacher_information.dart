@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:youniversity_app/components/course_card.dart';
+import 'package:youniversity_app/utils/app_colors.dart';
 
 class TeacherInformation extends StatelessWidget {
   const TeacherInformation({super.key});
@@ -25,7 +26,7 @@ class TeacherInformation extends StatelessWidget {
                   ),
                 ),
                 const TeacherCard(
-                  color: Color.fromARGB(255, 142, 224, 117),
+                  color: AppColors.darkBlueColor,
                   name: 'David Gerardo Quevedo Velasco',
                   email: 'pcsidque@upc.edu.pe',
                 ),
