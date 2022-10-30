@@ -84,8 +84,13 @@ class TeacherCard extends StatelessWidget {
   final Color? color;
   final String name;
   final String email;
+  final String? phone;
   const TeacherCard(
-      {super.key, this.color, required this.name, required this.email});
+      {super.key,
+      this.color,
+      required this.name,
+      required this.email,
+      this.phone});
 
   @override
   Widget build(BuildContext context) {

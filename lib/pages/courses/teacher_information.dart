@@ -25,7 +25,7 @@ class TeacherInformation extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(120)),
                   ),
                 ),
-                const TeacherCard(
+                const InformationCard(
                   color: AppColors.darkBlueColor,
                   name: 'David Gerardo Quevedo Velasco',
                   email: 'pcsidque@upc.edu.pe',
