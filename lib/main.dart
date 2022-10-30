@@ -1,31 +1,41 @@
+import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
-import 'activities/widgets/activity.widget.dart';
+import 'package:youniversity_app/layout/app_layout.dart';
+import 'package:youniversity_app/layout/app_navigation.dart';
+import 'package:youniversity_app/layout/route_constants.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(YOUniversityApp());
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class YOUniversityApp extends StatelessWidget {
+  YOUniversityApp({super.key});
+
+  final routerDelegate = BeamerDelegate(
+    initialPath: RouteConstants.authSignIn,
+    transitionDelegate: const NoAnimationTransitionDelegate(),
+    locationBuilder: RoutesLocationBuilder(
+      routes: {
+        '*': (_, __, ___) => AppLayout(navigation: navigation, initialIndex: 4),
+      },
+    ),
+  );
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
+    return BeamerProvider(
+      routerDelegate: routerDelegate,
+      child: MaterialApp.router(
+        title: 'YOUniversity',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        routerDelegate: routerDelegate,
+        routeInformationParser: BeamerParser(),
+        backButtonDispatcher: BeamerBackButtonDispatcher(
+          delegate: routerDelegate,
+        ),
       ),
-      home: ActivityWidget(),
     );
   }
 }
