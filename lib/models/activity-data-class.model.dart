@@ -6,11 +6,7 @@ class ActivityDataClass {
   String? remainingTime;
   String? topicTheme;
   Color? backgroundColor;
-  ActivityDataClass(
-    this.taskName,
-    this.courseName,
-    this.remainingTime,
-    this.topicTheme,
-    this.backgroundColor
-  );
+
+  ActivityDataClass(this.taskName, this.courseName, this.remainingTime,
+      this.topicTheme, this.backgroundColor);
 }

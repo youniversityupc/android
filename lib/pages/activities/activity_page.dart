@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'activity-form.widget.dart';
-import '../view_models/activity-data-class.model.dart';
+import 'package:youniversity_app/models/activity-data-class.model.dart';
+import 'package:youniversity_app/pages/activities/activity_form.dart';
 
 class ActivityWidget extends StatelessWidget {
 
