@@ -80,12 +80,12 @@ class CourseCard extends StatelessWidget {
   }
 }
 
-class TeacherCard extends StatelessWidget {
+class InformationCard extends StatelessWidget {
   final Color? color;
   final String name;
   final String email;
   final String? phone;
-  const TeacherCard(
+  const InformationCard(
       {super.key,
       this.color,
       required this.name,
@@ -94,6 +94,8 @@ class TeacherCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final phone = this.phone;
+
     return Card(
       color: color,
       child: Padding(
@@ -114,6 +116,11 @@ class TeacherCard extends StatelessWidget {
                     icon: const Icon(Icons.mail, color: Colors.white),
                     label: email,
                   ),
+                  if (phone != null)
+                    _CourseIcon(
+                      icon: const Icon(Icons.phone, color: Colors.white),
+                      label: phone,
+                    ),
                 ],
               ),
             ),
