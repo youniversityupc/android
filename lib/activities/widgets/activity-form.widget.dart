@@ -13,7 +13,7 @@ class ActivityForm extends StatefulWidget {
 class ActivityFormState extends State<ActivityForm> {
   final String? Function(String? value)? _inputValidation = (value) {
     if(value == null || value.isEmpty) return 'Please enter some text';
-    return null;
+    return "";
   };
   final _formKey = GlobalKey<FormState>();
   final Map<String,String> _currentOptionsSelected = {
@@ -38,11 +38,14 @@ class ActivityFormState extends State<ActivityForm> {
       autovalidateMode: AutovalidateMode.always,
       child: Column(
         children: <Widget>[
-          TextFormField(
-            decoration: const InputDecoration(
-              labelText: "Event Name"
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              decoration: const InputDecoration(
+                labelText: "Event Name"
+              ),
+              validator: _inputValidation,
             ),
-            validator: _inputValidation,
           ),
           ElevatedButton(
             onPressed: () {
