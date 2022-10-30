@@ -1,22 +1,21 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class GradesInformation extends StatefulWidget {
   const GradesInformation({Key? key}) : super(key: key);
 
   @override
-  _GradesInformationState createState() => _GradesInformationState();
+  State<GradesInformation> createState() => _GradesInformationState();
 }
 
 class _GradesInformationState extends State<GradesInformation> {
   TextEditingController? searchFieldController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final bodyText1 =
-      TextStyle(fontSize: 14, color: Color(0xFF326A8C), fontFamily: 'Poppins');
+  final bodyText1 = const TextStyle(
+      fontSize: 14, color: Color(0xFF326A8C), fontFamily: 'Poppins');
   final title2 =
-      TextStyle(fontSize: 22, color: Colors.black, fontFamily: 'Poppins');
-  final title3 = TextStyle(
+      const TextStyle(fontSize: 22, color: Colors.black, fontFamily: 'Poppins');
+  final title3 = const TextStyle(
       fontSize: 20,
       fontWeight: FontWeight.w500,
       color: Colors.white,
@@ -38,47 +37,47 @@ class _GradesInformationState extends State<GradesInformation> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: Color(0xFFF2F2F2),
+      backgroundColor: const Color(0xFFF2F2F2),
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(90),
+        preferredSize: const Size.fromHeight(90),
         child: AppBar(
-          backgroundColor: Color(0xFFF2F2F2),
+          backgroundColor: const Color(0xFFF2F2F2),
           automaticallyImplyLeading: false,
-          actions: [],
+          actions: const [],
           flexibleSpace: FlexibleSpaceBar(
             title: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 14),
+              padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 14),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
+                    padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
+                          padding:
+                              const EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
                           child: IconButton(
                             //borderColor: Colors.transparent,
                             //borderRadius: 30,
                             //borderWidth: 1,
                             //buttonSize: 50,
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.keyboard_backspace,
                               color: Color(0xFF326A8C),
                               size: 30,
                             ),
-                            onPressed: () {
-                              print('IconButton pressed ...');
-                            },
+                            onPressed: () {},
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 0),
+                          padding:
+                              const EdgeInsetsDirectional.fromSTEB(4, 0, 0, 0),
                           child: Text(
                             'NOTAS DETALLADAS',
                             style: bodyText1,
@@ -88,7 +87,7 @@ class _GradesInformationState extends State<GradesInformation> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(24, 0, 0, 0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 0, 0),
                     child: Text(
                       'IHC y Tecnología Movíles',
                       style: title2,
@@ -113,12 +112,13 @@ class _GradesInformationState extends State<GradesInformation> {
                 scrollDirection: Axis.vertical,
                 children: [
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(16, 12, 16, 0),
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(16, 12, 16, 0),
                     child: Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: Color(0xFF34D399),
-                        boxShadow: [
+                        color: const Color(0xFF34D399),
+                        boxShadow: const [
                           BoxShadow(
                             blurRadius: 5,
                             color: Color(0x2E000000),
@@ -128,7 +128,8 @@ class _GradesInformationState extends State<GradesInformation> {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            12, 12, 12, 12),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -159,12 +160,13 @@ class _GradesInformationState extends State<GradesInformation> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(16, 12, 16, 0),
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(16, 12, 16, 0),
                     child: Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: Color(0xFF34D399),
-                        boxShadow: [
+                        color: const Color(0xFF34D399),
+                        boxShadow: const [
                           BoxShadow(
                             blurRadius: 5,
                             color: Color(0x2E000000),
@@ -174,7 +176,8 @@ class _GradesInformationState extends State<GradesInformation> {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            12, 12, 12, 12),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -205,12 +208,13 @@ class _GradesInformationState extends State<GradesInformation> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(16, 12, 16, 0),
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(16, 12, 16, 0),
                     child: Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: Color(0xFF34D399),
-                        boxShadow: [
+                        color: const Color(0xFF34D399),
+                        boxShadow: const [
                           BoxShadow(
                             blurRadius: 5,
                             color: Color(0x2E000000),
@@ -220,7 +224,8 @@ class _GradesInformationState extends State<GradesInformation> {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            12, 12, 12, 12),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -251,12 +256,13 @@ class _GradesInformationState extends State<GradesInformation> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(16, 12, 16, 0),
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(16, 12, 16, 0),
                     child: Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: Color(0xFF34D399),
-                        boxShadow: [
+                        color: const Color(0xFF34D399),
+                        boxShadow: const [
                           BoxShadow(
                             blurRadius: 5,
                             color: Color(0x2E000000),
@@ -266,7 +272,8 @@ class _GradesInformationState extends State<GradesInformation> {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            12, 12, 12, 12),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -297,12 +304,13 @@ class _GradesInformationState extends State<GradesInformation> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(16, 12, 16, 0),
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(16, 12, 16, 0),
                     child: Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: Color(0xFF34D399),
-                        boxShadow: [
+                        color: const Color(0xFF34D399),
+                        boxShadow: const [
                           BoxShadow(
                             blurRadius: 5,
                             color: Color(0x2E000000),
@@ -312,7 +320,8 @@ class _GradesInformationState extends State<GradesInformation> {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            12, 12, 12, 12),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -343,12 +352,13 @@ class _GradesInformationState extends State<GradesInformation> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(16, 12, 16, 0),
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(16, 12, 16, 0),
                     child: Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: Color(0xFF34D399),
-                        boxShadow: [
+                        color: const Color(0xFF34D399),
+                        boxShadow: const [
                           BoxShadow(
                             blurRadius: 5,
                             color: Color(0x2E000000),
@@ -358,7 +368,8 @@ class _GradesInformationState extends State<GradesInformation> {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            12, 12, 12, 12),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -389,12 +400,13 @@ class _GradesInformationState extends State<GradesInformation> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(16, 12, 16, 0),
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(16, 12, 16, 0),
                     child: Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: Color(0xFF34D399),
-                        boxShadow: [
+                        color: const Color(0xFF34D399),
+                        boxShadow: const [
                           BoxShadow(
                             blurRadius: 5,
                             color: Color(0x2E000000),
@@ -404,7 +416,8 @@ class _GradesInformationState extends State<GradesInformation> {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            12, 12, 12, 12),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.start,
