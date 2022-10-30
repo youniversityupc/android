@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:youniversity_app/models/activity-data-class.model.dart';
+import 'package:youniversity_app/models/activity_model.dart';
 import 'package:youniversity_app/pages/activities/activity_form.dart';
 
 class ActivityWidget extends StatelessWidget {
 
   ActivityWidget({super.key});
 
-  final List<ActivityDataClass> _activities = [
-    ActivityDataClass("Test Online","Fisica 2", "Dentro de 30 minutos", "Reglas de Kirchoff",Colors.lightBlue),
-    ActivityDataClass("Reunion Grupal","IHC y Tecnologías Móviles", "Dentro de 2 horas", "Trabajo Parcial", Colors.orange),
-    ActivityDataClass("Entrega de Trabajo Parcial","Diseño de Base De Datos", "Dentro de 11 horas y 29 minutos", "Sprint 4", Colors.green),
-    ActivityDataClass("Control Virtual 2","Cálculo 2", "Dentro de 3 días", "Integrales triples", Colors.redAccent)
+  final List<ActivityModel> _activities = [
+    ActivityModel("Test Online","Fisica 2", "Dentro de 30 minutos", "Reglas de Kirchoff",Colors.lightBlue),
+    ActivityModel("Reunion Grupal","IHC y Tecnologías Móviles", "Dentro de 2 horas", "Trabajo Parcial", Colors.orange),
+    ActivityModel("Entrega de Trabajo Parcial","Diseño de Base De Datos", "Dentro de 11 horas y 29 minutos", "Sprint 4", Colors.green),
+    ActivityModel("Control Virtual 2","Cálculo 2", "Dentro de 3 días", "Integrales triples", Colors.redAccent)
   ];
 
   @override
@@ -35,7 +35,7 @@ class ActivityWidget extends StatelessWidget {
               child: ListView.builder(
                       itemCount: _activities.length,
                       itemBuilder: (BuildContext context, int index) {
-                        ActivityDataClass act = _activities[index];
+                        ActivityModel act = _activities[index];
                         return Activity(taskName: act.taskName, courseName: act.courseName, remainingTime: act.remainingTime,topicTheme: act.topicTheme,backgroundColor: act.backgroundColor);
                       }
                     )
@@ -50,7 +50,7 @@ class ActivityWidget extends StatelessWidget {
           Navigator.push(
             context, 
             MaterialPageRoute(
-              builder: (context) => ActivityForm(onAddActivity: (ActivityDataClass data) {})
+              builder: (context) => ActivityForm(onAddActivity: (ActivityModel data) {})
             )
           );
         },

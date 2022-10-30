@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:youniversity_app/models/activity-data-class.model.dart';
+import 'package:youniversity_app/models/activity_model.dart';
 
 class ActivityForm extends StatefulWidget {
-  final Function(ActivityDataClass) onAddActivity;
+  final Function(ActivityModel) onAddActivity;
   const ActivityForm({super.key, required this.onAddActivity});
 
   @override

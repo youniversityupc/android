@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class ActivityDataClass {
+class ActivityModel {
   String? taskName;
   String? courseName;
   String? remainingTime;
   String? topicTheme;
   Color? backgroundColor;
 
-  ActivityDataClass(this.taskName, this.courseName, this.remainingTime,
+  ActivityModel(this.taskName, this.courseName, this.remainingTime,
       this.topicTheme, this.backgroundColor);
 }
