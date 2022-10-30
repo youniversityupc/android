@@ -7,6 +7,7 @@ class AppLocationItem {
   final BeamLocation location;
   final BottomNavigationBarItem? navigation;
   final AppLocationTabBar? tabBar;
+  final bool onlyBeamer;
 
   AppLocationItem({
     required String title,
@@ -14,6 +15,7 @@ class AppLocationItem {
     required this.location,
     this.navigation,
     this.tabBar,
+    this.onlyBeamer = false,
   }) : title = title.toUpperCase();
 }
 
