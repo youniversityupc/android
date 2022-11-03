@@ -1,67 +1,76 @@
+import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
-import 'package:youniversity_app/models/activity_model.dart';
 
 class ActivityForm extends StatefulWidget {
-  final Function(ActivityModel) onAddActivity;
-  const ActivityForm({super.key, required this.onAddActivity});
+  const ActivityForm({super.key});
+
+  // final void Function(ActivityModel) onAddActivity;
 
   @override
   State<StatefulWidget> createState() => ActivityFormState();
 }
 
 class ActivityFormState extends State<ActivityForm> {
-  final String? Function(String? value)? _inputValidation = (value) {
-    if (value == null || value.isEmpty) return 'Please enter some text';
-    return "";
-  };
   final _formKey = GlobalKey<FormState>();
-  final Map<String, String> _currentOptionsSelected = {
-    'type': 'Grupal',
-    'course': 'Not selected yet'
-  };
-  final List<String> _coursesList = [
-    'Base de Datos',
-    'IHC y Tecnologías Móviles'
-  ];
-  final List<String> _typeList = ['Grupal', 'Individual'];
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text("New Activity"),
-        ),
-        body: _createNewForm());
+
+  // final Map<String, String> _currentOptionsSelected = {
+  //   'type': 'Grupal',
+  //   'course': 'Not selected yet'
+  // };
+
+  // final List<String> _coursesList = [
+  //   'Base de Datos',
+  //   'IHC y Tecnologías Móviles'
+  // ];
+
+  // final List<String> _typeList = ['Grupal', 'Individual'];
+
+  void _onFormChange() {
+    setState(() {
+      Form.of(primaryFocus!.context!)!.save();
+    });
   }
 
-  Widget _createNewForm() {
+  String? _inputValidation(String? value) {
+    if (value == null || value.isEmpty) return 'Requerido';
+    return null;
+  }
+
+  bool _isFormValid() {
+    return _formKey.currentState!.validate();
+  }
+
+  void _showSnackBar(BuildContext context, String text) {
+    final snackBar = SnackBar(content: Text(text));
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Form(
       key: _formKey,
       autovalidateMode: AutovalidateMode.always,
+      onChanged: _onFormChange,
       child: Column(
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
-              decoration: const InputDecoration(labelText: "Event Name"),
+              decoration: const InputDecoration(labelText: 'Event Name'),
               validator: _inputValidation,
             ),
           ),
           ElevatedButton(
-              onPressed: () {
-                if (_formKey.currentState!.validate() == false) return;
-                ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Processing data")));
-                Navigator.pop(context);
-                //(context.widget as ActivityForm).onAddActivity();
-              },
-              child: const Text("Submit"))
+            onPressed: () {
+              if (!_isFormValid()) return;
+              _showSnackBar(context, 'Processing data');
+              // widget.onAddActivity(activity);
+              Beamer.of(context).popRoute();
+            },
+            child: const Text('Submit'),
+          )
         ],
       ),
-      onChanged: () {
-        setState(() {
-          Form.of(primaryFocus!.context!)!.save();
-        });
-      },
     );
   }
 }
