@@ -1,160 +1,134 @@
+import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
+import 'package:youniversity_app/layout/app_theme.dart';
+import 'package:youniversity_app/layout/route_constants.dart';
+import 'package:youniversity_app/utils/text_style_extensions.dart';
+import 'package:youniversity_app/utils/named_font_weight.dart';
+import 'package:youniversity_app/utils/widget_list_extensions.dart';
+import 'package:youniversity_app/utils/build_context_extensions.dart';
 
-class SignUpHeader extends StatelessWidget {
-  const SignUpHeader({super.key});
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({super.key});
+
+  @override
+  State<SignUpPage> createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
+  Widget createTextInput({
+    required String label,
+    String? hint,
+    TextInputType keyboardType = TextInputType.text,
+    bool obscureText = false,
+  }) {
+    return TextField(
+      decoration: InputDecoration(
+        labelText: label,
+        hintText: hint,
+      ),
+      keyboardType: keyboardType,
+      obscureText: obscureText,
+    );
+  }
+
+  Widget createSubmitButton() {
+    final textStyle = context.textTheme.labelLarge;
+    return SizedBox(
+      width: double.infinity,
+      child: ElevatedButton(
+        onPressed: () => context.beamToNamed(RouteConstants.homeDashboard),
+        child: Text(
+          'CREAR CUENTA',
+          style: textStyle?.withColor(Colors.white),
+        ),
+      ),
+    );
+  }
+
+  Widget createSignInLabel() {
+    final textStyle = context.textTheme.titleSmall;
+    return GestureDetector(
+      onTap: () => context.beamToNamed(RouteConstants.authSignUp),
+      child: Center(
+        child: Text.rich(
+          TextSpan(
+            children: <InlineSpan>[
+              TextSpan(
+                text: '¿Ya tienes una cuenta? ',
+                style: textStyle?.withColor(AppColorPalette.darkerPrimaryColor),
+              ),
+              TextSpan(
+                text: 'Inicia sesión',
+                style: textStyle?.withColor(AppColorPalette.primaryColor),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      margin: const EdgeInsets.symmetric(vertical: 48),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: const <Widget>[
-          SizedBox(
-            height: 48,
-          ),
-          Center(
-            child: Image(image: AssetImage("assets/logo.png")),
-          ),
-          SizedBox(
-            height: 16,
-          ),
-          Center(
-            child: Text.rich(
-              TextSpan(children: <TextSpan>[
-                TextSpan(
-                  text: "Create a YOUniversity Account\n",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 24,
-                    color: Color.fromARGB(255, 15, 95, 160),
+        children: <Widget>[
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Image(image: AssetImage('assets/logo.png')),
+              Column(
+                children: [
+                  Text(
+                    'Crea tu cuenta en YOUniversity',
+                    style: context.textTheme.headlineSmall
+                        ?.withColor(AppColorPalette.primaryColor),
                   ),
+                  Text(
+                    'Organízate de la mejor manera',
+                    style: context.textTheme.titleMedium
+                        ?.withColor(AppColorPalette.darkerPrimaryColor)
+                        .withWeight(NamedFontWeight.light),
+                  )
+                ],
+              )
+            ].withVerticalSpace(16),
+          ),
+          Container(
+            margin: const EdgeInsets.all(16),
+            child: Column(
+              children: <Widget>[
+                createTextInput(
+                  label: 'Nombre completo',
+                  hint: 'John Doe',
                 ),
-                TextSpan(
-                  text: "Organize the best way",
-                  style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 16,
-                      color: Color.fromRGBO(67, 77, 89, 1)),
-                )
-              ]),
+                createTextInput(
+                  label: 'Correo electrónico',
+                  hint: 'john.doe@gmail.com',
+                  keyboardType: TextInputType.emailAddress,
+                ),
+                createTextInput(
+                  label: 'Contraseña',
+                  obscureText: true,
+                ),
+                createTextInput(
+                  label: 'Confirmar contraseña',
+                  obscureText: true,
+                ),
+                // createUniversityDropdown(),
+                createTextInput(
+                  label: 'Teléfono',
+                  hint: '+51 999 999 999',
+                  keyboardType: TextInputType.phone,
+                ),
+                createSubmitButton(),
+                createSignInLabel(),
+              ].withVerticalSpace(16),
             ),
-          )
+          ),
         ],
       ),
     );
-  }
-}
-
-class SignUpForm extends StatefulWidget {
-  const SignUpForm({super.key});
-
-  @override
-  State<SignUpForm> createState() => _SignUpFormState();
-}
-
-class _SignUpFormState extends State<SignUpForm> {
-  String password = '';
-  bool isPasswordVisible = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView(
-      padding: const EdgeInsets.all(16),
-      children: [
-        buildName(),
-        const SizedBox(height: 16),
-        buildEmail(),
-        const SizedBox(height: 16),
-        buildPassword(),
-        const SizedBox(height: 16),
-        buildUniversity(),
-        const SizedBox(height: 16),
-        buildPhone(),
-        const SizedBox(height: 16),
-        MaterialButton(
-          disabledColor: const Color.fromRGBO(50, 106, 140, 1),
-          onPressed: sendData(),
-          child: const Text(
-            "CREATE ACCOUNT",
-            style: TextStyle(fontSize: 16, color: Colors.white),
-          ),
-        ),
-        const Center(
-          child: Text.rich(TextSpan(children: <TextSpan>[
-            TextSpan(
-              text: "Already signed up? ",
-              style: TextStyle(
-                fontWeight: FontWeight.normal,
-                fontSize: 16,
-                color: Color.fromRGBO(67, 77, 89, 1),
-              ),
-            ),
-            TextSpan(
-              text: "Sign in",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-                color: Color.fromRGBO(50, 106, 140, 1),
-              ),
-            )
-          ])),
-        )
-      ],
-    );
-  }
-
-  Widget buildName() => const TextField(
-        decoration: InputDecoration(
-          hintText: 'John Doe',
-          labelText: 'Name',
-          border: OutlineInputBorder(),
-        ),
-        keyboardType: TextInputType.name,
-      );
-
-  Widget buildEmail() => const TextField(
-        decoration: InputDecoration(
-          hintText: 'johndoe@gmail.com',
-          labelText: 'Email',
-          border: OutlineInputBorder(),
-        ),
-        keyboardType: TextInputType.emailAddress,
-      );
-  Widget buildPassword() => TextField(
-        onChanged: (value) => setState(() => password = value),
-        decoration: InputDecoration(
-          hintText: 'Please, enter a strong password',
-          labelText: 'Password',
-          suffixIcon: IconButton(
-            icon: isPasswordVisible
-                ? const Icon(Icons.visibility_off)
-                : const Icon(Icons.visibility),
-            onPressed: () =>
-                setState(() => isPasswordVisible = !isPasswordVisible),
-          ),
-          border: const OutlineInputBorder(),
-        ),
-        obscureText: isPasswordVisible,
-      );
-  Widget buildUniversity() => const TextField(
-        decoration: InputDecoration(
-          hintText: 'Universidad Peruana de Ciencias Aplicadas',
-          labelText: 'University',
-          border: OutlineInputBorder(),
-        ),
-        keyboardType: TextInputType.name,
-      );
-  Widget buildPhone() => const TextField(
-        decoration: InputDecoration(
-          hintText: '999 999 999',
-          labelText: 'Phone number',
-          border: OutlineInputBorder(),
-        ),
-        keyboardType: TextInputType.phone,
-      );
-
-  sendData() {
-    // To do
   }
 }

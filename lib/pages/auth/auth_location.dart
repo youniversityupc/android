@@ -13,14 +13,14 @@ class AuthLocation extends BeamLocation<BeamState> {
         const BeamPage(
           key: ValueKey(RouteConstants.authSignIn),
           title: 'Iniciar sesión',
-          child: SignInForm(),
+          child: SignInPage(),
           type: BeamPageType.slideLeftTransition,
         ),
       if (uri == RouteConstants.authSignUp)
         const BeamPage(
           key: ValueKey(RouteConstants.authSignUp),
           title: 'Registrarse',
-          child: SignUpForm(),
+          child: SignUpPage(),
           type: BeamPageType.slideLeftTransition,
         ),
     ];

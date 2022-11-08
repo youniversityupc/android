@@ -6,14 +6,14 @@ import 'package:youniversity_app/utils/text_style_extensions.dart';
 import 'package:youniversity_app/utils/widget_list_extensions.dart';
 import 'package:youniversity_app/utils/build_context_extensions.dart';
 
-class SignInForm extends StatefulWidget {
-  const SignInForm({super.key});
+class SignInPage extends StatefulWidget {
+  const SignInPage({super.key});
 
   @override
-  State<SignInForm> createState() => _SignInFormState();
+  State<SignInPage> createState() => _SignInPageState();
 }
 
-class _SignInFormState extends State<SignInForm> {
+class _SignInPageState extends State<SignInPage> {
   Widget createEmailInput() {
     return const TextField(
       decoration: InputDecoration(
@@ -41,7 +41,7 @@ class _SignInFormState extends State<SignInForm> {
       child: ElevatedButton(
         onPressed: () => context.beamToNamed(RouteConstants.homeDashboard),
         child: Text(
-          'SIGN IN',
+          'INICIAR SESIÓN',
           style: textStyle?.withColor(Colors.white),
         ),
       ),
