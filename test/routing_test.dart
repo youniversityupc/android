@@ -9,7 +9,7 @@ void main() {
     await tester.pumpWidget(YOUniversityApp(theme: theme));
 
     // Click the login button
-    await tester.tap(find.widgetWithText(ElevatedButton, 'SIGN IN'));
+    await tester.tap(find.widgetWithText(ElevatedButton, 'INICIAR SESIÓN'));
     await tester.pump();
 
     // Verify that out AppBar is rendering the title correctly
