@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:youniversity_app/components/course_card.dart';
 import 'package:youniversity_app/layout/app_theme.dart';
+import 'package:youniversity_app/utils/build_context_extensions.dart';
 import 'package:youniversity_app/utils/text_style_extensions.dart';
 
 class HomeCoursesPage extends StatefulWidget {
@@ -13,7 +14,7 @@ class HomeCoursesPage extends StatefulWidget {
 class _HomeCoursesPageState extends State<HomeCoursesPage> {
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
+    final textTheme = context.textTheme;
 
     return Padding(
       padding: const EdgeInsets.all(16),

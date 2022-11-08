@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:youniversity_app/utils/build_context_extensions.dart';
 import 'package:youniversity_app/utils/text_style_extensions.dart';
 
 class _CourseIcon extends StatelessWidget {
@@ -12,7 +13,7 @@ class _CourseIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
+    final textTheme = context.textTheme;
 
     return Row(
       children: [
@@ -45,7 +46,7 @@ class CourseCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
+    final textTheme = context.textTheme;
 
     return Card(
       color: color,
