@@ -4,6 +4,7 @@ import 'package:youniversity_app/layout/app_theme.dart';
 import 'package:youniversity_app/layout/route_constants.dart';
 import 'package:youniversity_app/utils/text_style_extensions.dart';
 import 'package:youniversity_app/utils/widget_list_extensions.dart';
+import 'package:youniversity_app/utils/build_context_extensions.dart';
 
 class SignInForm extends StatefulWidget {
   const SignInForm({super.key});
@@ -34,11 +35,11 @@ class _SignInFormState extends State<SignInForm> {
   }
 
   Widget createSubmitButton() {
-    final textStyle = Theme.of(context).textTheme.labelLarge;
+    final textStyle = context.textTheme.labelLarge;
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
-        onPressed: () => beamToNamed(RouteConstants.homeDashboard),
+        onPressed: () => context.beamToNamed(RouteConstants.homeDashboard),
         child: Text(
           'SIGN IN',
           style: textStyle?.withColor(Colors.white),
@@ -48,9 +49,9 @@ class _SignInFormState extends State<SignInForm> {
   }
 
   Widget createSignUpLabel() {
-    final textStyle = Theme.of(context).textTheme.titleSmall;
+    final textStyle = context.textTheme.titleSmall;
     return GestureDetector(
-      onTap: () => beamToNamed(RouteConstants.authSignUp),
+      onTap: () => context.beamToNamed(RouteConstants.authSignUp),
       child: Center(
         child: Text.rich(
           TextSpan(
@@ -71,9 +72,9 @@ class _SignInFormState extends State<SignInForm> {
   }
 
   Widget createForgotPasswordLabel() {
-    final textStyle = Theme.of(context).textTheme.titleSmall;
+    final textStyle = context.textTheme.titleSmall;
     return GestureDetector(
-      onTap: () => beamToNamed(RouteConstants.authSignUp),
+      onTap: () => context.beamToNamed(RouteConstants.authSignUp),
       child: Center(
         child: Text(
           '¿Olvidaste tu contraseña?',
@@ -81,10 +82,6 @@ class _SignInFormState extends State<SignInForm> {
         ),
       ),
     );
-  }
-
-  void beamToNamed(String route) {
-    Beamer.of(context).beamToNamed(route);
   }
 
   @override
