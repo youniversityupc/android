@@ -2,8 +2,6 @@ import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:youniversity_app/layout/app_location_item.dart';
 import 'package:youniversity_app/layout/route_constants.dart';
-import 'package:youniversity_app/pages/auth/auth_location.dart';
-import 'package:youniversity_app/pages/profile/profile_location.dart';
 
 class AppLayout extends StatefulWidget {
   AppLayout({
@@ -20,16 +18,10 @@ class AppLayout extends StatefulWidget {
   final beamerKey = GlobalKey<BeamerState>();
 
   static BeamerDelegate _createRouter(List<AppLocationItem> navigation) {
-    final locations = navigation.map(((e) => e.location));
+    final locations = navigation.map(((e) => e.location)).toList();
 
     return BeamerDelegate(
-      locationBuilder: BeamerLocationBuilder(
-        beamLocations: [
-          ...locations,
-          AuthLocation(),
-          ProfileLocation(),
-        ],
-      ),
+      locationBuilder: BeamerLocationBuilder(beamLocations: locations),
     );
   }
 
