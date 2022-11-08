@@ -121,14 +121,18 @@ class _AppLayoutState extends State<AppLayout> {
   @override
   Widget build(BuildContext context) {
     final appBarConfig = _createAppBar(_index);
+    final pageMargin = appBarConfig == null ? kToolbarHeight : 0.0;
 
     return DefaultTabController(
       length: appBarConfig?.length ?? 0,
       child: Scaffold(
         appBar: appBarConfig?.appBar,
-        body: Beamer(
-          key: widget.beamerKey,
-          routerDelegate: widget.router,
+        body: Container(
+          margin: EdgeInsets.only(top: pageMargin),
+          child: Beamer(
+            key: widget.beamerKey,
+            routerDelegate: widget.router,
+          ),
         ),
         bottomNavigationBar: _createBottomNavBar(_index),
         resizeToAvoidBottomInset: false,
