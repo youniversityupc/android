@@ -22,14 +22,13 @@ class _HomeCoursesPageState extends State<HomeCoursesPage> {
         children: [
           Text(
             'Hola, Nicola',
-            style: textTheme.headline4?.withColor(DefaultColorPalette.gray900),
+            style: textTheme.headline4?.withColor(AppColorPalette.gray900),
           ),
           Container(
             margin: const EdgeInsets.only(top: 8),
             child: Text(
               '30 minutos restantes de tu última clase',
-              style:
-                  textTheme.subtitle1?.withColor(DefaultColorPalette.gray700),
+              style: textTheme.subtitle1?.withColor(AppColorPalette.gray700),
             ),
           ),
           Container(

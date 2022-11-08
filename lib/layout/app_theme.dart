@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-abstract class DefaultColorPalette {
+abstract class AppColorPalette {
   static const primaryColor = Color.fromRGBO(50, 106, 140, 1);
   static const backgroundColor = Color.fromRGBO(242, 242, 242, 1);
 
@@ -18,28 +18,28 @@ abstract class DefaultColorPalette {
 
 final theme = ThemeData(
   useMaterial3: true,
-  backgroundColor: DefaultColorPalette.backgroundColor,
-  primaryColor: DefaultColorPalette.primaryColor,
-  scaffoldBackgroundColor: DefaultColorPalette.backgroundColor,
+  backgroundColor: AppColorPalette.backgroundColor,
+  primaryColor: AppColorPalette.primaryColor,
+  scaffoldBackgroundColor: AppColorPalette.backgroundColor,
   appBarTheme: const AppBarTheme(
-    backgroundColor: DefaultColorPalette.backgroundColor,
-    foregroundColor: DefaultColorPalette.primaryColor,
+    backgroundColor: AppColorPalette.backgroundColor,
+    foregroundColor: AppColorPalette.primaryColor,
     elevation: 0,
   ),
   tabBarTheme: const TabBarTheme(
-    labelColor: DefaultColorPalette.primaryColor,
-    unselectedLabelColor: DefaultColorPalette.primaryColor,
+    labelColor: AppColorPalette.primaryColor,
+    unselectedLabelColor: AppColorPalette.primaryColor,
     indicator: UnderlineTabIndicator(
       borderSide: BorderSide(
         width: 2.0,
-        color: DefaultColorPalette.primaryColor,
+        color: AppColorPalette.primaryColor,
       ),
     ),
   ),
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-    backgroundColor: DefaultColorPalette.backgroundColor,
-    selectedItemColor: DefaultColorPalette.primaryColor,
-    unselectedItemColor: DefaultColorPalette.gray500,
+    backgroundColor: AppColorPalette.backgroundColor,
+    selectedItemColor: AppColorPalette.primaryColor,
+    unselectedItemColor: AppColorPalette.gray500,
     type: BottomNavigationBarType.fixed,
     showSelectedLabels: true,
   ),
