@@ -131,6 +131,7 @@ class _AppLayoutState extends State<AppLayout> {
           routerDelegate: widget.router,
         ),
         bottomNavigationBar: _createBottomNavBar(_index),
+        resizeToAvoidBottomInset: false,
       ),
     );
   }
