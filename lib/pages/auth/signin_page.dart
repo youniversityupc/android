@@ -37,7 +37,7 @@ class _SignInFormState extends State<SignInForm> {
     return ElevatedButton(
       onPressed: () => beamToNamed(context, RouteConstants.homeDashboard),
       child: Text(
-        "SIGN IN",
+        'SIGN IN',
         style: textStyle?.withColor(Colors.white),
       ),
     );
@@ -47,18 +47,21 @@ class _SignInFormState extends State<SignInForm> {
     final textStyle = Theme.of(context).textTheme.titleSmall;
     return GestureDetector(
       onTap: () => beamToNamed(context, RouteConstants.authSignUp),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            '¿No tienes cuenta? ',
-            style: textStyle?.withColor(AppColorPalette.darkerPrimaryColor),
+      child: Center(
+        child: Text.rich(
+          TextSpan(
+            children: <InlineSpan>[
+              TextSpan(
+                text: '¿No tienes cuenta? ',
+                style: textStyle?.withColor(AppColorPalette.darkerPrimaryColor),
+              ),
+              TextSpan(
+                text: 'Regístrate aquí',
+                style: textStyle?.withColor(AppColorPalette.primaryColor),
+              ),
+            ],
           ),
-          Text(
-            'Regístrate aquí',
-            style: textStyle?.withColor(AppColorPalette.primaryColor),
-          ),
-        ],
+        ),
       ),
     );
   }
