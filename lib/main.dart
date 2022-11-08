@@ -5,10 +5,12 @@ import 'package:youniversity_app/layout/app_navigation.dart';
 import 'package:youniversity_app/layout/app_theme.dart';
 import 'package:youniversity_app/layout/route_constants.dart';
 
-void main() => runApp(YOUniversityApp());
+void main() => runApp(YOUniversityApp(theme: theme));
 
 class YOUniversityApp extends StatelessWidget {
-  YOUniversityApp({super.key});
+  YOUniversityApp({super.key, required this.theme});
+
+  final ThemeData theme;
 
   final routerDelegate = BeamerDelegate(
     initialPath: RouteConstants.authSignIn,
