@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:youniversity_app/components/course_card.dart';
+import 'package:youniversity_app/layout/app_theme.dart';
+import 'package:youniversity_app/utils/text_style_extensions.dart';
 
 class HomeCoursesPage extends StatefulWidget {
   const HomeCoursesPage({super.key});
@@ -11,6 +13,8 @@ class HomeCoursesPage extends StatefulWidget {
 class _HomeCoursesPageState extends State<HomeCoursesPage> {
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -18,19 +22,14 @@ class _HomeCoursesPageState extends State<HomeCoursesPage> {
         children: [
           Text(
             'Hola, Nicola',
-            style: Theme.of(context)
-                .textTheme
-                .headline4
-                ?.copyWith(color: const Color.fromRGBO(24, 24, 27, 1)),
+            style: textTheme.headline4?.withColor(DefaultColorPalette.gray900),
           ),
           Container(
             margin: const EdgeInsets.only(top: 8),
             child: Text(
               '30 minutos restantes de tu última clase',
-              style: Theme.of(context)
-                  .textTheme
-                  .subtitle1
-                  ?.copyWith(color: const Color.fromRGBO(63, 63, 70, 1)),
+              style:
+                  textTheme.subtitle1?.withColor(DefaultColorPalette.gray700),
             ),
           ),
           Container(
