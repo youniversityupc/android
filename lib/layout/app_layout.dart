@@ -29,6 +29,13 @@ class AppLayout extends StatefulWidget {
   State<AppLayout> createState() => _AppLayoutState();
 }
 
+class _AppBarConfig {
+  final AppBar appBar;
+  final int length;
+
+  const _AppBarConfig(this.appBar, this.length);
+}
+
 class _AppLayoutState extends State<AppLayout> {
   late int _index;
 
@@ -45,9 +52,47 @@ class _AppLayoutState extends State<AppLayout> {
     return TabBar(tabs: items);
   }
 
+  _AppBarConfig? _createAppBar(int index) {
+    final onlyBeamer = widget.navigation[index].onlyBeamer;
+    if (onlyBeamer) return null;
+
+    final title = _createTitle(_index);
+    final tabBar = _createTabBar(_index);
+    final length = tabBar?.tabs.length ?? 0;
+
+    final appBar = AppBar(
+      title: title,
+      actions: [
+        GestureDetector(
+          onTap: _onAvatarTapped,
+          child: const CircleAvatar(
+            child: Text('D'),
+          ),
+        )
+      ],
+      bottom: tabBar,
+    );
+
+    return _AppBarConfig(appBar, length);
+  }
+
   List<BottomNavigationBarItem> _createBottomNavItemList() {
     final valid = widget.navigation.where((e) => e.navigation != null);
     return valid.map((e) => e.navigation!).toList();
+  }
+
+  BottomNavigationBar? _createBottomNavBar(int index) {
+    final onlyBeamer = widget.navigation[index].onlyBeamer;
+    if (onlyBeamer) return null;
+    final items = _createBottomNavItemList();
+    final current = index > 0 && index < items.length ? index : 0;
+    return BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
+      showSelectedLabels: true,
+      currentIndex: current,
+      items: items,
+      onTap: _onNavBarItemTapped,
+    );
   }
 
   void _onNavBarItemTapped(int index) {
@@ -75,45 +120,17 @@ class _AppLayoutState extends State<AppLayout> {
 
   @override
   Widget build(BuildContext context) {
-    final title = _createTitle(_index);
-    final tabBar = _createTabBar(_index);
-    final length = tabBar?.tabs.length ?? 0;
-    final onlyBeamer = widget.navigation[_index].onlyBeamer;
+    final appBarConfig = _createAppBar(_index);
 
     return DefaultTabController(
-      length: length,
+      length: appBarConfig?.length ?? 0,
       child: Scaffold(
-        appBar: onlyBeamer
-            ? null
-            : AppBar(
-                title: title,
-                actions: [
-                  GestureDetector(
-                    onTap: _onAvatarTapped,
-                    child: const CircleAvatar(
-                      child: Text('D'),
-                    ),
-                  )
-                ],
-                bottom: tabBar,
-              ),
-        body: Container(
-          margin:
-              onlyBeamer ? const EdgeInsets.only(top: kToolbarHeight) : null,
-          child: Beamer(
-            key: widget.beamerKey,
-            routerDelegate: widget.router,
-          ),
+        appBar: appBarConfig?.appBar,
+        body: Beamer(
+          key: widget.beamerKey,
+          routerDelegate: widget.router,
         ),
-        bottomNavigationBar: onlyBeamer
-            ? null
-            : BottomNavigationBar(
-                type: BottomNavigationBarType.fixed,
-                showSelectedLabels: true,
-                currentIndex: _index,
-                items: _createBottomNavItemList(),
-                onTap: _onNavBarItemTapped,
-              ),
+        bottomNavigationBar: _createBottomNavBar(_index),
       ),
     );
   }
