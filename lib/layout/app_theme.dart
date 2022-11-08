@@ -18,8 +18,8 @@ abstract class AppColorPalette {
 
 final theme = ThemeData(
   useMaterial3: true,
-  backgroundColor: AppColorPalette.backgroundColor,
   primaryColor: AppColorPalette.primaryColor,
+  backgroundColor: AppColorPalette.backgroundColor,
   scaffoldBackgroundColor: AppColorPalette.backgroundColor,
   appBarTheme: const AppBarTheme(
     backgroundColor: AppColorPalette.backgroundColor,
@@ -42,6 +42,14 @@ final theme = ThemeData(
     unselectedItemColor: AppColorPalette.gray500,
     type: BottomNavigationBarType.fixed,
     showSelectedLabels: true,
+  ),
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      backgroundColor: AppColorPalette.primaryColor,
+    ),
+  ),
+  inputDecorationTheme: const InputDecorationTheme(
+    border: OutlineInputBorder(),
   ),
   typography: Typography.material2021(),
 );
