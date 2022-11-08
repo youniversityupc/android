@@ -1,6 +1,8 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
+import 'package:youniversity_app/layout/app_theme.dart';
 import 'package:youniversity_app/layout/route_constants.dart';
+import 'package:youniversity_app/utils/text_style_extensions.dart';
 
 class SignInForm extends StatefulWidget {
   const SignInForm({super.key});
@@ -10,95 +12,104 @@ class SignInForm extends StatefulWidget {
 }
 
 class _SignInFormState extends State<SignInForm> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: ListView(padding: const EdgeInsets.all(16), children: [
-        const SizedBox(
-          height: 48,
-        ),
-        const Center(
-          child: Image(image: AssetImage("assets/logo.png")),
-        ),
-        const SizedBox(
-          height: 32,
-        ),
-        signInEmail(),
-        const SizedBox(height: 16),
-        singInPasswrod(),
-        const SizedBox(height: 16),
-        MaterialButton(
-          color: const Color.fromRGBO(50, 106, 140, 1),
-          onPressed: () => signIn(context),
-          child: const Text(
-            "SIGN IN",
-            style: TextStyle(fontSize: 16, color: Colors.white),
-          ),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              'New around here? ',
-              style: TextStyle(
-                fontWeight: FontWeight.normal,
-                fontSize: 16,
-                color: Colors.black,
-              ),
-            ),
-            TextButton(
-              onPressed: () => signUp(context),
-              child: const Text(
-                "Sign up",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                  color: Color.fromRGBO(50, 106, 140, 1),
-                ),
-              ),
-            )
-          ],
-        ),
-        const SizedBox(
-          height: 12,
-        ),
-        const Center(
-          child: Text(
-            "Forgot your password?",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-              color: Color.fromRGBO(50, 106, 140, 1),
-            ),
-          ),
-        )
-      ]),
+  Widget createEmailInput(BuildContext context) {
+    return const TextField(
+      decoration: InputDecoration(
+        labelText: 'Correo electrónico',
+        hintText: 'john.doe@gmail.com',
+      ),
+      keyboardType: TextInputType.emailAddress,
     );
   }
 
-  Widget signInEmail() => const TextField(
-        decoration: InputDecoration(
-          hintText: 'Your email',
-          labelText: 'Email',
-          border: OutlineInputBorder(),
-        ),
-        keyboardType: TextInputType.emailAddress,
-      );
-  Widget singInPasswrod() => const TextField(
-        decoration: InputDecoration(
-          hintText: 'Your password',
-          labelText: 'Password',
-          border: OutlineInputBorder(),
-        ),
-        keyboardType: TextInputType.visiblePassword,
-      );
-
-  void signIn(BuildContext context) {
-    Beamer.of(context).beamToNamed(RouteConstants.homeDashboard);
+  Widget createPasswordInput(BuildContext context) {
+    return const TextField(
+      decoration: InputDecoration(
+        labelText: 'Contraseña',
+      ),
+      keyboardType: TextInputType.text,
+      obscureText: true,
+    );
   }
 
-  void signUp(BuildContext context) {
-    Beamer.of(context).beamToNamed(RouteConstants.authSignUp);
+  Widget createSubmitButton(BuildContext context) {
+    final textStyle = Theme.of(context).textTheme.labelLarge;
+    return ElevatedButton(
+      onPressed: () => beamToNamed(context, RouteConstants.homeDashboard),
+      child: Text(
+        "SIGN IN",
+        style: textStyle?.withColor(Colors.white),
+      ),
+    );
+  }
+
+  Widget createSignUpLabel(BuildContext context) {
+    final textStyle = Theme.of(context).textTheme.titleSmall;
+    return GestureDetector(
+      onTap: () => beamToNamed(context, RouteConstants.authSignUp),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            '¿No tienes cuenta? ',
+            style: textStyle?.withColor(AppColorPalette.darkerPrimaryColor),
+          ),
+          Text(
+            'Regístrate aquí',
+            style: textStyle?.withColor(AppColorPalette.primaryColor),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget createForgotPasswordLabel(BuildContext context) {
+    final textStyle = Theme.of(context).textTheme.titleSmall;
+    return GestureDetector(
+      onTap: () => beamToNamed(context, RouteConstants.authSignUp),
+      child: Center(
+        child: Text(
+          '¿Olvidaste tu contraseña?',
+          style: textStyle?.withColor(AppColorPalette.primaryColor),
+        ),
+      ),
+    );
+  }
+
+  void beamToNamed(BuildContext context, String route) {
+    Beamer.of(context).beamToNamed(route);
+  }
+
+  List<Widget Function(BuildContext)> get itemBuilders => [
+        createEmailInput,
+        createPasswordInput,
+        createSubmitButton,
+        createSignUpLabel,
+        createForgotPasswordLabel,
+      ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 48),
+      child: Column(
+        children: <Widget>[
+          const Center(
+            child: Image(image: AssetImage('assets/logo.png')),
+          ),
+          Expanded(
+            child: Container(
+              margin: const EdgeInsets.all(16),
+              child: ListView.separated(
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: itemBuilders.length,
+                itemBuilder: (context, index) => itemBuilders[index](context),
+                separatorBuilder: (_, __) => const SizedBox(height: 16),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
