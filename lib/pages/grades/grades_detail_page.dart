@@ -5,14 +5,14 @@ import 'package:youniversity_app/utils/build_context_extensions.dart';
 import 'package:youniversity_app/utils/widget_list_extensions.dart';
 import 'package:youniversity_app/utils/text_style_extensions.dart';
 
-class GradesInformation extends StatefulWidget {
-  const GradesInformation({super.key});
+class GradesDetailPage extends StatefulWidget {
+  const GradesDetailPage({super.key});
 
   @override
-  State<GradesInformation> createState() => _GradesInformationState();
+  State<GradesDetailPage> createState() => _GradesDetailPageState();
 }
 
-class _GradesInformationState extends State<GradesInformation> {
+class _GradesDetailPageState extends State<GradesDetailPage> {
   final List<AssignmentGradeModel> items = const [
     AssignmentGradeModel(label: 'TB1', percentage: 5, grade: 20),
     AssignmentGradeModel(label: 'TB2', percentage: 5, grade: 20),
