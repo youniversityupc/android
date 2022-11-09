@@ -5,6 +5,7 @@ import 'package:youniversity_app/pages/activities/activities_location.dart';
 import 'package:youniversity_app/pages/auth/auth_location.dart';
 import 'package:youniversity_app/pages/courses/courses_location.dart';
 import 'package:youniversity_app/pages/home/home_location.dart';
+import 'package:youniversity_app/pages/profile/profile_location.dart';
 import 'package:youniversity_app/pages/timetable/timetable_location.dart';
 
 List<AppLocationItem> navigation = [
@@ -62,8 +63,13 @@ List<AppLocationItem> navigation = [
   ),
   AppLocationItem(
     title: 'Autenticación',
-    initialPath: '/auth/signin',
+    initialPath: RouteConstants.authSignIn,
     location: AuthLocation(),
     onlyBeamer: true,
+  ),
+  AppLocationItem(
+    title: 'Profile',
+    initialPath: RouteConstants.profile,
+    location: ProfileLocation(),
   ),
 ];

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:youniversity_app/utils/build_context_extensions.dart';
+import 'package:youniversity_app/utils/text_style_extensions.dart';
 
 class _CourseIcon extends StatelessWidget {
   final Icon icon;
@@ -11,17 +13,18 @@ class _CourseIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = context.textTheme;
+
     return Row(
       children: [
         Container(
           margin: const EdgeInsets.only(right: 8),
           child: icon,
         ),
-        Text(label,
-            style: Theme.of(context)
-                .textTheme
-                .bodyText1
-                ?.copyWith(color: Colors.white)),
+        Text(
+          label,
+          style: textTheme.bodyLarge?.withColor(Colors.white),
+        ),
       ],
     );
   }
@@ -43,6 +46,8 @@ class CourseCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = context.textTheme;
+
     return Card(
       color: color,
       child: Padding(
@@ -52,10 +57,7 @@ class CourseCard extends StatelessWidget {
           children: [
             Text(
               title,
-              style: Theme.of(context)
-                  .textTheme
-                  .headline5
-                  ?.copyWith(color: Colors.white),
+              style: textTheme.headlineSmall?.withColor(Colors.white),
             ),
             Container(
               margin: const EdgeInsets.only(top: 8),
