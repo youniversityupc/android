@@ -1,6 +1,7 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:youniversity_app/layout/app_location_item.dart';
+import 'package:youniversity_app/layout/app_theme.dart';
 import 'package:youniversity_app/layout/route_constants.dart';
 
 class AppLayout extends StatefulWidget {
@@ -66,9 +67,11 @@ class _AppLayoutState extends State<AppLayout> {
         GestureDetector(
           onTap: _onAvatarTapped,
           child: const CircleAvatar(
-            child: Text('D'),
+            backgroundColor: AppColorPalette.primaryColor,
+            child: Text('NC'),
           ),
-        )
+        ),
+        const SizedBox(width: 16),
       ],
       bottom: tabBar,
     );
