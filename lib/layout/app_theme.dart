@@ -16,6 +16,17 @@ abstract class AppColorPalette {
   static const gray700 = Color.fromRGBO(63, 63, 70, 1);
   static const gray800 = Color.fromRGBO(39, 39, 42, 1);
   static const gray900 = Color.fromRGBO(24, 24, 27, 1);
+
+  static const emerald50 = Color.fromRGBO(236, 253, 245, 1);
+  static const emerald100 = Color.fromRGBO(209, 250, 229, 1);
+  static const emerald200 = Color.fromRGBO(167, 243, 208, 1);
+  static const emerald300 = Color.fromRGBO(110, 231, 183, 1);
+  static const emerald400 = Color.fromRGBO(52, 211, 153, 1);
+  static const emerald500 = Color.fromRGBO(16, 185, 129, 1);
+  static const emerald600 = Color.fromRGBO(5, 150, 105, 1);
+  static const emerald700 = Color.fromRGBO(4, 120, 87, 1);
+  static const emerald800 = Color.fromRGBO(6, 95, 70, 1);
+  static const emerald900 = Color.fromRGBO(6, 78, 59, 1);
 }
 
 final theme = ThemeData(
