@@ -86,26 +86,28 @@ class _SignInPageState extends State<SignInPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 48),
-      child: Column(
-        children: <Widget>[
-          const Center(
-            child: Image(image: AssetImage('assets/logo.png')),
-          ),
-          Container(
-            margin: const EdgeInsets.all(16),
-            child: Column(
-              children: [
-                createEmailInput(),
-                createPasswordInput(),
-                createSubmitButton(),
-                createSignUpLabel(),
-                createForgotPasswordLabel(),
-              ].withVerticalSpace(16),
+    return SingleChildScrollView(
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 48),
+        child: Column(
+          children: <Widget>[
+            const Center(
+              child: Image(image: AssetImage('assets/logo.png')),
             ),
-          ),
-        ],
+            Container(
+              margin: const EdgeInsets.all(16),
+              child: Column(
+                children: [
+                  createEmailInput(),
+                  createPasswordInput(),
+                  createSubmitButton(),
+                  createSignUpLabel(),
+                  createForgotPasswordLabel(),
+                ].withVerticalSpace(16),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

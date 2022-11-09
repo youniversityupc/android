@@ -70,64 +70,66 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 48),
-      child: Column(
-        children: <Widget>[
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Image(image: AssetImage('assets/logo.png')),
-              Column(
-                children: [
-                  Text(
-                    'Crea tu cuenta en YOUniversity',
-                    style: context.textTheme.headlineSmall
-                        ?.withColor(AppColorPalette.primaryColor),
-                  ),
-                  Text(
-                    'Organízate de la mejor manera',
-                    style: context.textTheme.titleMedium
-                        ?.withColor(AppColorPalette.darkerPrimaryColor)
-                        .withWeight(NamedFontWeight.light),
-                  )
-                ],
-              )
-            ].withVerticalSpace(16),
-          ),
-          Container(
-            margin: const EdgeInsets.all(16),
-            child: Column(
-              children: <Widget>[
-                createTextInput(
-                  label: 'Nombre completo',
-                  hint: 'John Doe',
-                ),
-                createTextInput(
-                  label: 'Correo electrónico',
-                  hint: 'john.doe@gmail.com',
-                  keyboardType: TextInputType.emailAddress,
-                ),
-                createTextInput(
-                  label: 'Contraseña',
-                  obscureText: true,
-                ),
-                createTextInput(
-                  label: 'Confirmar contraseña',
-                  obscureText: true,
-                ),
-                // createUniversityDropdown(),
-                createTextInput(
-                  label: 'Teléfono',
-                  hint: '+51 999 999 999',
-                  keyboardType: TextInputType.phone,
-                ),
-                createSubmitButton(),
-                createSignInLabel(),
+    return SingleChildScrollView(
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 48),
+        child: Column(
+          children: <Widget>[
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Image(image: AssetImage('assets/logo.png')),
+                Column(
+                  children: [
+                    Text(
+                      'Crea tu cuenta en YOUniversity',
+                      style: context.textTheme.headlineSmall
+                          ?.withColor(AppColorPalette.primaryColor),
+                    ),
+                    Text(
+                      'Organízate de la mejor manera',
+                      style: context.textTheme.titleMedium
+                          ?.withColor(AppColorPalette.darkerPrimaryColor)
+                          .withWeight(NamedFontWeight.light),
+                    )
+                  ],
+                )
               ].withVerticalSpace(16),
             ),
-          ),
-        ],
+            Container(
+              margin: const EdgeInsets.all(16),
+              child: Column(
+                children: <Widget>[
+                  createTextInput(
+                    label: 'Nombre completo',
+                    hint: 'John Doe',
+                  ),
+                  createTextInput(
+                    label: 'Correo electrónico',
+                    hint: 'john.doe@gmail.com',
+                    keyboardType: TextInputType.emailAddress,
+                  ),
+                  createTextInput(
+                    label: 'Contraseña',
+                    obscureText: true,
+                  ),
+                  createTextInput(
+                    label: 'Confirmar contraseña',
+                    obscureText: true,
+                  ),
+                  // createUniversityDropdown(),
+                  createTextInput(
+                    label: 'Teléfono',
+                    hint: '+51 999 999 999',
+                    keyboardType: TextInputType.phone,
+                  ),
+                  createSubmitButton(),
+                  createSignInLabel(),
+                ].withVerticalSpace(16),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
