@@ -64,5 +64,11 @@ final theme = ThemeData(
   inputDecorationTheme: const InputDecorationTheme(
     border: OutlineInputBorder(),
   ),
+  listTileTheme: const ListTileThemeData(
+    contentPadding: EdgeInsets.symmetric(horizontal: 16),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(6)),
+    ),
+  ),
   typography: Typography.material2021(),
 );

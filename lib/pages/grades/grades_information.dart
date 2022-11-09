@@ -1,457 +1,66 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:youniversity_app/layout/app_theme.dart';
+import 'package:youniversity_app/pages/grades/models/assignment_grade_model.dart';
+import 'package:youniversity_app/utils/build_context_extensions.dart';
+import 'package:youniversity_app/utils/widget_list_extensions.dart';
+import 'package:youniversity_app/utils/text_style_extensions.dart';
 
 class GradesInformation extends StatefulWidget {
-  const GradesInformation({Key? key}) : super(key: key);
+  const GradesInformation({super.key});
 
   @override
   State<GradesInformation> createState() => _GradesInformationState();
 }
 
 class _GradesInformationState extends State<GradesInformation> {
-  TextEditingController? searchFieldController;
-  final scaffoldKey = GlobalKey<ScaffoldState>();
-  final bodyText1 = const TextStyle(
-      fontSize: 14, color: Color(0xFF326A8C), fontFamily: 'Poppins');
-  final title2 =
-      const TextStyle(fontSize: 22, color: Colors.black, fontFamily: 'Poppins');
-  final title3 = const TextStyle(
-      fontSize: 20,
-      fontWeight: FontWeight.w500,
-      color: Colors.white,
-      fontFamily: 'Poppins');
-
-  @override
-  void initState() {
-    super.initState();
-    searchFieldController = TextEditingController();
-  }
-
-  @override
-  void dispose() {
-    searchFieldController?.dispose();
-    super.dispose();
-  }
+  final List<AssignmentGradeModel> items = const [
+    AssignmentGradeModel(label: 'TB1', percentage: 5, grade: 20),
+    AssignmentGradeModel(label: 'TB2', percentage: 5, grade: 20),
+    AssignmentGradeModel(label: 'TP1', percentage: 10, grade: 20),
+    AssignmentGradeModel(label: 'EA1', percentage: 15, grade: 20),
+    AssignmentGradeModel(label: 'TB3', percentage: 5),
+    AssignmentGradeModel(label: 'TB4', percentage: 5),
+    AssignmentGradeModel(label: 'TF1', percentage: 25),
+    AssignmentGradeModel(label: 'EB1', percentage: 20),
+    AssignmentGradeModel(label: 'EC1', percentage: 5),
+    AssignmentGradeModel(label: 'PA1', percentage: 5),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: const Color(0xFFF2F2F2),
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(90),
-        child: AppBar(
-          backgroundColor: const Color(0xFFF2F2F2),
-          automaticallyImplyLeading: false,
-          actions: const [],
-          flexibleSpace: FlexibleSpaceBar(
-            title: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 14),
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding:
-                              const EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
-                          child: IconButton(
-                            //borderColor: Colors.transparent,
-                            //borderRadius: 30,
-                            //borderWidth: 1,
-                            //buttonSize: 50,
-                            icon: const Icon(
-                              Icons.keyboard_backspace,
-                              color: Color(0xFF326A8C),
-                              size: 30,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ),
-                        Padding(
-                          padding:
-                              const EdgeInsetsDirectional.fromSTEB(4, 0, 0, 0),
-                          child: Text(
-                            'NOTAS DETALLADAS',
-                            style: bodyText1,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 0, 0),
-                    child: Text(
-                      'IHC y Tecnología Movíles',
-                      style: title2,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            centerTitle: true,
-            expandedTitleScale: 1.0,
+    final textStyle = context.textTheme.headlineSmall;
+
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'IHC y Tecnologías Móviles',
+            style: textStyle?.withColor(AppColorPalette.gray900),
           ),
-          elevation: 2,
-        ),
-      ),
-      body: SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Expanded(
-              child: ListView(
-                padding: EdgeInsets.zero,
-                scrollDirection: Axis.vertical,
-                children: [
-                  Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(16, 12, 16, 0),
-                    child: Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF34D399),
-                        boxShadow: const [
-                          BoxShadow(
-                            blurRadius: 5,
-                            color: Color(0x2E000000),
-                            offset: Offset(0, 2),
-                          )
-                        ],
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            12, 12, 12, 12),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                  flex: 1,
-                                  child: Text(
-                                    'TB1 (5%)',
-                                    textAlign: TextAlign.start,
-                                    style: title3,
-                                  ),
-                                ),
-                                AutoSizeText(
-                                  '20',
-                                  textAlign: TextAlign.start,
-                                  style: title3,
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(16, 12, 16, 0),
-                    child: Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF34D399),
-                        boxShadow: const [
-                          BoxShadow(
-                            blurRadius: 5,
-                            color: Color(0x2E000000),
-                            offset: Offset(0, 2),
-                          )
-                        ],
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            12, 12, 12, 12),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                  flex: 1,
-                                  child: Text(
-                                    'TB2 (5%)',
-                                    textAlign: TextAlign.start,
-                                    style: title3,
-                                  ),
-                                ),
-                                AutoSizeText(
-                                  '20',
-                                  textAlign: TextAlign.start,
-                                  style: title3,
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(16, 12, 16, 0),
-                    child: Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF34D399),
-                        boxShadow: const [
-                          BoxShadow(
-                            blurRadius: 5,
-                            color: Color(0x2E000000),
-                            offset: Offset(0, 2),
-                          )
-                        ],
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            12, 12, 12, 12),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                  flex: 1,
-                                  child: Text(
-                                    'TP1 (10%)',
-                                    textAlign: TextAlign.start,
-                                    style: title3,
-                                  ),
-                                ),
-                                AutoSizeText(
-                                  '20',
-                                  textAlign: TextAlign.start,
-                                  style: title3,
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(16, 12, 16, 0),
-                    child: Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF34D399),
-                        boxShadow: const [
-                          BoxShadow(
-                            blurRadius: 5,
-                            color: Color(0x2E000000),
-                            offset: Offset(0, 2),
-                          )
-                        ],
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            12, 12, 12, 12),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                  flex: 1,
-                                  child: Text(
-                                    'EA1 (15%)',
-                                    textAlign: TextAlign.start,
-                                    style: title3,
-                                  ),
-                                ),
-                                AutoSizeText(
-                                  '20',
-                                  textAlign: TextAlign.start,
-                                  style: title3,
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(16, 12, 16, 0),
-                    child: Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF34D399),
-                        boxShadow: const [
-                          BoxShadow(
-                            blurRadius: 5,
-                            color: Color(0x2E000000),
-                            offset: Offset(0, 2),
-                          )
-                        ],
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            12, 12, 12, 12),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                  flex: 1,
-                                  child: Text(
-                                    'TB3 (5%)',
-                                    textAlign: TextAlign.start,
-                                    style: title3,
-                                  ),
-                                ),
-                                AutoSizeText(
-                                  '-',
-                                  textAlign: TextAlign.start,
-                                  style: title3,
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(16, 12, 16, 0),
-                    child: Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF34D399),
-                        boxShadow: const [
-                          BoxShadow(
-                            blurRadius: 5,
-                            color: Color(0x2E000000),
-                            offset: Offset(0, 2),
-                          )
-                        ],
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            12, 12, 12, 12),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                  flex: 1,
-                                  child: Text(
-                                    'TB4 (5%)',
-                                    textAlign: TextAlign.start,
-                                    style: title3,
-                                  ),
-                                ),
-                                AutoSizeText(
-                                  '-',
-                                  textAlign: TextAlign.start,
-                                  style: title3,
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(16, 12, 16, 0),
-                    child: Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF34D399),
-                        boxShadow: const [
-                          BoxShadow(
-                            blurRadius: 5,
-                            color: Color(0x2E000000),
-                            offset: Offset(0, 2),
-                          )
-                        ],
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            12, 12, 12, 12),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                  flex: 1,
-                                  child: Text(
-                                    'TF1 (25%)',
-                                    textAlign: TextAlign.start,
-                                    style: title3,
-                                  ),
-                                ),
-                                AutoSizeText(
-                                  '-',
-                                  textAlign: TextAlign.start,
-                                  style: title3,
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  )
-                ],
+          Expanded(
+            child: Material(
+              color: Colors.transparent,
+              clipBehavior: Clip.antiAlias,
+              child: ListView.separated(
+                clipBehavior: Clip.antiAlias,
+                itemBuilder: (context, index) {
+                  final item = items[index];
+                  final grade = item.grade?.toStringAsFixed(2);
+                  return ListTile(
+                    textColor: Colors.white,
+                    tileColor: AppColorPalette.emerald400,
+                    title: Text('${item.label} (${item.percentage}%)'),
+                    trailing: Text(grade ?? '-'),
+                  );
+                },
+                separatorBuilder: (_, __) => const SizedBox(height: 16),
+                itemCount: items.length,
               ),
             ),
-          ],
-        ),
+          ),
+        ].withVerticalSpace(16),
       ),
     );
   }
