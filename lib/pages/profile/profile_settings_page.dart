@@ -5,7 +5,7 @@ import 'package:youniversity_app/utils/text_style_extensions.dart';
 import 'package:youniversity_app/utils/widget_list_extensions.dart';
 
 class ProfileSettingsPage extends StatefulWidget {
-  const ProfileSettingsPage({Key? key}) : super(key: key);
+  const ProfileSettingsPage({super.key});
 
   @override
   State<ProfileSettingsPage> createState() => _ProfileSettingsPageState();
