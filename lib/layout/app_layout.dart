@@ -111,6 +111,8 @@ class _AppLayoutState extends State<AppLayout> {
     });
   }
 
+  bool get isWindows => Theme.of(context).platform == TargetPlatform.windows;
+
   @override
   void initState() {
     super.initState();
@@ -121,7 +123,8 @@ class _AppLayoutState extends State<AppLayout> {
   @override
   Widget build(BuildContext context) {
     final appBarConfig = _createAppBar(_index);
-    final pageMargin = appBarConfig == null ? kToolbarHeight : 0.0;
+    final pageMargin =
+        appBarConfig == null && !isWindows ? kToolbarHeight : 0.0;
 
     return DefaultTabController(
       length: appBarConfig?.length ?? 0,
