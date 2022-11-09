@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 abstract class AppColorPalette {
   static const primaryColor = Color.fromRGBO(50, 106, 140, 1);
   static const darkerPrimaryColor = Color.fromRGBO(67, 77, 89, 1);
+  static const secondaryColor = Color.fromRGBO(242, 227, 179, 1);
   static const backgroundColor = Color.fromRGBO(242, 242, 242, 1);
 
   static const gray50 = Color.fromRGBO(250, 250, 250, 1);

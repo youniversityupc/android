@@ -33,8 +33,6 @@ dependencies:
     sdk: flutter
 
   beamer: ^1.5.3
-  get: ^4.6.5
-  google_fonts: ^3.0.1
   auto_size_text: ^3.0.0
 
   # The following adds the Cupertino Icons font to your application.
