@@ -12,7 +12,7 @@ class CourseCard extends StatelessWidget {
     required this.course,
   });
 
-  Widget courseInformation(BuildContext context, String label, IconData icon) {
+  Widget createCourseInformation(BuildContext context, String label, IconData icon) {
     return Row(
       children: [
         Icon(icon, color: Colors.white),
