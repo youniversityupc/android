@@ -10,8 +10,8 @@ class ActivitiesLocation extends BeamLocation<BeamState> {
   List<BeamPage> buildPages(BuildContext context, BeamState state) {
     final location = state.routeInformation.location;
     return [
-      NoTransitionPage(
-        key: const ValueKey(RouteConstants.activities),
+      const NoTransitionPage(
+        key: ValueKey(RouteConstants.activities),
         title: 'Actividades',
         child: ActivityPage(),
       ),

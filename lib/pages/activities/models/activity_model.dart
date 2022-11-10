@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
+@immutable
 class ActivityModel {
-  String taskName;
-  String courseName;
-  String remainingTime;
-  String topicTheme;
-  Color backgroundColor;
+  final String taskName;
+  final String courseName;
+  final String remainingTime;
+  final String topicTheme;
+  final Color backgroundColor;
 
-  ActivityModel({
+  const ActivityModel({
     required this.taskName,
     required this.courseName,
     required this.remainingTime,

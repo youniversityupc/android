@@ -4,9 +4,9 @@ import 'package:youniversity_app/layout/route_constants.dart';
 import 'package:youniversity_app/pages/activities/models/activity_model.dart';
 
 class ActivityPage extends StatelessWidget {
-  ActivityPage({super.key});
+  const ActivityPage({super.key});
 
-  final List<ActivityModel> _activities = [
+  final List<ActivityModel> _activities = const [
     ActivityModel(
       taskName: 'Test Online',
       courseName: 'Fisica 2',
