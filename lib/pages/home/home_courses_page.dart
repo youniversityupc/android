@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:youniversity_app/components/course_card.dart';
+import 'package:youniversity_app/components/info_card.dart';
 import 'package:youniversity_app/layout/app_theme.dart';
 import 'package:youniversity_app/utils/build_context_extensions.dart';
 import 'package:youniversity_app/utils/text_style_extensions.dart';
+import 'package:youniversity_app/utils/widget_list_extensions.dart';
 
 class HomeCoursesPage extends StatefulWidget {
   const HomeCoursesPage({super.key});
@@ -37,21 +38,50 @@ class _HomeCoursesPageState extends State<HomeCoursesPage> {
               margin: const EdgeInsets.only(top: 16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  CourseCard(
-                    color: Color.fromRGBO(251, 146, 60, 1),
-                    title: 'IHC y Tecnología Móviles',
-                    location: 'Online',
-                    time: 'Quedan 30 minutos',
+                children: [
+                  InfoCard(
+                    backgroundColor: const Color.fromRGBO(251, 146, 60, 1),
+                    foregroundColor: Colors.white,
+                    children: [
+                      InfoCardItem(
+                        child: Text(
+                          'IHC y Tecnología Móviles',
+                          style:
+                              textTheme.headlineSmall?.withColor(Colors.white),
+                        ),
+                      ),
+                      const InfoCardItem(
+                        leading: Icon(Icons.room),
+                        child: Text('Online'),
+                      ),
+                      const InfoCardItem(
+                        leading: Icon(Icons.schedule),
+                        child: Text('Quedan 30 minutos'),
+                      ),
+                    ],
                   ),
-                  SizedBox(height: 8),
-                  CourseCard(
-                    color: Color.fromRGBO(248, 113, 113, 1),
-                    title: 'Cálculo II',
-                    location: 'Online',
-                    time: 'Terminó hace 1 hora y 30 minutos',
+                  InfoCard(
+                    backgroundColor: const Color.fromRGBO(248, 113, 113, 1),
+                    foregroundColor: Colors.white,
+                    children: [
+                      InfoCardItem(
+                        child: Text(
+                          'Cálculo II',
+                          style:
+                              textTheme.headlineSmall?.withColor(Colors.white),
+                        ),
+                      ),
+                      const InfoCardItem(
+                        leading: Icon(Icons.room),
+                        child: Text('Online'),
+                      ),
+                      const InfoCardItem(
+                        leading: Icon(Icons.schedule),
+                        child: Text('Terminó hace 1 hora y 30 minutos'),
+                      ),
+                    ],
                   ),
-                ],
+                ].withVerticalSpace(16),
               ),
             ),
           ],
