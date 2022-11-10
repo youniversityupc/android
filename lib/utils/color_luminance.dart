@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-/// Returns `Brightness.dark` if a darker font color should be used,
-/// or `Brightness.light` if a lighter color should be used.
+/// Evaluates the brightness of a color and returns `Brightness.light` or
+/// `Brightness.dark` accordingly.
 ///
 /// The luminance threshold used (`0.179`) is based on the W3C guidelines.
 ///
