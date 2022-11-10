@@ -73,11 +73,7 @@ class ActivityPage extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final activity = _activities[index];
                   return ActivityCard(
-                    taskName: activity.taskName,
-                    courseName: activity.courseName,
-                    remainingTime: activity.remainingTime,
-                    topicTheme: activity.topicTheme,
-                    backgroundColor: activity.backgroundColor,
+                    activity: activity,
                   );
                 },
                 separatorBuilder: (_, __) => const SizedBox(height: 16),
