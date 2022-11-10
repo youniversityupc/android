@@ -1,7 +1,10 @@
-import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
-import 'package:youniversity_app/layout/route_constants.dart';
+import 'package:youniversity_app/layout/app_theme.dart';
+import 'package:youniversity_app/pages/activities/components/activity_card.dart';
 import 'package:youniversity_app/pages/activities/models/activity_model.dart';
+import 'package:youniversity_app/utils/build_context_extensions.dart';
+import 'package:youniversity_app/utils/text_style_extensions.dart';
+import 'package:youniversity_app/utils/widget_list_extensions.dart';
 
 class ActivityPage extends StatelessWidget {
   const ActivityPage({super.key});
@@ -39,156 +42,49 @@ class ActivityPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            Container(
-              margin: const EdgeInsetsDirectional.all(10.0),
-              child: Column(
-                children: const <Widget>[
-                  Text(
-                    'Esta semana',
-                    style: TextStyle(
-                      fontFamily: 'Arial',
-                      fontSize: 30.5,
-                      color: Colors.black54,
-                    ),
-                    textAlign: TextAlign.start,
-                  ),
-                  Text(
-                    'Tienes 2 actividades para esta semana',
-                    style: TextStyle(
-                      fontFamily: 'Arial',
-                      fontSize: 20.5,
-                      color: Colors.black54,
-                    ),
-                    textAlign: TextAlign.justify,
-                  ),
-                ],
+    final textTheme = context.textTheme;
+
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Esta semana',
+                style: textTheme.headlineMedium
+                    ?.withColor(AppColorPalette.gray900),
               ),
-            ),
-            Expanded(
-              child: ListView.builder(
+              Text(
+                'Tienes ${_activities.length} actividades para esta semana',
+                style:
+                    textTheme.titleMedium?.withColor(AppColorPalette.gray700),
+              ),
+            ].withVerticalSpace(8),
+          ),
+          Expanded(
+            child: Material(
+              color: Colors.transparent,
+              clipBehavior: Clip.antiAlias,
+              child: ListView.separated(
                 itemCount: _activities.length,
                 itemBuilder: (context, index) {
-                  final act = _activities[index];
+                  final activity = _activities[index];
                   return ActivityCard(
-                    taskName: act.taskName,
-                    courseName: act.courseName,
-                    remainingTime: act.remainingTime,
-                    topicTheme: act.topicTheme,
-                    backgroundColor: act.backgroundColor,
+                    taskName: activity.taskName,
+                    courseName: activity.courseName,
+                    remainingTime: activity.remainingTime,
+                    topicTheme: activity.topicTheme,
+                    backgroundColor: activity.backgroundColor,
                   );
                 },
+                separatorBuilder: (_, __) => const SizedBox(height: 16),
               ),
-            )
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: const Color.fromARGB(255, 95, 55, 238),
-        foregroundColor: Colors.white,
-        onPressed: () {
-          Beamer.of(context).beamToNamed(RouteConstants.activitiesCreate);
-        },
-        child: const Icon(Icons.add),
-      ),
-    );
-  }
-}
-
-class ActivityCard extends StatelessWidget {
-  final String taskName;
-  final String courseName;
-  final String remainingTime;
-  final String topicTheme;
-  final Color backgroundColor;
-
-  const ActivityCard({
-    super.key,
-    required this.taskName,
-    required this.courseName,
-    required this.remainingTime,
-    required this.topicTheme,
-    required this.backgroundColor,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      color: backgroundColor,
-      child: Column(
-        children: <Widget>[
-          Container(
-            margin: const EdgeInsets.only(top: 10.0),
-            child: Text(
-              taskName,
-              style: const TextStyle(
-                fontFamily: 'Roboto',
-                fontSize: 25.5,
-                color: Colors.white,
-              ),
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.all(15.0),
-            child: Row(
-              children: <Widget>[
-                const Icon(Icons.task),
-                Container(
-                  margin: const EdgeInsets.only(left: 20.5),
-                  child: Text(
-                    courseName.toString(),
-                    style: const TextStyle(
-                      fontFamily: 'Roboto',
-                      fontSize: 14.5,
-                      color: Colors.white,
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.all(15.0),
-            child: Row(
-              children: <Widget>[
-                const Icon(Icons.timelapse),
-                Container(
-                  margin: const EdgeInsets.only(left: 20.5),
-                  child: Text(
-                    remainingTime.toString(),
-                    style: const TextStyle(
-                      fontFamily: 'Roboto',
-                      fontSize: 14.5,
-                      color: Colors.white,
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.all(15.0),
-            child: Row(
-              children: <Widget>[
-                const Icon(Icons.list_alt),
-                Container(
-                  margin: const EdgeInsets.only(left: 20.5),
-                  child: Text(
-                    topicTheme.toString(),
-                    style: const TextStyle(
-                      fontFamily: 'Roboto',
-                      fontSize: 14.5,
-                      color: Colors.white,
-                    ),
-                  ),
-                )
-              ],
             ),
           )
-        ],
+        ].withVerticalSpace(16),
       ),
     );
   }
