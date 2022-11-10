@@ -16,6 +16,7 @@ abstract class RouteConstants {
   static const String activitiesRoot = '/activities';
   static const String activitiesWildcard = '$activitiesRoot/*';
   static const String activities = activitiesRoot;
+  static const String activitiesCreate = '$activitiesRoot/create';
 
   static const String authRoot = '/auth';
   static const String authWildcard = '$authRoot/*';
