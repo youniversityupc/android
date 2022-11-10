@@ -2,6 +2,7 @@ import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:youniversity_app/layout/route_constants.dart';
 import 'package:youniversity_app/pages/home/home_courses_page.dart';
+import 'package:youniversity_app/pages/home/home_today_page.dart';
 import 'package:youniversity_app/utils/no_transition_page.dart';
 import 'package:youniversity_app/utils/tab_bar_view_page.dart';
 
@@ -15,7 +16,7 @@ class HomeLocation extends BeamLocation<BeamState> {
         child: TabBarViewPage(
           pages: const [
             HomeCoursesPage(),
-            Text('Hoy'),
+            HomeTodayPage(),
             Text('Dist. Horaria'),
           ],
           paths: const [
