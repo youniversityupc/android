@@ -62,9 +62,14 @@ class ProfileAvatar extends StatelessWidget {
       backgroundImage: backgroundImage,
       foregroundColor: foregroundColor,
       backgroundColor: backgroundColor,
-      child: IconTheme(
-        data: IconThemeData(color: foregroundColor, size: iconSize),
-        child: child,
+      child: Material(
+        shape: const CircleBorder(),
+        color: Colors.transparent,
+        clipBehavior: Clip.antiAlias,
+        child: IconTheme(
+          data: IconThemeData(color: foregroundColor, size: iconSize),
+          child: child,
+        ),
       ),
     );
   }
