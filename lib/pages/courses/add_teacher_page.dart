@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:youniversity_app/utils/app_colors.dart';
+import 'package:youniversity_app/layout/app_theme.dart';
 
 class AddTeacher extends StatefulWidget {
   const AddTeacher({super.key});
@@ -42,7 +42,7 @@ class _AddTeacherState extends State<AddTeacher> {
           padding: const EdgeInsets.all(16.0),
           child: MaterialButton(
             onPressed: () {},
-            color: AppColors.darkBlueColor,
+            color: AppColorPalette.primaryColor,
             child: const Text(
               'GUARDAR',
               style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
