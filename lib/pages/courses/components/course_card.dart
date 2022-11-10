@@ -12,7 +12,8 @@ class CourseCard extends StatelessWidget {
     required this.course,
   });
 
-  Widget createCourseInformation(BuildContext context, String label, IconData icon) {
+  Widget createCourseInformation(
+      BuildContext context, String label, IconData icon) {
     return Row(
       children: [
         Icon(icon, color: Colors.white),
@@ -38,8 +39,9 @@ class CourseCard extends StatelessWidget {
               course.courseName,
               style: textTheme.headlineSmall?.withColor(Colors.white),
             ),
-            courseInformation(context, course.teacherName, Icons.badge),
-            courseInformation(context, course.frequency, Icons.date_range),
+            createCourseInformation(context, course.teacherName, Icons.badge),
+            createCourseInformation(
+                context, course.frequency, Icons.date_range),
           ].withVerticalSpace(8),
         ),
       ),
