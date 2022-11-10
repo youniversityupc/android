@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:youniversity_app/components/course_card.dart';
 import 'package:youniversity_app/layout/app_theme.dart';
 
-class TeacherInformation extends StatelessWidget {
-  const TeacherInformation({super.key});
+class TeacherInfoPage extends StatelessWidget {
+  const TeacherInfoPage({super.key});
 
   @override
   Widget build(BuildContext context) {
