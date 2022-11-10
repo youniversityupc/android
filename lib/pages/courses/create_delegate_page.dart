@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:youniversity_app/components/profile_avatar.dart';
 import 'package:youniversity_app/utils/widget_list_extensions.dart';
 
-class AddDelegate extends StatefulWidget {
-  const AddDelegate({super.key});
+class CreateDelegatePage extends StatefulWidget {
+  const CreateDelegatePage({super.key});
 
   @override
-  State<AddDelegate> createState() => _AddDelegateState();
+  State<CreateDelegatePage> createState() => _CreateDelegatePageState();
 }
 
-class _AddDelegateState extends State<AddDelegate> {
+class _CreateDelegatePageState extends State<CreateDelegatePage> {
   Widget createTextInput({
     required String label,
     String? hint,

@@ -3,8 +3,8 @@ import 'package:youniversity_app/components/info_card.dart';
 import 'package:youniversity_app/components/profile_avatar.dart';
 import 'package:youniversity_app/utils/widget_list_extensions.dart';
 
-class DelegateInformation extends StatelessWidget {
-  const DelegateInformation({super.key});
+class DelegateInfoPage extends StatelessWidget {
+  const DelegateInfoPage({super.key});
 
   @override
   Widget build(BuildContext context) {
