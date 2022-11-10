@@ -14,7 +14,7 @@ class ProfileAvatar extends StatelessWidget {
     ProfileAvatarSize? size,
     double? radius,
     double? iconSize,
-    this.child = const Icon(Icons.add_a_photo),
+    this.child = const Icon(Icons.add_photo_alternate_outlined),
   })  : assert(!(radius != null && size != null)),
         foregroundColor = foregroundColor ??
             getForegroundColorForBackground(
