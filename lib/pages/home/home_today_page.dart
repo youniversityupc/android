@@ -66,11 +66,7 @@ class HomeTodayPage extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final todayActivity = _todayActivies[index];
                   return ActivityCard(
-                    taskName: todayActivity.taskName,
-                    courseName: todayActivity.courseName,
-                    remainingTime: todayActivity.remainingTime,
-                    topicTheme: todayActivity.topicTheme,
-                    backgroundColor: todayActivity.backgroundColor,
+                    activity: todayActivity,
                   );
                 },
                 separatorBuilder: (_, __) => const SizedBox(height: 16),
