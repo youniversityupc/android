@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:youniversity_app/components/info_card.dart';
 import 'package:youniversity_app/pages/courses/models/course_model.dart';
 import 'package:youniversity_app/utils/build_context_extensions.dart';
-import 'package:youniversity_app/utils/widget_list_extensions.dart';
 import 'package:youniversity_app/utils/text_style_extensions.dart';
 
 class CourseCard extends StatelessWidget {
@@ -12,39 +12,29 @@ class CourseCard extends StatelessWidget {
     required this.course,
   });
 
-  Widget createCourseInformation(
-      BuildContext context, String label, IconData icon) {
-    return Row(
-      children: [
-        Icon(icon, color: Colors.white),
-        Text(
-          label,
-          style: context.textTheme.bodyLarge?.withColor(Colors.white),
-        ),
-      ].withHorizontalSpace(8),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final textTheme = context.textTheme;
-    return Card(
-      color: course.backgroundColor,
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              course.courseName,
-              style: textTheme.headlineSmall?.withColor(Colors.white),
-            ),
-            createCourseInformation(context, course.teacherName, Icons.badge),
-            createCourseInformation(
-                context, course.frequency, Icons.date_range),
-          ].withVerticalSpace(8),
+
+    return InfoCard(
+      backgroundColor: course.backgroundColor,
+      foregroundColor: Colors.white,
+      children: [
+        InfoCardItem(
+          child: Text(
+            course.courseName,
+            style: textTheme.headlineSmall?.withColor(Colors.white),
+          ),
         ),
-      ),
+        InfoCardItem(
+          leading: const Icon(Icons.badge),
+          child: Text(course.teacherName),
+        ),
+        InfoCardItem(
+          leading: const Icon(Icons.date_range),
+          child: Text(course.frequency),
+        ),
+      ],
     );
   }
 }
