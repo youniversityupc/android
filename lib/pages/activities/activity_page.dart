@@ -1,38 +1,38 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:youniversity_app/layout/route_constants.dart';
-import 'package:youniversity_app/models/activity_model.dart';
+import 'package:youniversity_app/pages/activities/models/activity_model.dart';
 
 class ActivityPage extends StatelessWidget {
   ActivityPage({super.key});
 
   final List<ActivityModel> _activities = [
     ActivityModel(
-      taskName: "Test Online",
-      courseName: "Fisica 2",
-      remainingTime: "Dentro de 30 minutos",
-      topicTheme: "Reglas de Kirchoff",
+      taskName: 'Test Online',
+      courseName: 'Fisica 2',
+      remainingTime: 'Dentro de 30 minutos',
+      topicTheme: 'Reglas de Kirchoff',
       backgroundColor: Colors.lightBlue,
     ),
     ActivityModel(
-      taskName: "Reunion Grupal",
-      courseName: "IHC y Tecnologías Móviles",
-      remainingTime: "Dentro de 2 horas",
-      topicTheme: "Trabajo Parcial",
+      taskName: 'Reunion Grupal',
+      courseName: 'IHC y Tecnologías Móviles',
+      remainingTime: 'Dentro de 2 horas',
+      topicTheme: 'Trabajo Parcial',
       backgroundColor: Colors.orange,
     ),
     ActivityModel(
-      taskName: "Entrega de Trabajo Parcial",
-      courseName: "Diseño de Base De Datos",
-      remainingTime: "Dentro de 11 horas y 29 minutos",
-      topicTheme: "Sprint 4",
+      taskName: 'Entrega de Trabajo Parcial',
+      courseName: 'Diseño de Base De Datos',
+      remainingTime: 'Dentro de 11 horas y 29 minutos',
+      topicTheme: 'Sprint 4',
       backgroundColor: Colors.green,
     ),
     ActivityModel(
-      taskName: "Control Virtual 2",
-      courseName: "Cálculo 2",
-      remainingTime: "Dentro de 3 días",
-      topicTheme: "Integrales triples",
+      taskName: 'Control Virtual 2',
+      courseName: 'Cálculo 2',
+      remainingTime: 'Dentro de 3 días',
+      topicTheme: 'Integrales triples',
       backgroundColor: Colors.redAccent,
     )
   ];
@@ -48,18 +48,18 @@ class ActivityPage extends StatelessWidget {
               child: Column(
                 children: const <Widget>[
                   Text(
-                    "Esta semana",
+                    'Esta semana',
                     style: TextStyle(
-                      fontFamily: "Arial",
+                      fontFamily: 'Arial',
                       fontSize: 30.5,
                       color: Colors.black54,
                     ),
                     textAlign: TextAlign.start,
                   ),
                   Text(
-                    "Tienes 2 actividades para esta semana",
+                    'Tienes 2 actividades para esta semana',
                     style: TextStyle(
-                      fontFamily: "Arial",
+                      fontFamily: 'Arial',
                       fontSize: 20.5,
                       color: Colors.black54,
                     ),
@@ -125,7 +125,7 @@ class ActivityCard extends StatelessWidget {
             child: Text(
               taskName,
               style: const TextStyle(
-                fontFamily: "Roboto",
+                fontFamily: 'Roboto',
                 fontSize: 25.5,
                 color: Colors.white,
               ),
@@ -141,7 +141,7 @@ class ActivityCard extends StatelessWidget {
                   child: Text(
                     courseName.toString(),
                     style: const TextStyle(
-                      fontFamily: "Roboto",
+                      fontFamily: 'Roboto',
                       fontSize: 14.5,
                       color: Colors.white,
                     ),
@@ -160,7 +160,7 @@ class ActivityCard extends StatelessWidget {
                   child: Text(
                     remainingTime.toString(),
                     style: const TextStyle(
-                      fontFamily: "Roboto",
+                      fontFamily: 'Roboto',
                       fontSize: 14.5,
                       color: Colors.white,
                     ),
@@ -179,7 +179,7 @@ class ActivityCard extends StatelessWidget {
                   child: Text(
                     topicTheme.toString(),
                     style: const TextStyle(
-                      fontFamily: "Roboto",
+                      fontFamily: 'Roboto',
                       fontSize: 14.5,
                       color: Colors.white,
                     ),
