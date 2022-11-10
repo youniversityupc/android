@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:youniversity_app/layout/app_theme.dart';
 
-class AddTeacher extends StatefulWidget {
-  const AddTeacher({super.key});
+class CreateTeacherPage extends StatefulWidget {
+  const CreateTeacherPage({super.key});
 
   @override
-  State<AddTeacher> createState() => _AddTeacherState();
+  State<CreateTeacherPage> createState() => _CreateTeacherPageState();
 }
 
-class _AddTeacherState extends State<AddTeacher> {
+class _CreateTeacherPageState extends State<CreateTeacherPage> {
   @override
   Widget build(BuildContext context) {
     return ListView(
