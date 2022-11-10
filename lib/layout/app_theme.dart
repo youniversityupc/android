@@ -70,5 +70,10 @@ final theme = ThemeData(
       borderRadius: BorderRadius.all(Radius.circular(6)),
     ),
   ),
+  cardTheme: const CardTheme(
+    color: AppColorPalette.primaryColor,
+    margin: EdgeInsets.zero,
+    clipBehavior: Clip.antiAlias,
+  ),
   typography: Typography.material2021(),
 );
