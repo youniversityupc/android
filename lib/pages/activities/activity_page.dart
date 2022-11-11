@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:youniversity_app/components/info_card.dart';
 import 'package:youniversity_app/layout/app_theme.dart';
-import 'package:youniversity_app/pages/activities/components/activity_card.dart';
 import 'package:youniversity_app/pages/activities/models/activity_model.dart';
 import 'package:youniversity_app/utils/build_context_extensions.dart';
 import 'package:youniversity_app/utils/text_style_extensions.dart';
@@ -72,12 +72,29 @@ class ActivityPage extends StatelessWidget {
                 itemCount: _activities.length,
                 itemBuilder: (context, index) {
                   final activity = _activities[index];
-                  return ActivityCard(
-                    taskName: activity.taskName,
-                    courseName: activity.courseName,
-                    remainingTime: activity.remainingTime,
-                    topicTheme: activity.topicTheme,
+                  return InfoCard(
                     backgroundColor: activity.backgroundColor,
+                    title: Text(activity.taskName),
+                    children: [
+                      InfoCardItem(
+                        leading: const Icon(Icons.book),
+                        child: Text(
+                          activity.courseName,
+                        ),
+                      ),
+                      InfoCardItem(
+                        leading: const Icon(Icons.schedule),
+                        child: Text(
+                          activity.remainingTime,
+                        ),
+                      ),
+                      InfoCardItem(
+                        leading: const Icon(Icons.notes),
+                        child: Text(
+                          activity.topicTheme,
+                        ),
+                      ),
+                    ],
                   );
                 },
                 separatorBuilder: (_, __) => const SizedBox(height: 16),

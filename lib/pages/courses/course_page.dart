@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:youniversity_app/pages/courses/components/course_card.dart';
+import 'package:youniversity_app/components/info_card.dart';
 import 'package:youniversity_app/pages/courses/models/course_model.dart';
 
 class CoursePage extends StatelessWidget {
@@ -43,7 +43,20 @@ class CoursePage extends StatelessWidget {
             itemCount: _courses.length,
             itemBuilder: (context, index) {
               final course = _courses[index];
-              return CourseCard(course: course);
+              return InfoCard(
+                backgroundColor: course.backgroundColor,
+                title: Text(course.courseName),
+                children: [
+                  InfoCardItem(
+                    leading: const Icon(Icons.badge),
+                    child: Text(course.teacherName),
+                  ),
+                  InfoCardItem(
+                    leading: const Icon(Icons.date_range),
+                    child: Text(course.frequency),
+                  ),
+                ],
+              );
             },
             separatorBuilder: (_, __) => const SizedBox(height: 16),
           ),

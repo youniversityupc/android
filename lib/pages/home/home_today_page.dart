@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:youniversity_app/components/info_card.dart';
 import 'package:youniversity_app/layout/app_theme.dart';
-import 'package:youniversity_app/pages/activities/components/activity_card.dart';
 import 'package:youniversity_app/pages/activities/models/activity_model.dart';
 import 'package:youniversity_app/utils/build_context_extensions.dart';
 import 'package:youniversity_app/utils/text_style_extensions.dart';
@@ -65,12 +65,29 @@ class HomeTodayPage extends StatelessWidget {
                 itemCount: _todayActivies.length,
                 itemBuilder: (context, index) {
                   final todayActivity = _todayActivies[index];
-                  return ActivityCard(
-                    taskName: todayActivity.taskName,
-                    courseName: todayActivity.courseName,
-                    remainingTime: todayActivity.remainingTime,
-                    topicTheme: todayActivity.topicTheme,
+                  return InfoCard(
                     backgroundColor: todayActivity.backgroundColor,
+                    title: Text(todayActivity.taskName),
+                    children: [
+                      InfoCardItem(
+                        leading: const Icon(Icons.book),
+                        child: Text(
+                          todayActivity.courseName,
+                        ),
+                      ),
+                      InfoCardItem(
+                        leading: const Icon(Icons.schedule),
+                        child: Text(
+                          todayActivity.remainingTime,
+                        ),
+                      ),
+                      InfoCardItem(
+                        leading: const Icon(Icons.notes),
+                        child: Text(
+                          todayActivity.topicTheme,
+                        ),
+                      ),
+                    ],
                   );
                 },
                 separatorBuilder: (_, __) => const SizedBox(height: 16),
