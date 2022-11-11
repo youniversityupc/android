@@ -7,14 +7,12 @@ import 'package:youniversity_app/layout/route_constants.dart';
 class AppLayout extends StatefulWidget {
   AppLayout({
     required this.navigation,
-    this.onlyBeamer = false,
     this.initialIndex = 0,
     super.key,
   }) : router = _createRouter(navigation);
 
   final List<AppLocationItem> navigation;
   final BeamerDelegate router;
-  final bool onlyBeamer;
   final int initialIndex;
   final beamerKey = GlobalKey<BeamerState>();
 
