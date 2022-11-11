@@ -56,19 +56,21 @@ class ProfileAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CircleAvatar(
-      radius: radius,
-      foregroundImage: foregroundImage,
-      backgroundImage: backgroundImage,
-      foregroundColor: foregroundColor,
-      backgroundColor: backgroundColor,
-      child: Material(
-        shape: const CircleBorder(),
-        color: Colors.transparent,
-        clipBehavior: Clip.antiAlias,
-        child: IconTheme(
-          data: IconThemeData(color: foregroundColor, size: iconSize),
-          child: child,
+    return Center(
+      child: CircleAvatar(
+        radius: radius,
+        foregroundImage: foregroundImage,
+        backgroundImage: backgroundImage,
+        foregroundColor: foregroundColor,
+        backgroundColor: backgroundColor,
+        child: Material(
+          shape: const CircleBorder(),
+          color: Colors.transparent,
+          clipBehavior: Clip.antiAlias,
+          child: IconTheme(
+            data: IconThemeData(color: foregroundColor, size: iconSize),
+            child: child,
+          ),
         ),
       ),
     );
