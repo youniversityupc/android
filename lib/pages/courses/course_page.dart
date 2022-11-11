@@ -35,31 +35,29 @@ class CoursePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16),
-      child: Expanded(
-        child: Material(
-          color: Colors.transparent,
-          clipBehavior: Clip.antiAlias,
-          child: ListView.separated(
-            itemCount: _courses.length,
-            itemBuilder: (context, index) {
-              final course = _courses[index];
-              return InfoCard(
-                backgroundColor: course.backgroundColor,
-                title: Text(course.courseName),
-                children: [
-                  InfoCardItem(
-                    leading: const Icon(Icons.badge),
-                    child: Text(course.teacherName),
-                  ),
-                  InfoCardItem(
-                    leading: const Icon(Icons.date_range),
-                    child: Text(course.frequency),
-                  ),
-                ],
-              );
-            },
-            separatorBuilder: (_, __) => const SizedBox(height: 16),
-          ),
+      child: Material(
+        color: Colors.transparent,
+        clipBehavior: Clip.antiAlias,
+        child: ListView.separated(
+          itemCount: _courses.length,
+          itemBuilder: (context, index) {
+            final course = _courses[index];
+            return InfoCard(
+              backgroundColor: course.backgroundColor,
+              title: Text(course.courseName),
+              children: [
+                InfoCardItem(
+                  leading: const Icon(Icons.badge),
+                  child: Text(course.teacherName),
+                ),
+                InfoCardItem(
+                  leading: const Icon(Icons.date_range),
+                  child: Text(course.frequency),
+                ),
+              ],
+            );
+          },
+          separatorBuilder: (_, __) => const SizedBox(height: 16),
         ),
       ),
     );
