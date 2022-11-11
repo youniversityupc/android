@@ -39,7 +39,8 @@ class _SignInPageState extends State<SignInPage> {
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
-        onPressed: () => context.beamToNamed(RouteConstants.homeDashboard),
+        onPressed: () =>
+            context.beamToReplacementNamed(RouteConstants.homeDashboard),
         child: Text(
           'INICIAR SESIÓN',
           style: textStyle?.withColor(Colors.white),
@@ -51,7 +52,7 @@ class _SignInPageState extends State<SignInPage> {
   Widget createSignUpLabel() {
     final textStyle = context.textTheme.titleSmall;
     return GestureDetector(
-      onTap: () => context.beamToNamed(RouteConstants.authSignUp),
+      onTap: () => context.beamToReplacementNamed(RouteConstants.authSignUp),
       child: Center(
         child: Text.rich(
           TextSpan(
