@@ -1,7 +1,7 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
+import 'package:youniversity_app/components/profile_avatar.dart';
 import 'package:youniversity_app/layout/app_location_item.dart';
-import 'package:youniversity_app/layout/app_theme.dart';
 import 'package:youniversity_app/layout/route_constants.dart';
 
 class AppLayout extends StatefulWidget {
@@ -64,11 +64,11 @@ class _AppLayoutState extends State<AppLayout> {
     final appBar = AppBar(
       title: title,
       actions: [
-        GestureDetector(
-          onTap: _onAvatarTapped,
-          child: const CircleAvatar(
-            backgroundColor: AppColorPalette.primaryColor,
-            child: Text('NC'),
+        ProfileAvatar(
+          size: ProfileAvatarSize.extraSmall,
+          backgroundImage: const AssetImage('assets/dalb.jpg'),
+          child: InkWell(
+            onTap: _onAvatarTapped,
           ),
         ),
         const SizedBox(width: 16),
