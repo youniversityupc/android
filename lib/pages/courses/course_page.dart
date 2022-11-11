@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:youniversity_app/pages/courses/components/course_card.dart';
+import 'package:youniversity_app/components/info_card.dart';
 import 'package:youniversity_app/pages/courses/models/course_model.dart';
+import 'package:youniversity_app/utils/build_context_extensions.dart';
+import 'package:youniversity_app/utils/text_style_extensions.dart';
 
 class CoursePage extends StatelessWidget {
   const CoursePage({super.key});
@@ -33,6 +35,8 @@ class CoursePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = context.textTheme;
+
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Expanded(
@@ -43,7 +47,25 @@ class CoursePage extends StatelessWidget {
             itemCount: _courses.length,
             itemBuilder: (context, index) {
               final course = _courses[index];
-              return CourseCard(course: course);
+              return InfoCard(
+                backgroundColor: course.backgroundColor,
+                children: [
+                  InfoCardItem(
+                    child: Text(
+                      course.courseName,
+                      style: textTheme.headlineSmall?.withColor(Colors.white),
+                    ),
+                  ),
+                  InfoCardItem(
+                    leading: const Icon(Icons.badge),
+                    child: Text(course.teacherName),
+                  ),
+                  InfoCardItem(
+                    leading: const Icon(Icons.date_range),
+                    child: Text(course.frequency),
+                  ),
+                ],
+              );
             },
             separatorBuilder: (_, __) => const SizedBox(height: 16),
           ),
