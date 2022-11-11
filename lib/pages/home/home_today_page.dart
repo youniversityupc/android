@@ -67,14 +67,8 @@ class HomeTodayPage extends StatelessWidget {
                   final todayActivity = _todayActivies[index];
                   return InfoCard(
                     backgroundColor: todayActivity.backgroundColor,
+                    title: Text(todayActivity.taskName),
                     children: [
-                      InfoCardItem(
-                        child: Text(
-                          todayActivity.taskName,
-                          /*style:
-                              textTheme.headlineSmall?.withColor(Colors.white),*/
-                        ),
-                      ),
                       InfoCardItem(
                         leading: const Icon(Icons.book),
                         child: Text(

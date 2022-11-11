@@ -74,14 +74,8 @@ class ActivityPage extends StatelessWidget {
                   final activity = _activities[index];
                   return InfoCard(
                     backgroundColor: activity.backgroundColor,
+                    title: Text(activity.taskName),
                     children: [
-                      InfoCardItem(
-                        child: Text(
-                          activity.taskName,
-                          style:
-                              textTheme.headlineSmall?.withColor(Colors.white),
-                        ),
-                      ),
                       InfoCardItem(
                         leading: const Icon(Icons.book),
                         child: Text(
