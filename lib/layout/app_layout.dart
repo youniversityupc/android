@@ -38,25 +38,25 @@ class _AppBarConfig {
 class _AppLayoutState extends State<AppLayout> {
   late int _index;
 
-  Widget _createTitle(int index) {
-    final title = widget.navigation[index].title.toUpperCase();
+  Widget _createTitle() {
+    final title = widget.navigation[_index].title.toUpperCase();
     return Text(title);
   }
 
-  TabBar? _createTabBar(int index) {
-    final config = widget.navigation[index].tabBar;
+  TabBar? _createTabBar() {
+    final config = widget.navigation[_index].tabBar;
     if (config == null) return null;
 
     final items = config.items.map((e) => e.tab).toList();
     return TabBar(tabs: items);
   }
 
-  _AppBarConfig? _createAppBar(int index) {
-    final onlyBeamer = widget.navigation[index].onlyBeamer;
+  _AppBarConfig? _createAppBar() {
+    final onlyBeamer = widget.navigation[_index].onlyBeamer;
     if (onlyBeamer) return null;
 
-    final title = _createTitle(_index);
-    final tabBar = _createTabBar(_index);
+    final title = _createTitle();
+    final tabBar = _createTabBar();
     final length = tabBar?.tabs.length ?? 0;
 
     final appBar = AppBar(
@@ -82,11 +82,11 @@ class _AppLayoutState extends State<AppLayout> {
     return valid.map((e) => e.navigation!).toList();
   }
 
-  BottomNavigationBar? _createBottomNavBar(int index) {
-    final onlyBeamer = widget.navigation[index].onlyBeamer;
+  BottomNavigationBar? _createBottomNavBar() {
+    final onlyBeamer = widget.navigation[_index].onlyBeamer;
     if (onlyBeamer) return null;
     final items = _createBottomNavItemList();
-    final current = index > 0 && index < items.length ? index : 0;
+    final current = _index > 0 && _index < items.length ? _index : 0;
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       showSelectedLabels: true,
@@ -121,7 +121,7 @@ class _AppLayoutState extends State<AppLayout> {
 
   @override
   Widget build(BuildContext context) {
-    final appBarConfig = _createAppBar(_index);
+    final appBarConfig = _createAppBar();
 
     return DefaultTabController(
       length: appBarConfig?.length ?? 0,
@@ -131,7 +131,7 @@ class _AppLayoutState extends State<AppLayout> {
           key: widget.beamerKey,
           routerDelegate: widget.router,
         ),
-        bottomNavigationBar: _createBottomNavBar(_index),
+        bottomNavigationBar: _createBottomNavBar(),
       ),
     );
   }
