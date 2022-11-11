@@ -42,19 +42,17 @@ class _HomeCoursesPageState extends State<HomeCoursesPage> {
                   InfoCard(
                     backgroundColor: const Color.fromRGBO(251, 146, 60, 1),
                     foregroundColor: Colors.white,
-                    children: [
+                    children: const [
                       InfoCardItem(
                         child: Text(
                           'IHC y Tecnología Móviles',
-                          style:
-                              textTheme.headlineSmall?.withColor(Colors.white),
                         ),
                       ),
-                      const InfoCardItem(
+                      InfoCardItem(
                         leading: Icon(Icons.room),
                         child: Text('Online'),
                       ),
-                      const InfoCardItem(
+                      InfoCardItem(
                         leading: Icon(Icons.schedule),
                         child: Text('Quedan 30 minutos'),
                       ),
