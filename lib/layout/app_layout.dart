@@ -86,19 +86,26 @@ class _AppLayoutState extends State<AppLayout> {
     final onlyBeamer = widget.navigation[_index].onlyBeamer;
     if (onlyBeamer) return null;
     final items = _createBottomNavItemList();
-    final current = _index > 0 && _index < items.length ? _index : 0;
+    final current = _index >= 0 && _index < items.length ? _index : -1;
     return BottomNavigationBar(
-      type: BottomNavigationBarType.fixed,
-      showSelectedLabels: true,
-      currentIndex: current,
-      items: items,
+      currentIndex: current == -1 ? 0 : current,
+      selectedItemColor: current == -1
+          ? Theme.of(context).bottomNavigationBarTheme.unselectedItemColor
+          : null,
       onTap: _onNavBarItemTapped,
+      items: items,
     );
   }
 
   void _onNavBarItemTapped(int index) {
     final path = widget.navigation[index].initialPath;
-    widget.router.beamToNamed(path);
+    widget.router.beamToNamed(
+      path,
+      replaceRouteInformation: true,
+      popBeamLocationOnPop: false,
+      beamBackOnPop: true,
+      stacked: false,
+    );
   }
 
   void _onAvatarTapped() {

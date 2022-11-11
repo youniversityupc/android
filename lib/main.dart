@@ -35,6 +35,7 @@ class YOUniversityApp extends StatelessWidget {
         routeInformationParser: BeamerParser(),
         backButtonDispatcher: BeamerBackButtonDispatcher(
           delegate: routerDelegate,
+          alwaysBeamBack: true,
         ),
       ),
     );

@@ -49,7 +49,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget createSignInLabel() {
     final textStyle = context.textTheme.titleSmall;
     return GestureDetector(
-      onTap: () => context.beamToReplacementNamed(RouteConstants.authSignIn),
+      onTap: () => context.popToNamed(RouteConstants.authSignIn),
       child: Center(
         child: Text.rich(
           TextSpan(
