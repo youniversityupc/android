@@ -69,7 +69,7 @@ class _EmailInput extends StatelessWidget {
           decoration: InputDecoration(
             labelText: 'Correo electrónico',
             hintText: 'john.doe@gmail.com',
-            errorText: state.email.invalid ? 'Email inválido' : null,
+            errorText: state.email.invalid ? state.email.error?.message : null,
           ),
           keyboardType: TextInputType.emailAddress,
         );
@@ -92,7 +92,8 @@ class _PasswordInput extends StatelessWidget {
               context.read<LoginBloc>().add(LoginPasswordChanged(password)),
           decoration: InputDecoration(
             labelText: 'Contraseña',
-            errorText: state.password.invalid ? 'Requerido' : null,
+            errorText:
+                state.password.invalid ? state.password.error?.message : null,
           ),
           keyboardType: TextInputType.text,
           obscureText: true,
