@@ -7,6 +7,7 @@ import 'package:youniversity_app/pages/auth/model/password_confirmation_field.da
 import 'package:youniversity_app/pages/auth/model/password_field.dart';
 import 'package:youniversity_app/pages/auth/model/phone_field.dart';
 import 'package:youniversity_app/pages/auth/repository/auth_repository.dart';
+import 'package:youniversity_app/utils/formz_state.dart';
 
 part 'sign_up_event.dart';
 part 'sign_up_state.dart';

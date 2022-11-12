@@ -1,8 +1,8 @@
 part of 'sign_up_bloc.dart';
 
-class SignUpState extends Equatable {
+class SignUpState extends FormzState {
   const SignUpState({
-    this.status = FormzStatus.pure,
+    super.status = FormzStatus.pure,
     this.fullName = const FullNameField.pure(),
     this.email = const EmailField.pure(),
     this.password = const PasswordField.pure(),
@@ -10,7 +10,6 @@ class SignUpState extends Equatable {
     this.phone = const PhoneField.pure(),
   });
 
-  final FormzStatus status;
   final FullNameField fullName;
   final EmailField email;
   final PasswordField password;
@@ -36,6 +35,6 @@ class SignUpState extends Equatable {
   }
 
   @override
-  List<Object> get props =>
-      [status, fullName, email, password, passwordConfirmation, phone];
+  List<Object> get fields =>
+      [fullName, email, password, passwordConfirmation, phone];
 }

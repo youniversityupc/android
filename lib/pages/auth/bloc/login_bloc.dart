@@ -4,6 +4,7 @@ import 'package:formz/formz.dart';
 import 'package:youniversity_app/pages/auth/model/email_field.dart';
 import 'package:youniversity_app/pages/auth/model/password_field.dart';
 import 'package:youniversity_app/pages/auth/repository/auth_repository.dart';
+import 'package:youniversity_app/utils/formz_state.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';

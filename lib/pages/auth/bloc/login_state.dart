@@ -1,13 +1,12 @@
 part of 'login_bloc.dart';
 
-class LoginState extends Equatable {
+class LoginState extends FormzState {
   const LoginState({
-    this.status = FormzStatus.pure,
+    super.status = FormzStatus.pure,
     this.email = const EmailField.pure(),
     this.password = const PasswordField.pure(),
   });
 
-  final FormzStatus status;
   final EmailField email;
   final PasswordField password;
 
@@ -24,5 +23,5 @@ class LoginState extends Equatable {
   }
 
   @override
-  List<Object> get props => [status, email, password];
+  List<Object> get fields => [email, password];
 }
