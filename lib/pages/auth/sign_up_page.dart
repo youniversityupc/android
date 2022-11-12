@@ -1,11 +1,11 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:formz/formz.dart';
 import 'package:youniversity_app/components/bloc_text_field.dart';
 import 'package:youniversity_app/layout/app_theme.dart';
 import 'package:youniversity_app/layout/route_constants.dart';
 import 'package:youniversity_app/pages/auth/bloc/sign_up_bloc.dart';
+import 'package:youniversity_app/pages/auth/components/auth_button.dart';
 import 'package:youniversity_app/pages/auth/repository/auth_repository.dart';
 import 'package:youniversity_app/utils/text_style_extensions.dart';
 import 'package:youniversity_app/utils/named_font_weight.dart';
@@ -114,7 +114,10 @@ class _SignUpPageState extends State<SignUpPage> {
                         hintText: '+51 999 999 999',
                         keyboardType: TextInputType.phone,
                       ),
-                      const _SignUpButton(),
+                      AuthButton<SignUpBloc, SignUpState, SignUpEvent>(
+                        buildEvent: () => const SignUpSubmitted(),
+                        child: const Text('CREAR CUENTA'),
+                      ),
                       const _SignInLabel(),
                     ].withVerticalSpace(16),
                   ),
@@ -124,37 +127,6 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
         ),
       ),
-    );
-  }
-}
-
-class _SignUpButton extends StatelessWidget {
-  const _SignUpButton();
-
-  void _handleClick(BuildContext context, SignUpState state) {
-    if (!state.status.isValidated) return;
-    final bloc = context.read<SignUpBloc>();
-    bloc.add(const SignUpSubmitted());
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<SignUpBloc, SignUpState>(
-      buildWhen: (previous, current) => previous.status != current.status,
-      builder: (context, state) {
-        final textStyle = context.textTheme.labelLarge?.withColor(Colors.white);
-        if (state.status.isSubmissionInProgress) {
-          return const CircularProgressIndicator();
-        }
-
-        return SizedBox(
-          width: double.infinity,
-          child: ElevatedButton(
-            onPressed: () => _handleClick(context, state),
-            child: Text('CREAR CUENTA', style: textStyle),
-          ),
-        );
-      },
     );
   }
 }
