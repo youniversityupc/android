@@ -1,14 +1,17 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:formz/formz.dart';
+import 'package:youniversity_app/components/bloc_text_field.dart';
 import 'package:youniversity_app/layout/app_theme.dart';
 import 'package:youniversity_app/layout/route_constants.dart';
 import 'package:youniversity_app/pages/auth/bloc/login_bloc.dart';
+import 'package:youniversity_app/pages/auth/components/auth_button.dart';
 import 'package:youniversity_app/pages/auth/repository/auth_repository.dart';
 import 'package:youniversity_app/utils/text_style_extensions.dart';
 import 'package:youniversity_app/utils/widget_list_extensions.dart';
 import 'package:youniversity_app/utils/build_context_extensions.dart';
+
+typedef _SignInTextField = BlocTextField<LoginBloc, LoginState, LoginEvent>;
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -36,12 +39,34 @@ class _SignInPageState extends State<SignInPage> {
                 Container(
                   margin: const EdgeInsets.all(16),
                   child: Column(
-                    children: const [
-                      _EmailInput(),
-                      _PasswordInput(),
-                      _LoginButton(),
-                      _SignUpLabel(),
-                      _ForgotPasswordLabel(),
+                    children: [
+                      _SignInTextField(
+                        buildWhen: (previous, current) =>
+                            previous.email != current.email,
+                        buildEvent: (value) => LoginEmailChanged(value),
+                        buildErrorText: (state) => state.email.invalid
+                            ? state.email.error?.message
+                            : null,
+                        labelText: 'Correo electrónico',
+                        hintText: 'john.doe@gmail.com',
+                        keyboardType: TextInputType.emailAddress,
+                      ),
+                      _SignInTextField(
+                        buildWhen: (previous, current) =>
+                            previous.password != current.password,
+                        buildEvent: (value) => LoginPasswordChanged(value),
+                        buildErrorText: (state) => state.password.invalid
+                            ? state.password.error?.message
+                            : null,
+                        labelText: 'Contraseña',
+                        obscureText: true,
+                      ),
+                      AuthButton<LoginBloc, LoginState, LoginEvent>(
+                        buildEvent: () => const LoginSubmitted(),
+                        child: const Text('INICIAR SESIÓN'),
+                      ),
+                      const _SignUpLabel(),
+                      const _ForgotPasswordLabel(),
                     ].withVerticalSpace(16),
                   ),
                 ),
@@ -50,85 +75,6 @@ class _SignInPageState extends State<SignInPage> {
           ),
         ),
       ),
-    );
-  }
-}
-
-class _EmailInput extends StatelessWidget {
-  const _EmailInput();
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<LoginBloc, LoginState>(
-      buildWhen: (previous, current) => previous.email != current.email,
-      builder: (context, state) {
-        return TextField(
-          key: const ValueKey('SignInPage_EmailInput_TextField'),
-          onChanged: (email) =>
-              context.read<LoginBloc>().add(LoginEmailChanged(email)),
-          decoration: InputDecoration(
-            labelText: 'Correo electrónico',
-            hintText: 'john.doe@gmail.com',
-            errorText: state.email.invalid ? state.email.error?.message : null,
-          ),
-          keyboardType: TextInputType.emailAddress,
-        );
-      },
-    );
-  }
-}
-
-class _PasswordInput extends StatelessWidget {
-  const _PasswordInput();
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<LoginBloc, LoginState>(
-      buildWhen: (previous, current) => previous.password != current.password,
-      builder: (context, state) {
-        return TextField(
-          key: const ValueKey('SignInPage_PasswordInput_TextField'),
-          onChanged: (password) =>
-              context.read<LoginBloc>().add(LoginPasswordChanged(password)),
-          decoration: InputDecoration(
-            labelText: 'Contraseña',
-            errorText:
-                state.password.invalid ? state.password.error?.message : null,
-          ),
-          keyboardType: TextInputType.text,
-          obscureText: true,
-        );
-      },
-    );
-  }
-}
-
-class _LoginButton extends StatelessWidget {
-  const _LoginButton();
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<LoginBloc, LoginState>(
-      buildWhen: (previous, current) => previous.status != current.status,
-      builder: (context, state) {
-        final textStyle = context.textTheme.labelLarge;
-        return state.status.isSubmissionInProgress
-            ? const CircularProgressIndicator()
-            : SizedBox(
-                key: const ValueKey('SignInPage_Submit_Button'),
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: state.status.isValidated
-                      ? () =>
-                          context.read<LoginBloc>().add(const LoginSubmitted())
-                      : null,
-                  child: Text(
-                    'INICIAR SESIÓN',
-                    style: textStyle?.withColor(Colors.white),
-                  ),
-                ),
-              );
-      },
     );
   }
 }
