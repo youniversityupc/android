@@ -2,6 +2,7 @@ import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:youniversity_app/components/profile_avatar.dart';
 import 'package:youniversity_app/layout/app_location_item.dart';
+import 'package:youniversity_app/layout/app_theme.dart';
 import 'package:youniversity_app/layout/route_constants.dart';
 
 class AppLayout extends StatefulWidget {
@@ -37,6 +38,8 @@ class _AppBarConfig {
 
 class _AppLayoutState extends State<AppLayout> {
   late int _index;
+  void Function()? _backButtonHandler;
+  bool _showBackButton = false;
 
   Widget _createTitle() {
     final title = widget.navigation[_index].title.toUpperCase();
@@ -51,6 +54,10 @@ class _AppLayoutState extends State<AppLayout> {
     return TabBar(tabs: items);
   }
 
+  void _handleBack() {
+    widget.router.beamBack();
+  }
+
   _AppBarConfig? _createAppBar() {
     final onlyBeamer = widget.navigation[_index].onlyBeamer;
     if (onlyBeamer) return null;
@@ -59,7 +66,15 @@ class _AppLayoutState extends State<AppLayout> {
     final tabBar = _createTabBar();
     final length = tabBar?.tabs.length ?? 0;
 
+    bool showBack =
+        _showBackButton && widget.router.beamingHistoryCompleteLength > 1;
+    final backButton = BackButton(
+      color: AppColorPalette.primaryColor,
+      onPressed: _backButtonHandler ?? _handleBack,
+    );
+
     final appBar = AppBar(
+      leading: showBack ? backButton : null,
       title: title,
       actions: [
         ProfileAvatar(
@@ -116,6 +131,20 @@ class _AppLayoutState extends State<AppLayout> {
     int index = widget.navigation.indexWhere((e) => e.location.isCurrent);
     setState(() {
       _index = index != -1 ? index : widget.initialIndex;
+    });
+  }
+
+  void enableBackButton(void Function()? fn) {
+    setState(() {
+      _showBackButton = true;
+      if (fn != null) _backButtonHandler = fn;
+    });
+  }
+
+  void clearBackButton() {
+    setState(() {
+      _showBackButton = false;
+      _backButtonHandler = null;
     });
   }
 
