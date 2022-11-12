@@ -1,9 +1,12 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:youniversity_app/components/profile_avatar.dart';
 import 'package:youniversity_app/layout/app_location_item.dart';
 import 'package:youniversity_app/layout/app_theme.dart';
 import 'package:youniversity_app/layout/route_constants.dart';
+import 'package:youniversity_app/pages/auth/bloc/auth_bloc.dart';
+import 'package:youniversity_app/pages/auth/repository/auth_repository.dart';
 
 class AppLayout extends StatefulWidget {
   AppLayout({
@@ -159,15 +162,29 @@ class _AppLayoutState extends State<AppLayout> {
   Widget build(BuildContext context) {
     final appBarConfig = _createAppBar();
 
-    return DefaultTabController(
-      length: appBarConfig?.length ?? 0,
-      child: Scaffold(
-        appBar: appBarConfig?.appBar,
-        body: Beamer(
-          key: widget.beamerKey,
-          routerDelegate: widget.router,
+    return BlocListener<AuthBloc, AuthState>(
+      listener: (context, state) {
+        switch (state.status) {
+          case AuthStatus.authenticated:
+            widget.router.beamToReplacementNamed(RouteConstants.homeDashboard);
+            break;
+          case AuthStatus.unauthenticated:
+            widget.router.beamToReplacementNamed(RouteConstants.authSignIn);
+            break;
+          case AuthStatus.unknown:
+            break;
+        }
+      },
+      child: DefaultTabController(
+        length: appBarConfig?.length ?? 0,
+        child: Scaffold(
+          appBar: appBarConfig?.appBar,
+          body: Beamer(
+            key: widget.beamerKey,
+            routerDelegate: widget.router,
+          ),
+          bottomNavigationBar: _createBottomNavBar(),
         ),
-        bottomNavigationBar: _createBottomNavBar(),
       ),
     );
   }

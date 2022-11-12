@@ -2,11 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:youniversity_app/layout/app_theme.dart';
 import 'package:youniversity_app/main.dart';
+import 'package:youniversity_app/pages/auth/repository/auth_repository.dart';
 
 void main() {
   testWidgets('Routing changes the app bar title', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(YOUniversityApp(theme: theme));
+    await tester.pumpWidget(
+      YOUniversityApp(
+        theme: theme,
+        authRepository: AuthRepository(),
+      ),
+    );
 
     // Click the login button
     await tester.tap(find.widgetWithText(ElevatedButton, 'INICIAR SESIÓN'));
