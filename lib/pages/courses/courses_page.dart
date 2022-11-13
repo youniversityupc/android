@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:youniversity_app/components/info_card.dart';
 import 'package:youniversity_app/pages/courses/models/course_model.dart';
 
-class CoursePage extends StatelessWidget {
-  const CoursePage({super.key});
+class CoursesPage extends StatelessWidget {
+  const CoursesPage({super.key});
 
   final List<CourseModel> _courses = const [
     CourseModel(
