@@ -41,6 +41,9 @@ class InfoCard extends StatelessWidget {
     super.key,
     this.backgroundColor = AppColorPalette.primaryColor,
     Color? foregroundColor,
+    this.shadowColor,
+    this.elevation,
+    this.padding = const EdgeInsets.all(16),
     this.clipBehavior,
     this.contentAlignment = CrossAxisAlignment.start,
     this.title,
@@ -53,6 +56,9 @@ class InfoCard extends StatelessWidget {
 
   final Color backgroundColor;
   final Color foregroundColor;
+  final Color? shadowColor;
+  final double? elevation;
+  final EdgeInsetsGeometry padding;
   final Clip? clipBehavior;
   final CrossAxisAlignment contentAlignment;
   final Widget? title;
@@ -70,10 +76,12 @@ class InfoCard extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: Card(
+        shadowColor: shadowColor,
+        elevation: elevation,
         color: backgroundColor,
         clipBehavior: clipBehavior,
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: padding,
           child: DefaultTextStyle.merge(
             style: bodyStyle,
             child: IconTheme.merge(

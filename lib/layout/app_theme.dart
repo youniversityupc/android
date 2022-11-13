@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:youniversity_app/utils/text_style_extensions.dart';
 
 abstract class AppColorPalette {
   static const primaryColor = Color.fromRGBO(50, 106, 140, 1);
@@ -37,12 +38,18 @@ final theme = ThemeData(
   appBarTheme: const AppBarTheme(
     backgroundColor: AppColorPalette.backgroundColor,
     foregroundColor: AppColorPalette.primaryColor,
+    iconTheme: IconThemeData(color: AppColorPalette.primaryColor),
+    scrolledUnderElevation: 0,
     elevation: 0,
   ),
-  tabBarTheme: const TabBarTheme(
+  tabBarTheme: TabBarTheme(
     labelColor: AppColorPalette.primaryColor,
     unselectedLabelColor: AppColorPalette.primaryColor,
-    indicator: UnderlineTabIndicator(
+    labelStyle: Typography.englishLike2021.titleMedium
+        ?.withColor(AppColorPalette.primaryColor),
+    unselectedLabelStyle: Typography.englishLike2021.titleMedium
+        ?.withColor(AppColorPalette.primaryColor),
+    indicator: const UnderlineTabIndicator(
       borderSide: BorderSide(
         width: 2.0,
         color: AppColorPalette.primaryColor,

@@ -1,10 +1,17 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:youniversity_app/components/bloc_text_field.dart';
 import 'package:youniversity_app/layout/app_theme.dart';
 import 'package:youniversity_app/layout/route_constants.dart';
+import 'package:youniversity_app/pages/auth/bloc/login_bloc.dart';
+import 'package:youniversity_app/pages/auth/components/auth_button.dart';
+import 'package:youniversity_app/pages/auth/repository/auth_repository.dart';
 import 'package:youniversity_app/utils/text_style_extensions.dart';
 import 'package:youniversity_app/utils/widget_list_extensions.dart';
 import 'package:youniversity_app/utils/build_context_extensions.dart';
+
+typedef _SignInTextField = BlocTextField<LoginBloc, LoginState, LoginEvent>;
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -14,44 +21,72 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
-  Widget createEmailInput() {
-    return const TextField(
-      decoration: InputDecoration(
-        labelText: 'Correo electrónico',
-        hintText: 'john.doe@gmail.com',
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => LoginBloc(
+        authRepository: context.read<AuthRepository>(),
       ),
-      keyboardType: TextInputType.emailAddress,
-    );
-  }
-
-  Widget createPasswordInput() {
-    return const TextField(
-      decoration: InputDecoration(
-        labelText: 'Contraseña',
-      ),
-      keyboardType: TextInputType.text,
-      obscureText: true,
-    );
-  }
-
-  Widget createSubmitButton() {
-    final textStyle = context.textTheme.labelLarge;
-    return SizedBox(
-      width: double.infinity,
-      child: ElevatedButton(
-        onPressed: () => context.beamToNamed(RouteConstants.homeDashboard),
-        child: Text(
-          'INICIAR SESIÓN',
-          style: textStyle?.withColor(Colors.white),
+      child: SafeArea(
+        child: SingleChildScrollView(
+          child: Container(
+            margin: const EdgeInsets.symmetric(vertical: 48),
+            child: Column(
+              children: <Widget>[
+                const Center(
+                  child: Image(image: AssetImage('assets/logo.png')),
+                ),
+                Container(
+                  margin: const EdgeInsets.all(16),
+                  child: Column(
+                    children: [
+                      _SignInTextField(
+                        buildWhen: (previous, current) =>
+                            previous.email != current.email,
+                        buildEvent: (value) => LoginEmailChanged(value),
+                        buildErrorText: (state) => state.email.invalid
+                            ? state.email.error?.message
+                            : null,
+                        labelText: 'Correo electrónico',
+                        hintText: 'john.doe@gmail.com',
+                        keyboardType: TextInputType.emailAddress,
+                      ),
+                      _SignInTextField(
+                        buildWhen: (previous, current) =>
+                            previous.password != current.password,
+                        buildEvent: (value) => LoginPasswordChanged(value),
+                        buildErrorText: (state) => state.password.invalid
+                            ? state.password.error?.message
+                            : null,
+                        labelText: 'Contraseña',
+                        obscureText: true,
+                      ),
+                      AuthButton<LoginBloc, LoginState, LoginEvent>(
+                        buildEvent: () => const LoginSubmitted(),
+                        child: const Text('INICIAR SESIÓN'),
+                      ),
+                      const _SignUpLabel(),
+                      const _ForgotPasswordLabel(),
+                    ].withVerticalSpace(16),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
   }
+}
 
-  Widget createSignUpLabel() {
+class _SignUpLabel extends StatelessWidget {
+  const _SignUpLabel();
+
+  @override
+  Widget build(BuildContext context) {
     final textStyle = context.textTheme.titleSmall;
     return GestureDetector(
-      onTap: () => context.beamToNamed(RouteConstants.authSignUp),
+      onTap: () => context.popToNamed(RouteConstants.authSignUp),
       child: Center(
         child: Text.rich(
           TextSpan(
@@ -70,45 +105,20 @@ class _SignInPageState extends State<SignInPage> {
       ),
     );
   }
+}
 
-  Widget createForgotPasswordLabel() {
+class _ForgotPasswordLabel extends StatelessWidget {
+  const _ForgotPasswordLabel();
+
+  @override
+  Widget build(BuildContext context) {
     final textStyle = context.textTheme.titleSmall;
     return GestureDetector(
-      onTap: () => context.beamToNamed(RouteConstants.authSignUp),
+      onTap: () => context.popToNamed(RouteConstants.authSignUp),
       child: Center(
         child: Text(
           '¿Olvidaste tu contraseña?',
           style: textStyle?.withColor(AppColorPalette.primaryColor),
-        ),
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: SingleChildScrollView(
-        child: Container(
-          margin: const EdgeInsets.symmetric(vertical: 48),
-          child: Column(
-            children: <Widget>[
-              const Center(
-                child: Image(image: AssetImage('assets/logo.png')),
-              ),
-              Container(
-                margin: const EdgeInsets.all(16),
-                child: Column(
-                  children: [
-                    createEmailInput(),
-                    createPasswordInput(),
-                    createSubmitButton(),
-                    createSignUpLabel(),
-                    createForgotPasswordLabel(),
-                  ].withVerticalSpace(16),
-                ),
-              ),
-            ],
-          ),
         ),
       ),
     );

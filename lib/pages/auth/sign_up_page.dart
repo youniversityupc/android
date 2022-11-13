@@ -1,11 +1,18 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:youniversity_app/components/bloc_text_field.dart';
 import 'package:youniversity_app/layout/app_theme.dart';
 import 'package:youniversity_app/layout/route_constants.dart';
+import 'package:youniversity_app/pages/auth/bloc/sign_up_bloc.dart';
+import 'package:youniversity_app/pages/auth/components/auth_button.dart';
+import 'package:youniversity_app/pages/auth/repository/auth_repository.dart';
 import 'package:youniversity_app/utils/text_style_extensions.dart';
 import 'package:youniversity_app/utils/named_font_weight.dart';
 import 'package:youniversity_app/utils/widget_list_extensions.dart';
 import 'package:youniversity_app/utils/build_context_extensions.dart';
+
+typedef _SignUpTextField = BlocTextField<SignUpBloc, SignUpState, SignUpEvent>;
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -15,40 +22,123 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  Widget createTextInput({
-    required String label,
-    String? hint,
-    TextInputType keyboardType = TextInputType.text,
-    bool obscureText = false,
-  }) {
-    return TextField(
-      decoration: InputDecoration(
-        labelText: label,
-        hintText: hint,
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => SignUpBloc(
+        authRepository: context.read<AuthRepository>(),
       ),
-      keyboardType: keyboardType,
-      obscureText: obscureText,
-    );
-  }
-
-  Widget createSubmitButton() {
-    final textStyle = context.textTheme.labelLarge;
-    return SizedBox(
-      width: double.infinity,
-      child: ElevatedButton(
-        onPressed: () => context.beamToNamed(RouteConstants.homeDashboard),
-        child: Text(
-          'CREAR CUENTA',
-          style: textStyle?.withColor(Colors.white),
+      child: SafeArea(
+        child: SingleChildScrollView(
+          child: Container(
+            margin: const EdgeInsets.symmetric(vertical: 48),
+            child: Column(
+              children: <Widget>[
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Image(image: AssetImage('assets/logo.png')),
+                    Column(
+                      children: [
+                        Text(
+                          'Crea tu cuenta en YOUniversity',
+                          style: context.textTheme.headlineSmall
+                              ?.withColor(AppColorPalette.primaryColor),
+                        ),
+                        Text(
+                          'Organízate de la mejor manera',
+                          style: context.textTheme.titleMedium
+                              ?.withColor(AppColorPalette.darkerPrimaryColor)
+                              .withWeight(NamedFontWeight.light),
+                        )
+                      ],
+                    )
+                  ].withVerticalSpace(16),
+                ),
+                Container(
+                  margin: const EdgeInsets.all(16),
+                  child: Column(
+                    children: [
+                      _SignUpTextField(
+                        buildWhen: (previous, current) =>
+                            previous.fullName != current.fullName,
+                        buildEvent: (value) => SignUpFullNameChanged(value),
+                        buildErrorText: (state) => state.fullName.invalid
+                            ? state.fullName.error?.message
+                            : null,
+                        labelText: 'Nombre completo',
+                        hintText: 'John Doe',
+                      ),
+                      _SignUpTextField(
+                        buildWhen: (previous, current) =>
+                            previous.email != current.email,
+                        buildEvent: (value) => SignUpEmailChanged(value),
+                        buildErrorText: (state) => state.email.invalid
+                            ? state.email.error?.message
+                            : null,
+                        labelText: 'Correo electrónico',
+                        hintText: 'john.doe@gmail.com',
+                        keyboardType: TextInputType.emailAddress,
+                      ),
+                      _SignUpTextField(
+                        buildWhen: (previous, current) =>
+                            previous.password != current.password,
+                        buildEvent: (value) => SignUpPasswordChanged(value),
+                        buildErrorText: (state) => state.password.invalid
+                            ? state.password.error?.message
+                            : null,
+                        labelText: 'Contraseña',
+                        obscureText: true,
+                      ),
+                      _SignUpTextField(
+                        buildWhen: (previous, current) =>
+                            previous.passwordConfirmation !=
+                            current.passwordConfirmation,
+                        buildEvent: (value) =>
+                            SignUpPasswordConfirmationChanged(value),
+                        buildErrorText: (state) =>
+                            state.passwordConfirmation.invalid
+                                ? state.passwordConfirmation.error?.message
+                                : null,
+                        labelText: 'Confirmar contraseña',
+                        obscureText: true,
+                      ),
+                      _SignUpTextField(
+                        buildWhen: (previous, current) =>
+                            previous.phone != current.phone,
+                        buildEvent: (value) => SignUpPhoneChanged(value),
+                        buildErrorText: (state) => state.phone.invalid
+                            ? state.phone.error?.message
+                            : null,
+                        labelText: 'Teléfono',
+                        hintText: '+51 999 999 999',
+                        keyboardType: TextInputType.phone,
+                      ),
+                      AuthButton<SignUpBloc, SignUpState, SignUpEvent>(
+                        buildEvent: () => const SignUpSubmitted(),
+                        child: const Text('CREAR CUENTA'),
+                      ),
+                      const _SignInLabel(),
+                    ].withVerticalSpace(16),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
   }
+}
 
-  Widget createSignInLabel() {
+class _SignInLabel extends StatelessWidget {
+  const _SignInLabel();
+
+  @override
+  Widget build(BuildContext context) {
     final textStyle = context.textTheme.titleSmall;
     return GestureDetector(
-      onTap: () => context.beamToNamed(RouteConstants.authSignUp),
+      onTap: () => context.popToNamed(RouteConstants.authSignIn),
       child: Center(
         child: Text.rich(
           TextSpan(
@@ -60,74 +150,6 @@ class _SignUpPageState extends State<SignUpPage> {
               TextSpan(
                 text: 'Inicia sesión',
                 style: textStyle?.withColor(AppColorPalette.primaryColor),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: SingleChildScrollView(
-        child: Container(
-          margin: const EdgeInsets.symmetric(vertical: 48),
-          child: Column(
-            children: <Widget>[
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Image(image: AssetImage('assets/logo.png')),
-                  Column(
-                    children: [
-                      Text(
-                        'Crea tu cuenta en YOUniversity',
-                        style: context.textTheme.headlineSmall
-                            ?.withColor(AppColorPalette.primaryColor),
-                      ),
-                      Text(
-                        'Organízate de la mejor manera',
-                        style: context.textTheme.titleMedium
-                            ?.withColor(AppColorPalette.darkerPrimaryColor)
-                            .withWeight(NamedFontWeight.light),
-                      )
-                    ],
-                  )
-                ].withVerticalSpace(16),
-              ),
-              Container(
-                margin: const EdgeInsets.all(16),
-                child: Column(
-                  children: <Widget>[
-                    createTextInput(
-                      label: 'Nombre completo',
-                      hint: 'John Doe',
-                    ),
-                    createTextInput(
-                      label: 'Correo electrónico',
-                      hint: 'john.doe@gmail.com',
-                      keyboardType: TextInputType.emailAddress,
-                    ),
-                    createTextInput(
-                      label: 'Contraseña',
-                      obscureText: true,
-                    ),
-                    createTextInput(
-                      label: 'Confirmar contraseña',
-                      obscureText: true,
-                    ),
-                    // createUniversityDropdown(),
-                    createTextInput(
-                      label: 'Teléfono',
-                      hint: '+51 999 999 999',
-                      keyboardType: TextInputType.phone,
-                    ),
-                    createSubmitButton(),
-                    createSignInLabel(),
-                  ].withVerticalSpace(16),
-                ),
               ),
             ],
           ),

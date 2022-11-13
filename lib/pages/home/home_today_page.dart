@@ -94,7 +94,7 @@ class HomeTodayPage extends StatelessWidget {
               ),
             ),
           )
-        ].withHorizontalSpace(16),
+        ].withVerticalSpace(16),
       ),
     );
   }
