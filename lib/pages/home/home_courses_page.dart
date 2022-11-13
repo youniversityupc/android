@@ -1,6 +1,8 @@
+import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:youniversity_app/components/info_card.dart';
 import 'package:youniversity_app/layout/app_theme.dart';
+import 'package:youniversity_app/layout/route_constants.dart';
 import 'package:youniversity_app/utils/build_context_extensions.dart';
 import 'package:youniversity_app/utils/text_style_extensions.dart';
 import 'package:youniversity_app/utils/widget_list_extensions.dart';
@@ -39,21 +41,25 @@ class _HomeCoursesPageState extends State<HomeCoursesPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  InfoCard(
-                    backgroundColor: const Color.fromRGBO(251, 146, 60, 1),
-                    title: const Text(
-                      'IHC y Tecnología Móviles',
+                  GestureDetector(
+                    onTap: () =>
+                        context.beamToNamed(RouteConstants.courseDetails),
+                    child: InfoCard(
+                      backgroundColor: const Color.fromRGBO(251, 146, 60, 1),
+                      title: const Text(
+                        'Aplicaciones para Dispositivos Móviles',
+                      ),
+                      children: const [
+                        InfoCardItem(
+                          leading: Icon(Icons.room),
+                          child: Text('Online'),
+                        ),
+                        InfoCardItem(
+                          leading: Icon(Icons.schedule),
+                          child: Text('Quedan 30 minutos'),
+                        ),
+                      ],
                     ),
-                    children: const [
-                      InfoCardItem(
-                        leading: Icon(Icons.room),
-                        child: Text('Online'),
-                      ),
-                      InfoCardItem(
-                        leading: Icon(Icons.schedule),
-                        child: Text('Quedan 30 minutos'),
-                      ),
-                    ],
                   ),
                   InfoCard(
                     backgroundColor: const Color.fromRGBO(248, 113, 113, 1),

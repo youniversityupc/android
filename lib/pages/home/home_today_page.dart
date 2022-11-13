@@ -12,7 +12,7 @@ class HomeTodayPage extends StatelessWidget {
   final List<ActivityModel> _todayActivies = const [
     ActivityModel(
       taskName: 'Reunion Grupal',
-      courseName: 'IHC y Tecnologías Móviles',
+      courseName: 'Aplicaciones para Dispositivos Móviles',
       remainingTime: 'Dentro de 2 horas',
       topicTheme: 'Trabajo Parcial',
       backgroundColor: Colors.orange,
