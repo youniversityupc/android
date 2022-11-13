@@ -171,6 +171,12 @@ class _AppLayoutState extends State<AppLayout> {
           case AuthStatus.unauthenticated:
             widget.router.beamToReplacementNamed(RouteConstants.authSignIn);
             break;
+          case AuthStatus.error:
+            const snackBar = SnackBar(
+              content: Text('An unknown error has ocurred.'),
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            break;
           case AuthStatus.unknown:
             break;
         }

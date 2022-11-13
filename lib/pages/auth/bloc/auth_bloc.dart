@@ -39,6 +39,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         return emit(const AuthState.authenticated());
       case AuthStatus.unknown:
         return emit(const AuthState.unknown());
+      case AuthStatus.error:
+        return emit(const AuthState.error());
     }
   }
 

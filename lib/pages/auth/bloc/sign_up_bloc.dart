@@ -122,8 +122,8 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     if (state.status.isValidated) {
       emit(state.copyWith(status: FormzStatus.submissionInProgress));
       try {
-        // TODO: Replace this with signup method
-        await _authRepository.login(
+        await _authRepository.register(
+          email: state.email.value,
           username: state.email.value,
           password: state.password.value,
         );
