@@ -1,35 +1,30 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:youniversity_app/components/profile_avatar.dart';
 import 'package:youniversity_app/layout/app_location_item.dart';
+import 'package:youniversity_app/layout/app_theme.dart';
 import 'package:youniversity_app/layout/route_constants.dart';
-import 'package:youniversity_app/pages/auth/auth_location.dart';
-import 'package:youniversity_app/pages/profile/profile_location.dart';
+import 'package:youniversity_app/pages/auth/bloc/auth_bloc.dart';
+import 'package:youniversity_app/pages/auth/repository/auth_repository.dart';
 
 class AppLayout extends StatefulWidget {
   AppLayout({
     required this.navigation,
-    this.onlyBeamer = false,
     this.initialIndex = 0,
     super.key,
   }) : router = _createRouter(navigation);
 
   final List<AppLocationItem> navigation;
   final BeamerDelegate router;
-  final bool onlyBeamer;
   final int initialIndex;
   final beamerKey = GlobalKey<BeamerState>();
 
   static BeamerDelegate _createRouter(List<AppLocationItem> navigation) {
-    final locations = navigation.map(((e) => e.location));
+    final locations = navigation.map(((e) => e.location)).toList();
 
     return BeamerDelegate(
-      locationBuilder: BeamerLocationBuilder(
-        beamLocations: [
-          ...locations,
-          AuthLocation(),
-          ProfileLocation(),
-        ],
-      ),
+      locationBuilder: BeamerLocationBuilder(beamLocations: locations),
     );
   }
 
@@ -37,20 +32,67 @@ class AppLayout extends StatefulWidget {
   State<AppLayout> createState() => _AppLayoutState();
 }
 
+class _AppBarConfig {
+  final AppBar appBar;
+  final int length;
+
+  const _AppBarConfig(this.appBar, this.length);
+}
+
 class _AppLayoutState extends State<AppLayout> {
   late int _index;
+  void Function()? _backButtonHandler;
+  bool _showBackButton = false;
 
-  Widget _createTitle(int index) {
-    final title = widget.navigation[index].title.toUpperCase();
+  Widget _createTitle() {
+    final title = widget.navigation[_index].title.toUpperCase();
     return Text(title);
   }
 
-  TabBar? _createTabBar(int index) {
-    final config = widget.navigation[index].tabBar;
+  TabBar? _createTabBar() {
+    final config = widget.navigation[_index].tabBar;
     if (config == null) return null;
 
     final items = config.items.map((e) => e.tab).toList();
     return TabBar(tabs: items);
+  }
+
+  void _handleBack() {
+    widget.router.beamBack();
+  }
+
+  _AppBarConfig? _createAppBar() {
+    final onlyBeamer = widget.navigation[_index].onlyBeamer;
+    if (onlyBeamer) return null;
+
+    final title = _createTitle();
+    final tabBar = _createTabBar();
+    final length = tabBar?.tabs.length ?? 0;
+
+    bool showBack =
+        _showBackButton && widget.router.beamingHistoryCompleteLength > 1;
+    final backButton = BackButton(
+      color: AppColorPalette.primaryColor,
+      onPressed: _backButtonHandler ?? _handleBack,
+    );
+
+    final appBar = AppBar(
+      leading: showBack ? backButton : null,
+      title: title,
+      actions: [
+        ProfileAvatar(
+          size: ProfileAvatarSize.extraSmall,
+          backgroundImage: const AssetImage('assets/dalb.jpg'),
+          child: InkWell(
+            onTap: _onAvatarTapped,
+          ),
+        ),
+        const SizedBox(width: 16),
+      ],
+      bottom: tabBar,
+    );
+
+    return _AppBarConfig(appBar, length);
   }
 
   List<BottomNavigationBarItem> _createBottomNavItemList() {
@@ -58,9 +100,30 @@ class _AppLayoutState extends State<AppLayout> {
     return valid.map((e) => e.navigation!).toList();
   }
 
+  BottomNavigationBar? _createBottomNavBar() {
+    final onlyBeamer = widget.navigation[_index].onlyBeamer;
+    if (onlyBeamer) return null;
+    final items = _createBottomNavItemList();
+    final current = _index >= 0 && _index < items.length ? _index : -1;
+    return BottomNavigationBar(
+      currentIndex: current == -1 ? 0 : current,
+      selectedItemColor: current == -1
+          ? Theme.of(context).bottomNavigationBarTheme.unselectedItemColor
+          : null,
+      onTap: _onNavBarItemTapped,
+      items: items,
+    );
+  }
+
   void _onNavBarItemTapped(int index) {
     final path = widget.navigation[index].initialPath;
-    widget.router.beamToNamed(path);
+    widget.router.beamToNamed(
+      path,
+      replaceRouteInformation: true,
+      popBeamLocationOnPop: false,
+      beamBackOnPop: true,
+      stacked: false,
+    );
   }
 
   void _onAvatarTapped() {
@@ -74,6 +137,20 @@ class _AppLayoutState extends State<AppLayout> {
     });
   }
 
+  void enableBackButton(void Function()? fn) {
+    setState(() {
+      _showBackButton = true;
+      if (fn != null) _backButtonHandler = fn;
+    });
+  }
+
+  void clearBackButton() {
+    setState(() {
+      _showBackButton = false;
+      _backButtonHandler = null;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -83,45 +160,37 @@ class _AppLayoutState extends State<AppLayout> {
 
   @override
   Widget build(BuildContext context) {
-    final title = _createTitle(_index);
-    final tabBar = _createTabBar(_index);
-    final length = tabBar?.tabs.length ?? 0;
-    final onlyBeamer = widget.navigation[_index].onlyBeamer;
+    final appBarConfig = _createAppBar();
 
-    return DefaultTabController(
-      length: length,
-      child: Scaffold(
-        appBar: onlyBeamer
-            ? null
-            : AppBar(
-                title: title,
-                actions: [
-                  GestureDetector(
-                    onTap: _onAvatarTapped,
-                    child: const CircleAvatar(
-                      child: Text('D'),
-                    ),
-                  )
-                ],
-                bottom: tabBar,
-              ),
-        body: Container(
-          margin:
-              onlyBeamer ? const EdgeInsets.only(top: kToolbarHeight) : null,
-          child: Beamer(
+    return BlocListener<AuthBloc, AuthState>(
+      listener: (context, state) {
+        switch (state.status) {
+          case AuthStatus.authenticated:
+            widget.router.beamToReplacementNamed(RouteConstants.homeDashboard);
+            break;
+          case AuthStatus.unauthenticated:
+            widget.router.beamToReplacementNamed(RouteConstants.authSignIn);
+            break;
+          case AuthStatus.error:
+            const snackBar = SnackBar(
+              content: Text('An unknown error has ocurred.'),
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            break;
+          case AuthStatus.unknown:
+            break;
+        }
+      },
+      child: DefaultTabController(
+        length: appBarConfig?.length ?? 0,
+        child: Scaffold(
+          appBar: appBarConfig?.appBar,
+          body: Beamer(
             key: widget.beamerKey,
             routerDelegate: widget.router,
           ),
+          bottomNavigationBar: _createBottomNavBar(),
         ),
-        bottomNavigationBar: onlyBeamer
-            ? null
-            : BottomNavigationBar(
-                type: BottomNavigationBarType.fixed,
-                showSelectedLabels: true,
-                currentIndex: _index,
-                items: _createBottomNavItemList(),
-                onTap: _onNavBarItemTapped,
-              ),
       ),
     );
   }

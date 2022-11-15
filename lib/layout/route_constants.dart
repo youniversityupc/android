@@ -12,10 +12,17 @@ abstract class RouteConstants {
   static const String coursesRoot = '/courses';
   static const String coursesWildcard = '$coursesRoot/*';
   static const String courses = coursesRoot;
+  static const String courseDetails = '$coursesRoot/details';
+  static const String courseTeacher = '$coursesRoot/teacher';
+  static const String courseTeacherCreate = '$coursesRoot/teacher/create';
+  static const String courseDelegate = '$coursesRoot/delegate';
+  static const String courseDelegateCreate = '$coursesRoot/delegate/create';
+  static const String courseGrades = '$coursesRoot/grades';
 
   static const String activitiesRoot = '/activities';
   static const String activitiesWildcard = '$activitiesRoot/*';
   static const String activities = activitiesRoot;
+  static const String activitiesCreate = '$activitiesRoot/create';
 
   static const String authRoot = '/auth';
   static const String authWildcard = '$authRoot/*';

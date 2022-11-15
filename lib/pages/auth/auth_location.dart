@@ -1,8 +1,8 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:youniversity_app/layout/route_constants.dart';
-import 'package:youniversity_app/pages/auth/signin_page.dart';
-import 'package:youniversity_app/pages/auth/signup_page.dart';
+import 'package:youniversity_app/pages/auth/sign_in_page.dart';
+import 'package:youniversity_app/pages/auth/sign_up_page.dart';
 
 class AuthLocation extends BeamLocation<BeamState> {
   @override
@@ -13,14 +13,14 @@ class AuthLocation extends BeamLocation<BeamState> {
         const BeamPage(
           key: ValueKey(RouteConstants.authSignIn),
           title: 'Iniciar sesión',
-          child: SignInForm(),
+          child: SignInPage(),
           type: BeamPageType.slideLeftTransition,
         ),
       if (uri == RouteConstants.authSignUp)
         const BeamPage(
           key: ValueKey(RouteConstants.authSignUp),
           title: 'Registrarse',
-          child: SignUpForm(),
+          child: SignUpPage(),
           type: BeamPageType.slideLeftTransition,
         ),
     ];
