@@ -11,11 +11,15 @@ enum AuthStatus {
 }
 
 class AuthRepository {
+  AuthRepository({
+    http.Client? client,
+  }) : _client = client ?? http.Client();
+
   static const _domain = 'api.youniversityapp.ga';
   static const _base = '/api/auth';
 
   final _controller = StreamController<AuthStatus>();
-  final _client = http.Client();
+  final http.Client _client;
 
   Uri _createUri(String path) {
     return Uri.https(_domain, '$_base$path');
