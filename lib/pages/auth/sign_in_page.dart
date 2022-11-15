@@ -41,6 +41,8 @@ class _SignInPageState extends State<SignInPage> {
                   child: Column(
                     children: [
                       _SignInTextField(
+                        textFieldKey:
+                            const ValueKey('SignInPage_Email_TextField'),
                         buildWhen: (previous, current) =>
                             previous.email != current.email,
                         buildEvent: (value) => LoginEmailChanged(value),
@@ -52,6 +54,8 @@ class _SignInPageState extends State<SignInPage> {
                         keyboardType: TextInputType.emailAddress,
                       ),
                       _SignInTextField(
+                        textFieldKey:
+                            const ValueKey('SignInPage_Password_TextField'),
                         buildWhen: (previous, current) =>
                             previous.password != current.password,
                         buildEvent: (value) => LoginPasswordChanged(value),
