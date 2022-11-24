@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:youniversity_app/components/daily_advice.dart';
 import 'package:youniversity_app/components/info_card.dart';
 import 'package:youniversity_app/layout/app_theme.dart';
 import 'package:youniversity_app/pages/activities/models/activity_model.dart';
@@ -42,6 +43,17 @@ class HomeTodayPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Consejo del día',
+                style: textTheme.headlineMedium
+                    ?.withColor(AppColorPalette.gray900),
+              ),
+              const DailyAdvice(),
+            ].withVerticalSpace(8),
+          ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
