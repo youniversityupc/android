@@ -118,6 +118,8 @@ class _SignUpPageState extends State<SignUpPage> {
                         buildEvent: () => const SignUpSubmitted(),
                         child: const Text('CREAR CUENTA'),
                       ),
+                      const _SignUpTermsAndConditions(),
+                      const SizedBox(height: 8),
                       const _SignInLabel(),
                     ].withVerticalSpace(16),
                   ),
@@ -154,6 +156,21 @@ class _SignInLabel extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class _SignUpTermsAndConditions extends StatelessWidget {
+  const _SignUpTermsAndConditions();
+
+  @override
+  Widget build(BuildContext context) {
+    final textStyle = context.textTheme.titleSmall;
+    return Center(
+      child: Text(
+        'Al presionar este botón, estas aceptando nuestros términos y condiciones',
+        style: textStyle?.withColor(AppColorPalette.primaryColor),
       ),
     );
   }
